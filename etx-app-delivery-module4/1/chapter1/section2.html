@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Check your work :: Application Modernization</title>
+    <title>Meet Emma — A Day in the Software Factory :: DevEx with Developer Hub</title>
     <meta name="generator" content="Antora 3.2.0-alpha.12">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
@@ -17,7 +17,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
-      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Application Modernization</a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -37,12 +37,12 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="../index.html">Application Modernization</a></h3>
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../index.html">Software Factory and CI/CD</a>
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
   </li>
 </ul>
   </li>
@@ -57,10 +57,46 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="day2-appmod-overview.html">Application Modernization</a>
+    <span class="nav-text">Developer Hub and the IDP</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="day2-lab2-mta.html">Application Modernization (MTA)</a>
+    <a class="nav-link" href="devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="docs.html">Documentation as Code with TechDocs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="plugins.html">Extending Developer Hub with Plugins</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mcp.html">MCP in Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lightspeed.html">Developer Lightspeed</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Hands-on Lab</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab1-dh1-install-configure.html">Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab2-dh2-golden-paths.html">Developer Hub: templates and integrations</a>
   </li>
 </ul>
   </li>
@@ -71,12 +107,12 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Application Modernization</span>
+    <span class="title">DevEx with Developer Hub</span>
     <span class="version">1</span>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <a class="title" href="../index.html">Application Modernization</a>
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
       <ul class="versions">
         <li class="version is-current is-latest">
           <a href="../index.html">1</a>
@@ -94,8 +130,8 @@
   <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="../index.html">Application Modernization</a></li>
-    <li><a href="section2.html">Check your work</a></li>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="section2.html">Meet Emma</a></li>
   </ul>
 </nav>
 </div>
@@ -104,45 +140,182 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Check your work</h1>
-<div class="sect1">
-<h2 id="_follow_below_steps_in_the_lab_to_check_your_work"><a class="anchor" href="#_follow_below_steps_in_the_lab_to_check_your_work"></a>Follow below steps in the lab to check your work</h2>
+<h1 class="page">Meet Emma — A Day in the Software Factory</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>FIXME: Add the instructions to be followed in the lab environment to make sure the problem has been resolved. You may chose to remove this block if grading script is provided in the lab to check the work.</p>
+<p>Now that you&#8217;ve learned what a Software Factory is, let&#8217;s see how it helps a developer during everyday software development.</p>
+</div>
+<div class="paragraph">
+<p>In this lesson, you&#8217;ll follow Emma as she delivers her first application using her organization&#8217;s Software Factory.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+As you read through Emma&#8217;s journey, think about how similar steps are performed in your own organization.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_check_your_work_using_the_grading_script"><a class="anchor" href="#_check_your_work_using_the_grading_script"></a>Check your work using the grading script</h2>
+<h2 id="_meet_emma"><a class="anchor" href="#_meet_emma"></a>Meet Emma</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>After you have resolved the issue and met the success criteria, login to <code>FIXME</code> system as <code>FIXME</code> user and run the grading script as shown here to check your work:</p>
-</div>
-<div class="listingblock execute">
+<div class="imageblock text-right">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">break-fix-script grade</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sample output</div>
-<div class="content">
-<pre>[root@classroom ~]# break-fix-script grade
-Initiating break-fix-script with option grade
-Grading.  Please wait.
-Success.
-COMPLETION CODE: &lt;check your output for this value&gt;
-Completed break-fix-script with option grade successfully</pre>
+<img src="_images/p2.png" alt="p2" width="220">
 </div>
 </div>
 <div class="paragraph">
-<p>FIXME: Remove the below block if no grading script is provided to check the work in the break-fix activity. In this case make sure you use the above block to provide step-by-step instructions learner can follow to check their work.</p>
+<p>Emma has just joined the engineering team.</p>
+</div>
+<div class="paragraph">
+<p>She has been assigned her first feature and wants to start contributing immediately.</p>
+</div>
+<div class="paragraph">
+<p>Instead of requesting infrastructure, configuring development environments, creating CI/CD pipelines, and learning deployment processes, Emma uses the organization&#8217;s Software Factory.</p>
+</div>
+<div class="paragraph">
+<p>The platform provides everything she needs through a standardized self-service experience.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_submit_the_completion_code"><a class="anchor" href="#_submit_the_completion_code"></a>Submit the completion code</h2>
+<h2 id="_emmas_journey"><a class="anchor" href="#_emmas_journey"></a>Emma&#8217;s Journey</h2>
 <div class="sectionbody">
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/journey.png" alt="journey" width="900">
+</div>
+</div>
+<details>
+<summary class="title">Emma&#8217;s workflow (Click to expand)</summary>
+<div class="content">
+<div class="paragraph">
+<p>Emma&#8217;s first day looks like this:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sign in to the organization&#8217;s <strong>Developer Hub</strong>.</p>
+</li>
+<li>
+<p>Choose a <strong>Golden Path</strong> for the application she wants to build.</p>
+</li>
+<li>
+<p>Launch a ready-to-use development workspace using <strong>Dev Spaces</strong>.</p>
+</li>
+<li>
+<p>Write code and commit the changes to Git.</p>
+</li>
+<li>
+<p>The platform automatically builds and validates the application.</p>
+</li>
+<li>
+<p>Security and compliance checks run automatically.</p>
+</li>
+<li>
+<p>GitOps deploys the application to OpenShift.</p>
+</li>
+<li>
+<p>The platform continuously monitors the running application.</p>
+</li>
+</ol>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_behind_every_step"><a class="anchor" href="#_behind_every_step"></a>Behind Every Step</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Emma interacts with only a few simple interfaces, but many platform capabilities work together behind the scenes.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Emma&#8217;s Activity</th>
+<th class="tableblock halign-left valign-top">Platform Capability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find project templates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developer Hub</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start coding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dev Spaces</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store source code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitHub or GitLab</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Build and test applications</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OpenShift Pipelines</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Perform security validation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trusted Software Supply Chain</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store trusted artifacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quay</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy applications</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitOps</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Monitor running applications</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Platform Services</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_this_matters"><a class="anchor" href="#_why_this_matters"></a>Why This Matters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Without a Software Factory, Emma would need to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Learn multiple development processes.</p>
+</li>
+<li>
+<p>Configure development tools.</p>
+</li>
+<li>
+<p>Build deployment pipelines.</p>
+</li>
+<li>
+<p>Understand infrastructure.</p>
+</li>
+<li>
+<p>Integrate security tooling.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With a Software Factory, these capabilities are already provided by the platform.</p>
+</div>
+<div class="paragraph">
+<p>Emma focuses on delivering business features while the platform handles the underlying automation, security, and operational tasks.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -150,24 +323,111 @@ Completed break-fix-script with option grade successfully</pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Skip this if not applicable for you.
+<div class="paragraph">
+<p>A Software Factory doesn&#8217;t replace developers—it removes the repetitive platform work that slows them down, allowing developers to focus on writing application code.</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reflection"><a class="anchor" href="#_reflection"></a>Reflection</h2>
+<div class="sectionbody">
+<details>
+<summary class="title">Think about your own organization (Click to expand)</summary>
+<div class="content">
+<div class="paragraph">
+<p>When a new developer joins your team:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>For RedHat internal audience: Submit that completion code <a href="https://link-to-appropriate-lms.com" target="_blank" rel="noopener">here</a> to receive a grade for this training</p>
+<p>How long does onboarding take?</p>
 </li>
 <li>
-<p>For RedHat partners: Submit that completion code <a href="https://link-to-appropriate-lms.com" target="_blank" rel="noopener">here</a> to receive a grade for this training</p>
+<p>Is there a standardized workflow?</p>
+</li>
+<li>
+<p>Which activities are manual?</p>
+</li>
+<li>
+<p>Which activities could be automated through a Software Factory?</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>FIXME: Change the links in the above lines to the link for appropriate audience specific LMS where learner can provide completion code. Remove this block if submitting completion is not applicable.</p>
 </div>
+</details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_check_your_understanding"><a class="anchor" href="#_check_your_understanding"></a>Check Your Understanding</h2>
+<div class="sectionbody">
+<details>
+<summary class="title">Quiz Time! (Click to expand)</summary>
+<div class="content">
+<div class="paragraph">
+<p>Match Emma&#8217;s activity with the platform capability that supports it.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Activity</th>
+<th class="tableblock halign-left valign-top">Capability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find project templates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start coding immediately</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatically build applications</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy consistently</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store trusted container images</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Answers</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Find project templates → Developer Hub</p>
+</li>
+<li>
+<p>Start coding immediately → Dev Spaces</p>
+</li>
+<li>
+<p>Automatically build applications → OpenShift Pipelines</p>
+</li>
+<li>
+<p>Deploy consistently → GitOps</p>
+</li>
+<li>
+<p>Store trusted container images → Quay</p>
+</li>
+</ul>
+</div>
+</div>
+</details>
 </div>
 </div>
 </article>

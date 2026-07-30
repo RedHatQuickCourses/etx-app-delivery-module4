@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lab 1: Application CI Pipeline :: DevEx with Developer Hub</title>
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer Hub and the IDP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/docs.html">Documentation as Code with TechDocs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/plugins.html">Extending Developer Hub with Plugins</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/mcp.html">MCP in Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/lightspeed.html">Developer Lightspeed</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Hands-on Lab</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/lab1-dh1-install-configure.html">Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/lab2-dh2-golden-paths.html">Developer Hub: templates and integrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="day2-lab1-ci-pipeline.html">CI Pipeline</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Lab 1: Application CI Pipeline</h1>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create a Tekton CI pipeline that clones your application source, builds and tests it, retrieves registry credentials from Vault, and pushes the container image.
+Then wire up Tekton Triggers to fire the pipeline automatically when code is pushed to GitLab.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pipeline_workspace_and_serviceaccount"><a class="anchor" href="#_pipeline_workspace_and_serviceaccount"></a>Pipeline Workspace and ServiceAccount</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create a workspace PVC and a ServiceAccount for the pipeline:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - <<'EOF'
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pipeline-workspace-pvc
+  namespace: etx-app-dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pipeline
+  namespace: etx-app-dev
+EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Expected output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">persistentvolumeclaim/pipeline-workspace-pvc created
+serviceaccount/pipeline created</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the ServiceAccount already exists (created during namespace setup), you may see <code>serviceaccount/pipeline configured</code> instead of <code>created</code>, along with a warning about a missing annotation. This is normal - <code>oc apply</code> automatically patches the annotation, and the resource is correctly configured.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_grant_serviceaccount_permissions"><a class="anchor" href="#_grant_serviceaccount_permissions"></a>Grant ServiceAccount Permissions</h3>
+<div class="paragraph">
+<p>The pipeline ServiceAccount needs permission to push images and manage resources in the namespace:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm policy add-role-to-user edit \
+  system:serviceaccount:etx-app-dev:pipeline \
+  -n etx-app-dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This grants the <code>edit</code> role, allowing the pipeline to create ImageStreams, Deployments, and other resources.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_retrieve_registry_credentials_from_vault"><a class="anchor" href="#_retrieve_registry_credentials_from_vault"></a>Retrieve Registry Credentials from Vault</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create a Tekton Task that authenticates to Vault using the Kubernetes auth method configured in the <a href="#day2-lab1-supporting-services.adoc" class="xref unresolved">Supporting Services</a> section and writes registry credentials to the workspace.</p>
+</div>
+<div class="paragraph">
+<p>First, get the Vault URL from the cluster:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Get Vault URL dynamically
+VAULT_URL="https://$(oc get route -n vault -o jsonpath='{.items[0].spec.host}')"
+echo "Using Vault URL: $VAULT_URL"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then create the Task:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - &lt;&lt;EOF
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: vault-fetch-registry-creds
+  namespace: etx-app-dev
+spec:
+  workspaces:
+    - name: source
+  results:
+    - name: registry-server
+    - name: registry-username
+    - name: registry-password
+  steps:
+    - name: fetch
+      image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+      script: |
+        #!/bin/sh
+        set -e
+
+        # Install jq
+        microdnf install -y jq &amp;&amp; microdnf clean all
+
+        # Authenticate to Vault using ServiceAccount token
+        VAULT_ADDR="${VAULT_URL}"
+        SA_TOKEN=\$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+
+        VAULT_TOKEN=\$(curl -s --request POST \
+          "\${VAULT_ADDR}/v1/auth/kubernetes/login" \
+          --data "{\"role\":\"pipeline\",\"jwt\":\"\${SA_TOKEN}\"}" \
+          | jq -r '.auth.client_token')
+
+        # Fetch registry credentials
+        CREDS=\$(curl -s --header "X-Vault-Token: \${VAULT_TOKEN}" \
+          "\${VAULT_ADDR}/v1/secret/data/registry")
+
+        echo "\${CREDS}" | jq -r '.data.data.server' \
+          | tr -d '\n' &gt; \$(results.registry-server.path)
+        echo "\${CREDS}" | jq -r '.data.data.username' \
+          | tr -d '\n' &gt; \$(results.registry-username.path)
+        echo "\${CREDS}" | jq -r '.data.data.password' \
+          | tr -d '\n' &gt; \$(results.registry-password.path)
+EOF</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_the_pipeline"><a class="anchor" href="#_create_the_pipeline"></a>Create the Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Define the CI pipeline with four tasks: clone, build/test, fetch credentials, and build/push the container image:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - <<'EOF'
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: etx-app-base-app-ci
+  namespace: etx-app-dev
+spec:
+  params:
+    - name: git-url
+      type: string
+    - name: git-revision
+      type: string
+      default: main
+    - name: image-name
+      type: string
+  workspaces:
+    - name: shared-workspace
+  tasks:
+    - name: clone
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+      params:
+        - name: URL
+          value: $(params.git-url)
+        - name: REVISION
+          value: $(params.git-revision)
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+
+    - name: build-and-test
+      runAfter: [clone]
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: maven
+          - name: namespace
+            value: openshift-pipelines
+      params:
+        - name: GOALS
+          value: ["package", "-DskipTests=false"]
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+
+    - name: fetch-creds
+      runAfter: [clone]
+      taskRef:
+        name: vault-fetch-registry-creds
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+
+    - name: build-image
+      runAfter: [build-and-test, fetch-creds]
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: buildah
+          - name: namespace
+            value: openshift-pipelines
+      params:
+        - name: IMAGE
+          value: $(params.image-name):$(params.git-revision)
+        - name: DOCKERFILE
+          value: Containerfile
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+EOF</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>git-clone</code>, <code>maven</code>, and <code>buildah</code> are standard Tasks installed in the <code>openshift-pipelines</code> namespace. This pipeline resolves them with the cluster resolver (replacing deprecated <code>ClusterTask</code> references). Run <code>oc get task -n openshift-pipelines</code> to verify they are available.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_the_pipeline_manually"><a class="anchor" href="#_test_the_pipeline_manually"></a>Test the Pipeline Manually</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Run the pipeline once to verify it works before adding webhooks.</p>
+</div>
+<div class="paragraph">
+<p>First, get the GitLab URL from the cluster:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Get GitLab URL dynamically
+GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+echo "Using GitLab URL: $GITLAB_URL"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then create the PipelineRun:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f - &lt;&lt;EOF
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: etx-app-base-app-ci-
+  namespace: etx-app-dev
+spec:
+  pipelineRef:
+    name: etx-app-base-app-ci
+  params:
+    - name: git-url
+      value: ${GITLAB_URL}/software-factory/etx_app_base_app
+    - name: git-revision
+      value: main
+    - name: image-name
+      value: image-registry.openshift-image-registry.svc:5000/etx-app-dev/etx-app-base-app
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: pipeline-workspace-pvc
+  taskRunTemplate:
+    serviceAccountName: pipeline
+EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Expected output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">pipelinerun.tekton.dev/etx-app-base-app-ci-xxxxx created</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Monitor the PipelineRun:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># List all PipelineRuns
+oc get pipelinerun -n etx-app-dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see your PipelineRun with status <code>Running</code> or <code>Succeeded</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_monitor_pipeline_execution"><a class="anchor" href="#_monitor_pipeline_execution"></a>Monitor Pipeline Execution</h3>
+<div class="paragraph">
+<p>There are several ways to monitor the pipeline:</p>
+</div>
+<div class="paragraph">
+<p><strong>Option 1: Watch PipelineRun status</strong> (Recommended)</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Watch PipelineRun status in real-time (press Ctrl+C to exit)
+oc get pipelinerun -n etx-app-dev -w</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows the overall status of all PipelineRuns and updates in real-time.</p>
+</div>
+<div class="paragraph">
+<p><strong>Option 2: View individual Task logs</strong></p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Get the name of the latest PipelineRun
+LATEST_PR=$(oc get pipelinerun -n etx-app-dev --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1].metadata.name}')
+
+echo "PipelineRun: $LATEST_PR"
+
+# List all TaskRuns for this PipelineRun
+oc get taskrun -n etx-app-dev -l tekton.dev/pipelineRun=$LATEST_PR</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To view logs of a specific TaskRun, use the name from the list above:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># View logs of a specific TaskRun (example: fetch-creds)
+oc logs -n etx-app-dev -l tekton.dev/taskRun=etx-app-base-app-ci-xxxxx-fetch-creds -f</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or automatically get logs from a failed TaskRun:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Get the latest PipelineRun
+LATEST_PR=$(oc get pipelinerun -n etx-app-dev --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1].metadata.name}')
+
+# Get the first failed TaskRun
+FAILED_TASK=$(oc get taskrun -n etx-app-dev -l tekton.dev/pipelineRun=$LATEST_PR -o jsonpath='{.items[?(@.status.conditions[0].reason=="Failed")].metadata.name}' | awk '{print $1}')
+
+if [ -n "$FAILED_TASK" ]; then
+  echo "Viewing logs for failed TaskRun: $FAILED_TASK"
+  oc logs -n etx-app-dev -l tekton.dev/taskRun=$FAILED_TASK
+else
+  echo "No failed TaskRuns found"
+fi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Option 3: View logs of currently running pod</strong></p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Get the name of the latest PipelineRun
+LATEST_PR=$(oc get pipelinerun -n etx-app-dev --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1].metadata.name}')
+
+echo "Watching logs for PipelineRun: $LATEST_PR"
+
+# Follow the logs of the currently running pod
+oc logs -f $(oc get pods -n etx-app-dev -l tekton.dev/pipelineRun=$LATEST_PR --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1].metadata.name}') -n etx-app-dev</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Option 3 only shows logs from one Task at a time. When that Task completes, the command exits. Use Option 1 for continuous monitoring or Option 2 to view specific Task logs.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Watch the logs to confirm all tasks complete successfully.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_troubleshooting_common_issues"><a class="anchor" href="#_troubleshooting_common_issues"></a>Troubleshooting Common Issues</h3>
+<div class="paragraph">
+<p><strong>fetch-creds task fails with "parse error: Invalid numeric literal"</strong></p>
+</div>
+<div class="paragraph">
+<p>This error means the Vault response is not valid JSON. Common causes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Vault is unavailable</strong>: Check if Vault pods are running:</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n vault</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If Vault is down, wait for it to recover and retry the pipeline.</p>
+</div>
+</li>
+<li>
+<p><strong>Vault authentication not configured</strong>: Verify the Kubernetes auth method exists in Vault UI at the vault URL.</p>
+</li>
+<li>
+<p><strong>ServiceAccount lacks permissions</strong>: Verify the pipeline ServiceAccount exists:</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get serviceaccount pipeline -n etx-app-dev</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Pipeline succeeds but image not found in registry</strong></p>
+</div>
+<div class="paragraph">
+<p>Verify the image was pushed:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get imagestream etx-app-base-app -n etx-app-dev
+oc get imagestreamtag etx-app-base-app:main -n etx-app-dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>git-clone task fails with "Could not resolve host"</strong></p>
+</div>
+<div class="paragraph">
+<p>The GitLab URL is incorrect. Verify:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}{"\n"}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Recreate the PipelineRun with the correct GitLab URL.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_set_up_webhooks_with_tekton_triggers"><a class="anchor" href="#_set_up_webhooks_with_tekton_triggers"></a>Set Up Webhooks with Tekton Triggers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create the trigger resources so the pipeline runs automatically when code is pushed to GitLab.</p>
+</div>
+<div class="sect2">
+<h3 id="_triggerbinding"><a class="anchor" href="#_triggerbinding"></a>TriggerBinding</h3>
+<div class="paragraph">
+<p>Maps fields from the GitLab webhook payload to pipeline parameters:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - <<'EOF'
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: gitlab-push-binding
+  namespace: etx-app-dev
+spec:
+  params:
+    - name: git-url
+      value: $(body.repository.git_http_url)
+    - name: git-revision
+      value: $(body.checkout_sha)
+EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_triggertemplate"><a class="anchor" href="#_triggertemplate"></a>TriggerTemplate</h3>
+<div class="paragraph">
+<p>Creates a PipelineRun when triggered:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - <<'EOF'
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: gitlab-push-template
+  namespace: etx-app-dev
+spec:
+  params:
+    - name: git-url
+    - name: git-revision
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1
+      kind: PipelineRun
+      metadata:
+        generateName: etx-app-base-app-ci-
+      spec:
+        pipelineRef:
+          name: etx-app-base-app-ci
+        params:
+          - name: git-url
+            value: $(tt.params.git-url)
+          - name: git-revision
+            value: $(tt.params.git-revision)
+          - name: image-name
+            value: image-registry.openshift-image-registry.svc:5000/etx-app-dev/etx-app-base-app
+        workspaces:
+          - name: shared-workspace
+            persistentVolumeClaim:
+              claimName: pipeline-workspace-pvc
+        taskRunTemplate:
+          serviceAccountName: pipeline
+EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_eventlistener"><a class="anchor" href="#_eventlistener"></a>EventListener</h3>
+<div class="paragraph">
+<p>Exposes an HTTP endpoint that GitLab can send webhooks to:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - <<'EOF'
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: gitlab-listener
+  namespace: etx-app-dev
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - name: gitlab-push
+      bindings:
+        - ref: gitlab-push-binding
+      template:
+        ref: gitlab-push-template
+EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_expose_the_eventlistener"><a class="anchor" href="#_expose_the_eventlistener"></a>Expose the EventListener</h3>
+<div class="paragraph">
+<p>Create a route with TLS so GitLab can reach the EventListener securely:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create route edge el-gitlab-listener \
+  --service=el-gitlab-listener \
+  --port=http-listener \
+  -n etx-app-dev</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+GitLab requires HTTPS for webhooks, so we create a route with edge TLS termination. If the route already exists, delete it first with <code>oc delete route el-gitlab-listener -n etx-app-dev</code> and recreate with TLS.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Get the webhook URL:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo "https://$(oc get route el-gitlab-listener -n etx-app-dev -o jsonpath='{.spec.host}')"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Copy this URL for the next step.</p>
+</div>
+<div class="paragraph">
+<p>Expected format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">https://el-gitlab-listener-etx-app-dev.apps.cluster-xxxxx.dynamic.redhatworkshops.io</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configure_gitlab_webhook"><a class="anchor" href="#_configure_gitlab_webhook"></a>Configure GitLab Webhook</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Configuring webhooks in GitLab requires <strong>Maintainer</strong> or <strong>Owner</strong> role on the project. The <code>platform-developer</code> user does not have sufficient permissions. Use the <code>platform-admin</code> account or ask your instructor to grant you Maintainer access.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_step_1_enable_webhooks_to_local_network_required"><a class="anchor" href="#_step_1_enable_webhooks_to_local_network_required"></a>Step 1: Enable Webhooks to Local Network (REQUIRED)</h4>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>GitLab blocks webhooks to local/internal networks by default for security (SSRF protection). Since the EventListener runs in the same cluster as GitLab, you <strong>must</strong> enable this feature or webhook creation will fail with "Invalid url given" error.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Get the GitLab Admin URLs and root password:</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+GITLAB_ROOT_PASSWORD=$(oc get secret -n gitlab gitlab-gitlab-initial-root-password -o jsonpath='{.data.password}' | base64 -d)
+
+echo "GitLab URL: $GITLAB_URL"
+echo "Admin Area: $GITLAB_URL/admin"
+echo "Network Settings (Direct): $GITLAB_URL/admin/application_settings/network"
+echo ""
+echo "Root Username: root"
+echo "Root Password: $GITLAB_ROOT_PASSWORD"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Log into GitLab as root administrator:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Open the GitLab URL in your browser</p>
+</li>
+<li>
+<p>Click <strong>Standard</strong> tab (not ETX Lab SSO)</p>
+</li>
+<li>
+<p><strong>Username:</strong> <code>root</code></p>
+</li>
+<li>
+<p><strong>Password:</strong> Use the password from the command above</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>root</code> user is the GitLab built-in administrator. The <code>platform-admin</code> user from Keycloak does not have admin privileges by default.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Access the Admin Area:</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Option A - Direct URL (Recommended):</strong></p>
+</div>
+<div class="paragraph">
+<p>Open the admin URL directly (from the command above):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">{gitlab_url}/admin/application_settings/network</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This takes you directly to the Network settings page.</p>
+</div>
+<div class="paragraph">
+<p><strong>Option B - UI Navigation:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>After logging in, look for the <strong>wrench icon</strong> 🔧 in the top navigation bar (usually far right)</p>
+</li>
+<li>
+<p>OR click your <strong>avatar/profile picture</strong> (top right) → select <strong>Admin Area</strong></p>
+</li>
+<li>
+<p>If you don&#8217;t see these options, verify you&#8217;re logged in as <code>platform-admin</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then navigate:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the left sidebar, find <strong>Settings</strong> section</p>
+</li>
+<li>
+<p>Click <strong>Settings</strong> → <strong>Network</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Expand the <strong>Outbound requests</strong> section</p>
+</li>
+<li>
+<p>Enable local network webhooks:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Check ☑️ <strong>Allow requests to the local network from webhooks and integrations</strong></p>
+</li>
+<li>
+<p>Optionally check ☑️ <strong>Allow requests to the local network from system hooks</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Click btn:[Save changes] at the bottom</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Finding the Admin Area:</strong></p>
+</div>
+<div class="paragraph">
+<p>The Admin Area is only accessible to users with administrator privileges. When logged in as <code>root</code>, you should see:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A wrench icon (🔧) in the top navigation bar</p>
+</li>
+<li>
+<p>"Admin Area" option when clicking your avatar</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t see these, verify:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You&#8217;re logged in as <code>root</code> (GitLab built-in admin)</p>
+</li>
+<li>
+<p>You used the Standard login (not ETX Lab SSO)</p>
+</li>
+<li>
+<p>You&#8217;re using the correct password from the OpenShift secret</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Why not platform-admin?</strong></p>
+</div>
+<div class="paragraph">
+<p>The <code>platform-admin</code> user from Keycloak is not a GitLab administrator by default. To grant admin privileges to <code>platform-admin</code>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in as <code>root</code></p>
+</li>
+<li>
+<p>Go to menu:Admin Area[Users]</p>
+</li>
+<li>
+<p>Find the <code>platform-admin</code> user</p>
+</li>
+<li>
+<p>Click <strong>Edit</strong> → Check <strong>Admin</strong> → <strong>Save changes</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Direct URL:</strong> You can always access admin settings directly at:
+<code>{gitlab_url}/admin/application_settings/network</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Verification:</strong> After saving, you should see a green checkmark or success message indicating "Allow requests to the local network from webhooks and integrations" is enabled.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This setting is cluster-wide and affects all GitLab projects. In production environments, consider using external webhooks, GitLab Runner with allowedHosts, or more restrictive network policies.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_step_2_add_the_webhook_to_your_repository"><a class="anchor" href="#_step_2_add_the_webhook_to_your_repository"></a>Step 2: Add the Webhook to Your Repository</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Configuring webhooks requires <strong>Maintainer</strong> or <strong>Owner</strong> role on the project (different from GitLab Admin). You can use <code>platform-admin</code> from Keycloak if it has Maintainer access to the project, or log in as <code>root</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Option A: Use root account</strong> (if you&#8217;re already logged in from Step 1)</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to your project:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <strong>Projects</strong> → <strong>Explore projects</strong> → search for <strong>etx_app_base_app</strong></p>
+</li>
+<li>
+<p>Or navigate directly: <code>{gitlab_url}/software-factory/etx_app_base_app</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Option B: Use platform-admin account</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log out from <code>root</code> and log in via <strong>ETX Lab SSO</strong> as <code>platform-admin</code></p>
+</li>
+<li>
+<p>Navigate to your project:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Projects</strong> → <strong>software-factory</strong> → <strong>etx_app_base_app</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>If you see "Settings → Webhooks", you have Maintainer access and can proceed</p>
+</li>
+<li>
+<p>If you don&#8217;t see "Settings → Webhooks":</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ask your instructor to grant Maintainer role, OR</p>
+</li>
+<li>
+<p>Use the <code>root</code> account (Option A above)</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Continue with either option:</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to menu:Settings[Webhooks]</p>
+</li>
+<li>
+<p>Click btn:[Add new webhook]</p>
+</li>
+<li>
+<p>Configure the webhook:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>URL</strong>: Paste the EventListener route URL:</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo "https://$(oc get route el-gitlab-listener -n etx-app-dev -o jsonpath='{.spec.host}')"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Trigger</strong>: Check ☑️ <strong>Push events</strong></p>
+</li>
+<li>
+<p><strong>SSL verification</strong>: Uncheck for lab environments with self-signed certificates</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Click btn:[Add webhook]</p>
+</li>
+<li>
+<p>Test the webhook:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Scroll down to <strong>Project Hooks</strong></p>
+</li>
+<li>
+<p>Find your webhook in the list</p>
+</li>
+<li>
+<p>Click btn:[Test] → <strong>Push events</strong></p>
+</li>
+<li>
+<p>You should see "Hook executed successfully: HTTP 200" or similar</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you get "SSL certificate problem" error during testing, make sure "Enable SSL verification" is unchecked in the webhook configuration.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Using platform-developer Account:</strong></p>
+</div>
+<div class="paragraph">
+<p>If you want to use your <code>platform-developer</code> account instead of <code>platform-admin</code>, ask your instructor to grant you Maintainer role:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In GitLab (as admin), navigate to <strong>software-factory/etx_app_base_app</strong></p>
+</li>
+<li>
+<p>Go to menu:Settings[Members]</p>
+</li>
+<li>
+<p>Find the user and change role to <strong>Maintainer</strong></p>
+</li>
+<li>
+<p>The user can now access Settings → Webhooks</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_troubleshooting_webhook_issues"><a class="anchor" href="#_troubleshooting_webhook_issues"></a>Troubleshooting Webhook Issues</h4>
+<div class="paragraph">
+<p><strong>Error: "Invalid url given"</strong></p>
+</div>
+<div class="paragraph">
+<p>This error occurs when GitLab blocks webhooks to local/internal networks. Solutions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Enable local network webhooks</strong> (required):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to menu:Admin Area[Settings &gt; Network &gt; Outbound requests]</p>
+</li>
+<li>
+<p>Check "Allow requests to the local network from webhooks and integrations"</p>
+</li>
+<li>
+<p>Save changes and try again</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Verify the URL format</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Must start with <code>https://</code> (not <code>http://</code>)</p>
+</li>
+<li>
+<p>Run: <code>echo "https://$(oc get route el-gitlab-listener -n etx-app-dev -o jsonpath='{.spec.host}')"</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Test EventListener is responding</strong>:</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">curl -I https://$(oc get route el-gitlab-listener -n etx-app-dev -o jsonpath='{.spec.host}')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Expected: HTTP 400 Bad Request (this is normal - it expects a webhook payload)</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Error: "SSL certificate problem"</strong></p>
+</div>
+<div class="paragraph">
+<p>The cluster uses self-signed certificates. In GitLab webhook settings:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Uncheck "Enable SSL verification"</p>
+</li>
+<li>
+<p>This is safe for lab environments</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Test event fails with error</strong></p>
+</div>
+<div class="paragraph">
+<p>Check the EventListener pod is running:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n etx-app-dev | grep el-gitlab-listener
+oc logs -n etx-app-dev -l eventlistener=gitlab-listener</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verify_the_pipeline"><a class="anchor" href="#_verify_the_pipeline"></a>Verify the Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Push a change to your repository and confirm the pipeline triggers:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Make a trivial change
+echo "# CI/CD test" &gt;&gt; README.md
+git add README.md
+git commit -m "Test webhook trigger"
+git push origin feature/add-devfile</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check for new pipeline runs:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipelinerun -n etx-app-dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see a new <code>etx-app-base-app-ci-*</code> PipelineRun triggered by the webhook.</p>
+</div>
+<div class="paragraph">
+<p>Follow the latest run logs:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Get the name of the latest PipelineRun
+LATEST_PR=$(oc get pipelinerun -n etx-app-dev --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1].metadata.name}')
+
+echo "Following logs for: $LATEST_PR"
+
+# Follow the logs
+oc logs -f $(oc get pods -n etx-app-dev -l tekton.dev/pipelineRun=$LATEST_PR --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1].metadata.name}') -n etx-app-dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify the image was pushed:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get imagestream etx-app-base-app -n etx-app-dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the image tagged with the commit SHA.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quick_verification"><a class="anchor" href="#_quick_verification"></a>Quick Verification</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Verify all components are working:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Check pipeline exists
+oc get pipeline etx-app-base-app-ci -n etx-app-dev
+
+# Check EventListener is running
+oc get pods -n etx-app-dev | grep el-gitlab-listener
+
+# Check webhook URL is exposed
+oc get route el-gitlab-listener -n etx-app-dev
+
+# Check recent pipeline runs
+oc get pipelinerun -n etx-app-dev --sort-by=.metadata.creationTimestamp | tail -5</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Common Issues:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pipeline fails at clone:</strong> Check Git credentials/authentication</p>
+</li>
+<li>
+<p><strong>Build fails:</strong> Verify Maven build works locally first</p>
+</li>
+<li>
+<p><strong>Push fails:</strong> Confirm ServiceAccount has <code>edit</code> role</p>
+</li>
+<li>
+<p><strong>Webhook not triggering:</strong> Verify EventListener pod is Running and route is accessible</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You now have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Tekton CI pipeline with Vault secrets integration</p>
+</li>
+<li>
+<p>Automated builds triggered by GitLab webhooks</p>
+</li>
+<li>
+<p>Container images pushed to OpenShift internal registry</p>
+</li>
+<li>
+<p>Maven-based Java/Quarkus build and test automation</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Proceed to <a href="day2-lab1-app-deployment.html" class="xref page">Application Deployment with Argo CD</a>.</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: DevEx with Developer Hub</title>
+    <link rel="prev" href="mcp.html">
+    <link rel="next" href="lab1-dh1-install-configure.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer Hub and the IDP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="docs.html">Documentation as Code with TechDocs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="plugins.html">Extending Developer Hub with Plugins</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mcp.html">MCP in Developer Hub</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="lightspeed.html">Developer Lightspeed</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Hands-on Lab</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab1-dh1-install-configure.html">Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab2-dh2-golden-paths.html">Developer Hub: templates and integrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li>Developer Hub and the IDP</li>
+    <li><a href="lightspeed.html">Developer Lightspeed</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<div class="sect1">
+<h2 id="_ai_powered_developer_assistance_with_developer_lightspeed"><a class="anchor" href="#_ai_powered_developer_assistance_with_developer_lightspeed"></a>AI-Powered Developer Assistance with Developer Lightspeed</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As modern software platforms continue to grow in complexity, developers spend a significant amount of time performing tasks beyond writing code. These tasks include searching documentation, understanding platform capabilities, troubleshooting issues, and learning new tools.</p>
+</div>
+<div class="paragraph">
+<p><strong>Red Hat Developer Lightspeed</strong> helps reduce this overhead by providing an AI-powered assistant directly within Red Hat Developer Hub.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/lightspeed.png" alt="lightspeed">
+</div>
+</div>
+<div class="paragraph">
+<p>Developer Lightspeed integrates into the existing Developer Hub experience through a plug-in, allowing developers to ask natural language questions without leaving the portal.</p>
+</div>
+<div class="paragraph">
+<p>Examples include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How do I deploy my application using GitOps?</p>
+</li>
+<li>
+<p>Show me the documentation for this component.</p>
+</li>
+<li>
+<p>Who owns this service?</p>
+</li>
+<li>
+<p>How do I create a new software template?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Instead of manually searching multiple documentation sites or repositories, developers can interact with the platform using conversational prompts.</p>
+</div>
+<div class="sect2">
+<h3 id="_how_developer_lightspeed_works"><a class="anchor" href="#_how_developer_lightspeed_works"></a>How Developer Lightspeed Works</h3>
+<div class="paragraph">
+<p>When a developer submits a prompt through Developer Hub, the request is processed by the Developer Lightspeed service.</p>
+</div>
+<div class="paragraph">
+<p>The service acts as an intermediary between Developer Hub and the configured Large Language Model (LLM). It is responsible for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Authenticating requests</p>
+</li>
+<li>
+<p>Retrieving additional context</p>
+</li>
+<li>
+<p>Communicating with the configured AI model</p>
+</li>
+<li>
+<p>Returning context-aware responses to the developer</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Organizations have the flexibility to use either self-hosted or public AI models, depending on their operational and security requirements.</p>
+</div>
+<div class="paragraph">
+<p>Supported providers include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OpenAI</p>
+</li>
+<li>
+<p>Microsoft Azure OpenAI</p>
+</li>
+<li>
+<p>Google</p>
+</li>
+<li>
+<p>Amazon Bedrock</p>
+</li>
+<li>
+<p>Red Hat AI Inference Server</p>
+</li>
+<li>
+<p>vLLM</p>
+</li>
+<li>
+<p>Ollama</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Developer Lightspeed is model-agnostic. Organizations can choose the AI model that best meets their deployment, compliance, and performance requirements.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_improving_response_accuracy_with_retrieval_augmented_generation_rag"><a class="anchor" href="#_improving_response_accuracy_with_retrieval_augmented_generation_rag"></a>Improving Response Accuracy with Retrieval-Augmented Generation (RAG)</h3>
+<div class="paragraph">
+<p>Large Language Models provide general knowledge, but they are typically unaware of organization-specific platform information.</p>
+</div>
+<div class="paragraph">
+<p>To improve the quality of responses, Developer Lightspeed uses a <strong>Retrieval-Augmented Generation (RAG)</strong> architecture.</p>
+</div>
+<div class="paragraph">
+<p>Rather than relying solely on the model&#8217;s training data, the service retrieves relevant information from trusted sources before generating a response.</p>
+</div>
+<div class="paragraph">
+<p>For Red Hat Developer Hub, these sources include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Official Developer Hub documentation</p>
+</li>
+<li>
+<p>Software Catalog metadata</p>
+</li>
+<li>
+<p>TechDocs documentation (through MCP)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This allows the AI assistant to provide responses that are more accurate, relevant, and specific to the developer&#8217;s environment.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extending_platform_knowledge_with_mcp"><a class="anchor" href="#_extending_platform_knowledge_with_mcp"></a>Extending Platform Knowledge with MCP</h3>
+<div class="paragraph">
+<p>Developer Lightspeed can also use the <strong>Model Context Protocol (MCP)</strong> to retrieve information from trusted platform services.</p>
+</div>
+<div class="paragraph">
+<p>Developer Hub exposes MCP tools that allow the AI assistant to access:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Software Catalog metadata</p>
+</li>
+<li>
+<p>TechDocs documentation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Instead of relying solely on the language model&#8217;s knowledge, the AI assistant retrieves current platform information directly from Developer Hub, resulting in more reliable and context-aware responses.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Think of MCP as a secure bridge that allows AI assistants to access trusted platform information rather than relying only on what the language model already knows.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conversation_history"><a class="anchor" href="#_conversation_history"></a>Conversation History</h3>
+<div class="paragraph">
+<p>Developer Lightspeed can optionally persist conversations using PostgreSQL.</p>
+</div>
+<div class="paragraph">
+<p>This enables organizations to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Preserve conversation history</p>
+</li>
+<li>
+<p>Collect user feedback</p>
+</li>
+<li>
+<p>Review interactions for compliance or auditing</p>
+</li>
+<li>
+<p>Analyze usage patterns to improve the developer experience</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By default, conversation history can also be stored in memory for simpler deployments.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_key_takeaway"><a class="anchor" href="#_key_takeaway"></a>Key Takeaway</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developer Lightspeed enhances the Developer Experience by bringing AI-powered assistance directly into Red Hat Developer Hub.</p>
+</div>
+<div class="paragraph">
+<p>Rather than replacing existing platform tools, it helps developers interact with them more efficiently by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Answering platform-related questions</p>
+</li>
+<li>
+<p>Retrieving trusted documentation</p>
+</li>
+<li>
+<p>Accessing Software Catalog information through MCP</p>
+</li>
+<li>
+<p>Providing context-aware guidance using Retrieval-Augmented Generation (RAG)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This enables developers to spend less time searching for information and more time building applications.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="mcp.html">MCP in Developer Hub</a></span>
+  <span class="next"><a href="lab1-dh1-install-configure.html">Install and configure Red Hat Developer Hub</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

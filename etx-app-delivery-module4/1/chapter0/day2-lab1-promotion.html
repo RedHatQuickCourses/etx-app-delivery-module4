@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lab 1: Promotion Pipeline :: DevEx with Developer Hub</title>
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Developer Hub and the IDP</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/docs.html">Documentation as Code with TechDocs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/plugins.html">Extending Developer Hub with Plugins</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/mcp.html">MCP in Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/lightspeed.html">Developer Lightspeed</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Hands-on Lab</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/lab1-dh1-install-configure.html">Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/lab2-dh2-golden-paths.html">Developer Hub: templates and integrations</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="day2-lab1-promotion.html">Promotion Pipeline</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Lab 1: Promotion Pipeline</h1>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the previous exercises, you set up a CI pipeline that builds container images and deploys them to the dev environment automatically.
+Now you&#8217;ll create a promotion pipeline that moves tested images from dev to staging on the secondary cluster.</p>
+</div>
+<div class="paragraph">
+<p>This promotion pipeline:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Copies container images from the internal registry to Quay (for cross-cluster access)</p>
+</li>
+<li>
+<p>Updates the GitOps repository with the new image tag for staging</p>
+</li>
+<li>
+<p>Triggers Argo CD to sync the staging environment on the secondary cluster</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before starting this exercise, ensure you have completed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="day2-lab1-ci-pipeline.html" class="xref page">Application CI Pipeline</a></p>
+</li>
+<li>
+<p><a href="day2-lab1-app-deployment.html" class="xref page">Application Deployment</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You should have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A working CI pipeline that builds and pushes images</p>
+</li>
+<li>
+<p>Argo CD managing both dev and stage environments</p>
+</li>
+<li>
+<p>Access to Quay registry (pre-configured by bootstrap)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_understanding_the_promotion_flow"><a class="anchor" href="#_understanding_the_promotion_flow"></a>Understanding the Promotion Flow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The promotion workflow follows these steps:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Promotion Sequence</caption>
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Step</th>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Approves promotion (manual trigger)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GitLab</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Triggers promotion pipeline</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Promotion Pipeline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pulls image from internal registry by SHA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Promotion Pipeline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pushes image to Quay with 'stable' tag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Promotion Pipeline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updates <code>environments/stage/deployment.yaml</code> in GitOps repo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Argo CD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detects change in GitOps repository</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Argo CD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Syncs new image to staging cluster</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Key points:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Dev environment</strong> uses images from internal registry (fast, local)</p>
+</li>
+<li>
+<p><strong>Staging environment</strong> uses images from Quay (cross-cluster accessible)</p>
+</li>
+<li>
+<p><strong>Promotion is explicit</strong> - you decide when code is ready for staging</p>
+</li>
+<li>
+<p><strong>GitOps ensures</strong> staging deployments are version-controlled</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_promotion_pipeline_resources"><a class="anchor" href="#_create_promotion_pipeline_resources"></a>Create Promotion Pipeline Resources</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_pipeline_workspace"><a class="anchor" href="#_pipeline_workspace"></a>Pipeline Workspace</h3>
+<div class="paragraph">
+<p>The promotion pipeline needs a workspace for cloning the GitOps repository:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - &lt;&lt;'EOF'
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: promotion-workspace-pvc
+  namespace: etx-app-dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fetch_quay_credentials_from_vault"><a class="anchor" href="#_fetch_quay_credentials_from_vault"></a>Fetch Quay Credentials from Vault</h3>
+<div class="paragraph">
+<p>Create a task to retrieve Quay credentials from Vault:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - &lt;&lt;'EOF'
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: vault-fetch-quay-creds
+  namespace: etx-app-dev
+spec:
+  results:
+    - name: quay-server
+    - name: quay-username
+    - name: quay-password
+  steps:
+    - name: fetch
+      image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+      script: |
+        #!/bin/sh
+        set -e
+
+        # Install curl and jq
+        microdnf install -y curl jq &amp;&amp; microdnf clean all
+
+        # Authenticate to Vault using ServiceAccount token
+        VAULT_ADDR="{vault_url}"
+        SA_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+
+        VAULT_TOKEN=$(curl -s --request POST \
+          "${VAULT_ADDR}/v1/auth/kubernetes/login" \
+          --data "{\"role\":\"pipeline\",\"jwt\":\"${SA_TOKEN}\"}" \
+          | jq -r '.auth.client_token')
+
+        # Fetch Quay credentials
+        CREDS=$(curl -s --header "X-Vault-Token: ${VAULT_TOKEN}" \
+          "${VAULT_ADDR}/v1/secret/data/registry/quay")
+
+        echo "${CREDS}" | jq -r '.data.data.server' \
+          | tr -d '\n' &gt; $(results.quay-server.path)
+        echo "${CREDS}" | jq -r '.data.data.username' \
+          | tr -d '\n' &gt; $(results.quay-username.path)
+        echo "${CREDS}" | jq -r '.data.data.password' \
+          | tr -d '\n' &gt; $(results.quay-password.path)
+EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_copy_image_to_quay"><a class="anchor" href="#_copy_image_to_quay"></a>Copy Image to Quay</h3>
+<div class="paragraph">
+<p>Create a task that copies the image from the internal registry to Quay using Skopeo:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - &lt;&lt;'EOF'
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: copy-image-to-quay
+  namespace: etx-app-dev
+spec:
+  params:
+    - name: source-image
+      type: string
+      description: Source image URL (internal registry)
+    - name: dest-image
+      type: string
+      description: Destination image URL (Quay)
+    - name: dest-username
+      type: string
+    - name: dest-password
+      type: string
+  steps:
+    - name: copy
+      image: quay.io/skopeo/stable:latest
+      script: |
+        #!/bin/bash
+        set -e
+
+        echo "Copying image from internal registry to Quay..."
+        echo "Source: $(params.source-image)"
+        echo "Destination: $(params.dest-image)"
+
+        # Copy image using skopeo
+        skopeo copy \
+          --src-tls-verify=false \
+          --dest-tls-verify=false \
+          --dest-creds="$(params.dest-username):$(params.dest-password)" \
+          "docker://$(params.source-image)" \
+          "docker://$(params.dest-image)"
+
+        echo "Image copied successfully!"
+EOF</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_update_gitops_repository"><a class="anchor" href="#_update_gitops_repository"></a>Update GitOps Repository</h3>
+<div class="paragraph">
+<p>Create a task to update the staging deployment manifest with the new image tag:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - &lt;&lt;'EOF'
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: update-gitops-staging
+  namespace: etx-app-dev
+spec:
+  params:
+    - name: gitops-repo-url
+      type: string
+    - name: image-url
+      type: string
+      description: Full image URL to update in staging manifest
+    - name: git-username
+      type: string
+      default: "Tekton Pipeline"
+    - name: git-email
+      type: string
+      default: "pipeline@openshift.local"
+  workspaces:
+    - name: source
+  steps:
+    - name: update
+      image: registry.access.redhat.com/ubi9/ubi:latest
+      script: |
+        #!/bin/bash
+        set -e
+
+        # Install git
+        dnf install -y git &amp;&amp; dnf clean all
+
+        # Clone GitOps repo
+        git clone $(params.gitops-repo-url) /workspace/gitops
+        cd /workspace/gitops
+
+        # Update the image in staging deployment
+        sed -i "s|image:.*etx-app-base-app:.*|image: $(params.image-url)|" \
+          environments/stage/deployment.yaml
+
+        # Commit and push
+        git config user.email "$(params.git-email)"
+        git config user.name "$(params.git-username)"
+        git add environments/stage/deployment.yaml
+        git commit -m "Promote to staging: $(params.image-url)"
+        git push origin main
+
+        echo "GitOps repository updated successfully!"
+EOF</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_the_promotion_pipeline"><a class="anchor" href="#_create_the_promotion_pipeline"></a>Create the Promotion Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now combine all tasks into a promotion pipeline:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - &lt;&lt;'EOF'
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: etx-app-promotion
+  namespace: etx-app-dev
+spec:
+  params:
+    - name: source-image-tag
+      type: string
+      description: Image tag to promote (e.g., commit SHA)
+    - name: dest-image-tag
+      type: string
+      default: stable
+      description: Tag to use in Quay (e.g., stable, v1.0.0)
+    - name: gitops-repo-url
+      type: string
+      default: {gitlab_url}/software-factory/etx-app-gitops.git
+  workspaces:
+    - name: shared-workspace
+  tasks:
+    - name: fetch-quay-creds
+      taskRef:
+        name: vault-fetch-quay-creds
+
+    - name: copy-to-quay
+      runAfter: [fetch-quay-creds]
+      taskRef:
+        name: copy-image-to-quay
+      params:
+        - name: source-image
+          value: image-registry.openshift-image-registry.svc:5000/etx-app-dev/etx-app-base-app:$(params.source-image-tag)
+        - name: dest-image
+          value: $(tasks.fetch-quay-creds.results.quay-server)/etx-app/etx-app-base-app:$(params.dest-image-tag)
+        - name: dest-username
+          value: $(tasks.fetch-quay-creds.results.quay-username)
+        - name: dest-password
+          value: $(tasks.fetch-quay-creds.results.quay-password)
+
+    - name: update-gitops
+      runAfter: [copy-to-quay]
+      taskRef:
+        name: update-gitops-staging
+      params:
+        - name: gitops-repo-url
+          value: $(params.gitops-repo-url)
+        - name: image-url
+          value: $(tasks.fetch-quay-creds.results.quay-server)/etx-app/etx-app-base-app:$(params.dest-image-tag)
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Apply the pipeline:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f etx-app-promotion-pipeline.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_the_promotion_pipeline"><a class="anchor" href="#_test_the_promotion_pipeline"></a>Test the Promotion Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First, get the GitLab URL dynamically:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+echo "GitLab URL: $GITLAB_URL"</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_a_valid_image_tag"><a class="anchor" href="#_get_a_valid_image_tag"></a>Get a Valid Image Tag</h3>
+<div class="paragraph">
+<p>Find a recent image tag from your dev environment:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># List recent images from dev CI pipeline
+oc get imagestream etx-app-base-app -n etx-app-dev -o json | \
+  jq -r '.status.tags[].tag' | head -5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pick one of the commit SHA tags from the output.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_the_promotion_pipeline"><a class="anchor" href="#_run_the_promotion_pipeline"></a>Run the Promotion Pipeline</h3>
+<div class="paragraph">
+<p>Trigger the promotion pipeline manually.</p>
+</div>
+<div class="paragraph">
+<p>First, get an actual commit SHA from the images built by the CI pipeline:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get images -n etx-app-dev | grep etx-app-base-app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then create a PipelineRun (replace <code>&lt;COMMIT_SHA&gt;</code> with an actual image tag from above):</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f - &lt;&lt;EOF
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: etx-app-promotion-
+  namespace: etx-app-dev
+spec:
+  pipelineRef:
+    name: etx-app-promotion
+  params:
+    - name: source-image-tag
+      value: &lt;COMMIT_SHA&gt;
+    - name: dest-image-tag
+      value: stable
+    - name: gitops-repo-url
+      value: ${GITLAB_URL}/software-factory/etx-app-gitops.git
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: promotion-workspace-pvc
+  taskRunTemplate:
+    serviceAccountName: pipeline
+EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Watch the pipeline logs. You should see:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Vault credentials retrieved</p>
+</li>
+<li>
+<p>Image copied from internal registry to Quay</p>
+</li>
+<li>
+<p>GitOps repository updated</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_verify_the_promotion"><a class="anchor" href="#_verify_the_promotion"></a>Verify the Promotion</h3>
+<div class="paragraph">
+<p>Check that the GitOps repository was updated:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/workshop/etx-app-gitops
+git pull origin main
+cat environments/stage/deployment.yaml | grep image:</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the Quay image URL with the <code>stable</code> tag.</p>
+</div>
+<div class="paragraph">
+<p>Check the Argo CD application status:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get application etx-app-stage -n etx-app-dev -o jsonpath='{.status.sync.status}{"\n"}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should be <code>Synced</code>.</p>
+</div>
+<div class="paragraph">
+<p>View in Argo CD UI:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the Argo CD dashboard</p>
+</li>
+<li>
+<p>Click on the <code>etx-app-stage</code> application</p>
+</li>
+<li>
+<p>You should see it&#8217;s synced and healthy</p>
+</li>
+<li>
+<p>The deployment should show the new image from Quay</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_automate_promotion_with_approval"><a class="anchor" href="#_automate_promotion_with_approval"></a>Automate Promotion with Approval</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For a more realistic workflow, you can add a manual approval step before promotion.</p>
+</div>
+<div class="sect2">
+<h3 id="_option_1_manual_trigger_current_approach"><a class="anchor" href="#_option_1_manual_trigger_current_approach"></a>Option 1: Manual Trigger (Current Approach)</h3>
+<div class="paragraph">
+<p>The current setup requires manually triggering the promotion pipeline.
+This is suitable for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Small teams</p>
+</li>
+<li>
+<p>Infrequent deployments</p>
+</li>
+<li>
+<p>High-touch release processes</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_option_2_automatic_with_manual_approval"><a class="anchor" href="#_option_2_automatic_with_manual_approval"></a>Option 2: Automatic with Manual Approval</h3>
+<div class="paragraph">
+<p>Add a manual approval task using Tekton:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f - &lt;&lt;'EOF'
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: manual-approval
+  namespace: etx-app-dev
+spec:
+  description: |
+    Pauses pipeline execution until manual approval.
+    Requires operator intervention to continue.
+  steps:
+    - name: wait-for-approval
+      image: registry.access.redhat.com/ubi9/ubi-minimal:latest
+      script: |
+        #!/bin/sh
+        echo "⏸️  Pipeline paused - waiting for manual approval"
+        echo "Run: oc patch taskrun &lt;taskrun-name&gt; -p '{\"spec\":{\"status\":\"Succeeded\"}}'"
+        sleep infinity
+EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add this task as the first step in your promotion pipeline to require approval before promoting to staging.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_option_3_gitlab_merge_request_trigger"><a class="anchor" href="#_option_3_gitlab_merge_request_trigger"></a>Option 3: GitLab Merge Request Trigger</h3>
+<div class="paragraph">
+<p>Create a webhook that triggers the promotion pipeline when a merge request is merged:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a promotion branch in your application repo</p>
+</li>
+<li>
+<p>Open a merge request for promotion</p>
+</li>
+<li>
+<p>Add reviewers for approval</p>
+</li>
+<li>
+<p>On merge, trigger the promotion pipeline via GitLab webhook</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This approach provides:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Code review for promotion decisions</p>
+</li>
+<li>
+<p>Audit trail in Git</p>
+</li>
+<li>
+<p>Team collaboration</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rollback_strategy"><a class="anchor" href="#_rollback_strategy"></a>Rollback Strategy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you need to rollback a staging deployment:</p>
+</div>
+<div class="sect2">
+<h3 id="_method_1_revert_git_commit"><a class="anchor" href="#_method_1_revert_git_commit"></a>Method 1: Revert Git Commit</h3>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/workshop/etx-app-gitops
+git log environments/stage/deployment.yaml
+git revert &lt;commit-hash&gt;
+git push origin main</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Argo CD will automatically sync the previous version.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_method_2_update_to_previous_tag"><a class="anchor" href="#_method_2_update_to_previous_tag"></a>Method 2: Update to Previous Tag</h3>
+<div class="paragraph">
+<p>Run the promotion pipeline with a previous image tag:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f - &lt;&lt;EOF
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: etx-app-promotion-
+  namespace: etx-app-dev
+spec:
+  pipelineRef:
+    name: etx-app-promotion
+  params:
+    - name: source-image-tag
+      value: &lt;PREVIOUS_SHA&gt;
+    - name: dest-image-tag
+      value: stable
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: promotion-workspace-pvc
+  taskRunTemplate:
+    serviceAccountName: pipeline
+EOF</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have completed the Promotion Pipeline exercise. You now have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Automated image promotion from internal registry to Quay</p>
+</li>
+<li>
+<p>GitOps-based staging deployments</p>
+</li>
+<li>
+<p>Secure credential management via Vault</p>
+</li>
+<li>
+<p>Multi-cluster deployment capability</p>
+</li>
+<li>
+<p>Rollback capability through Git history</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_key_takeaways"><a class="anchor" href="#_key_takeaways"></a>Key Takeaways</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Promotion != Re-build:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The same container image (by SHA) is promoted from dev to staging</p>
+</li>
+<li>
+<p>No code changes between environments - only configuration</p>
+</li>
+<li>
+<p>This ensures you test exactly what you deploy</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>GitOps ensures consistency:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All deployment state is in Git</p>
+</li>
+<li>
+<p>Changes are auditable and reversible</p>
+</li>
+<li>
+<p>Argo CD provides automatic sync and drift detection</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Multi-cluster architecture:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Dev uses internal registry (fast, local)</p>
+</li>
+<li>
+<p>Staging uses Quay (cross-cluster accessible)</p>
+</li>
+<li>
+<p>Argo CD manages both from single control plane</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Proceed to <a href="#day2-lab2-mta.adoc" class="xref unresolved">Lab 2: Application Modernization (MTA)</a> to learn how to modernize legacy Java applications.</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>
