@@ -1,35 +1,142 @@
-= Check your work
+= Meet Emma — A Day in the Software Factory
+:navtitle: Meet Emma
 
-== Follow below steps in the lab to check your work
+Now that you've learned what a Software Factory is, let's see how it helps a developer during everyday software development.
 
-FIXME: Add the instructions to be followed in the lab environment to make sure the problem has been resolved. You may chose to remove this block if grading script is provided in the lab to check the work.
+In this lesson, you'll follow Emma as she delivers her first application using her organization's Software Factory.
 
-== Check your work using the grading script
+TIP: As you read through Emma's journey, think about how similar steps are performed in your own organization.
 
-After you have resolved the issue and met the success criteria, login to `FIXME` system as `FIXME` user and run the grading script as shown here to check your work:
+== Meet Emma
 
-[source,bash,role=execute]
-----
-break-fix-script grade
-----
+image::p2.png[align="right",width="220"]
 
-.Sample output
-----
-[root@classroom ~]# break-fix-script grade
-Initiating break-fix-script with option grade
-Grading.  Please wait.
-Success.
-COMPLETION CODE: <check your output for this value>
-Completed break-fix-script with option grade successfully
-----
+Emma has just joined the engineering team.
 
-FIXME: Remove the below block if no grading script is provided to check the work in the break-fix activity. In this case make sure you use the above block to provide step-by-step instructions learner can follow to check their work.
+She has been assigned her first feature and wants to start contributing immediately.
 
-== Submit the completion code
+Instead of requesting infrastructure, configuring development environments, creating CI/CD pipelines, and learning deployment processes, Emma uses the organization's Software Factory.
 
-NOTE: Skip this if not applicable for you.
+The platform provides everything she needs through a standardized self-service experience.
 
-- For RedHat internal audience: Submit that completion code https://link-to-appropriate-lms.com[here,window=_blank] to receive a grade for this training
-- For RedHat partners: Submit that completion code https://link-to-appropriate-lms.com[here,window=_blank] to receive a grade for this training
+== Emma's Journey
 
-FIXME: Change the links in the above lines to the link for appropriate audience specific LMS where learner can provide completion code. Remove this block if submitting completion is not applicable.
+image::journey.png[align="center",width="900"]
+
+.Emma's workflow (Click to expand)
+[%collapsible]
+====
+Emma's first day looks like this:
+
+. Sign in to the organization's *Developer Hub*.
+. Choose a *Golden Path* for the application she wants to build.
+. Launch a ready-to-use development workspace using *Dev Spaces*.
+. Write code and commit the changes to Git.
+. The platform automatically builds and validates the application.
+. Security and compliance checks run automatically.
+. GitOps deploys the application to OpenShift.
+. The platform continuously monitors the running application.
+====
+
+== Behind Every Step
+
+Emma interacts with only a few simple interfaces, but many platform capabilities work together behind the scenes.
+
+[cols="1,2",options="header"]
+|===
+|Emma's Activity
+|Platform Capability
+
+|Find project templates
+|Developer Hub
+
+|Start coding
+|Dev Spaces
+
+|Store source code
+|GitHub or GitLab
+
+|Build and test applications
+|OpenShift Pipelines
+
+|Perform security validation
+|Trusted Software Supply Chain
+
+|Store trusted artifacts
+|Quay
+
+|Deploy applications
+|GitOps
+
+|Monitor running applications
+|Platform Services
+|===
+
+== Why This Matters
+
+Without a Software Factory, Emma would need to:
+
+* Learn multiple development processes.
+* Configure development tools.
+* Build deployment pipelines.
+* Understand infrastructure.
+* Integrate security tooling.
+
+With a Software Factory, these capabilities are already provided by the platform.
+
+Emma focuses on delivering business features while the platform handles the underlying automation, security, and operational tasks.
+
+[NOTE]
+====
+A Software Factory doesn't replace developers—it removes the repetitive platform work that slows them down, allowing developers to focus on writing application code.
+====
+
+== Reflection
+
+.Think about your own organization (Click to expand)
+[%collapsible]
+====
+When a new developer joins your team:
+
+* How long does onboarding take?
+* Is there a standardized workflow?
+* Which activities are manual?
+* Which activities could be automated through a Software Factory?
+====
+
+== Check Your Understanding
+
+.Quiz Time! (Click to expand)
+[%collapsible]
+====
+
+Match Emma's activity with the platform capability that supports it.
+
+[cols="1,1",options="header"]
+|===
+|Activity |Capability
+
+|Find project templates
+|?
+
+|Start coding immediately
+|?
+
+|Automatically build applications
+|?
+
+|Deploy consistently
+|?
+
+|Store trusted container images
+|?
+|===
+
+*Answers*
+
+* Find project templates → Developer Hub
+* Start coding immediately → Dev Spaces
+* Automatically build applications → OpenShift Pipelines
+* Deploy consistently → GitOps
+* Store trusted container images → Quay
+====

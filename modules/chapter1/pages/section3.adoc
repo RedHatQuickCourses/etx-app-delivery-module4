@@ -1,0 +1,54 @@
+= Developer Hub: The Front Door to the Software Factory
+:navtitle: Developer Hub
+
+So far in this learning path, you've explored what an Application Platform is, why organizations are adopting Platform Engineering, and how a Software Factory standardizes and automates software delivery.
+
+This raises an important question:
+
+How do developers efficiently discover, access, and use all these platform capabilities without needing to learn every underlying tool?
+
+This is where _Red Hat Developer Hub_ comes in, an Internal Developer Portal (IDP) based on the CNCF _Backstage_ project.
+
+image::hub.png[Red Hat Developer Hub,link=self,window=blank,width=700]
+
+Rather than replacing the tools within the Software Factory, Developer Hub provides a unified, self-service experience that brings them together in a single developer portal. It becomes the primary interface through which developers create new projects, launch development environments, monitor pipelines, view deployments, access documentation, and interact with the platform.
+
+Modern application delivery has become increasingly complex.
+
+Developers interact with source code repositories, build pipelines, deployment tools, documentation systems, security scanners, observability dashboards, and platform services.
+
+Individually, each tool solves an important problem.
+
+Together, however, they increase the amount of knowledge developers must retain simply to deliver software.
+
+This challenge is commonly referred to as developer cognitive load.
+
+Increasing Developer Efficiency
+Faster Onboarding & Setup: Instant onboarding with preconfigured, trusted environments, integrated services, and curated tools—all powered by cloud-based workspaces.
+
+
+Streamlined Development Workflow: Automated software templates, self-services capabilities and a central source-of-truth reduce friction.
+
+
+Integrated Collaboration & Flexibility: Development teams can work on local laptops while the source code stays secure, leveraging integrated tools. 
+
+Key Technical Capabilities: Developer Productivity
+
+Accelerated onboarding and frictionless self-service
+Single-pane visibility to simplify app ownership and governance
+Consistent Development-to-Production Workflows
+Automated Software Templates
+Streamlined Automation for Faster, Secure Development
+Rootless, Secure Container Execution
+
+
+
+
+
+
+
+
+
+Self-Service with Software Templates
+
+image::self-serve.png[Self-Service with Software Templates,link=self,window=blank,width=700]

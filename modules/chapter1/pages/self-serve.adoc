@@ -1,0 +1,84 @@
+= Self-Service with Software Templates
+:navtitle: Self-Service with Software Templates
+
+Developers need a fast and consistent way to create *new* applications without manually configuring repositories, pipelines, deployment manifests, and platform integrations.
+
+This is where *Software Templates* come in.
+
+Software Templates, also known as *Golden Paths*, provide standardized project blueprints that automate the creation of new applications. Rather than starting from an empty repository, developers begin with an organization-approved template that already includes the required project structure, configurations, and automation.
+
+image::self-serve.png[Self-Service with Software Templates,align="center"]
+
+The diagram above illustrates how Software Templates simplify application development by capturing organizational best practices and turning them into reusable automation.
+
+== Capture Your Best Practices
+
+Platform Engineers work with development teams to identify proven architectural patterns, coding standards, deployment practices, and organizational policies.
+
+Instead of documenting these practices for developers to follow manually, they are codified into reusable Software Templates.
+
+As a result, every new project begins with the same approved foundation.
+
+== Bake Your Processes into Templates
+
+Once best practices have been captured, Platform Engineers package them into Software Templates.
+
+A template defines everything required to bootstrap a new application, including:
+
+* Project structure and source code scaffold
+* Git repository creation
+* CI/CD pipeline configuration
+* Deployment manifests, such as Helm charts or Kustomize overlays
+* Dev Spaces configuration for cloud-based development
+* Software Catalog registration
+* Organizational standards and recommended configurations
+
+Developers simply provide a few project-specific details, while the template automatically performs the remaining setup.
+
+== Generate New Projects Automatically
+
+When a developer selects a Software Template from Red Hat Developer Hub, the platform automatically provisions the required resources.
+
+Instead of manually creating repositories, configuring pipelines, or preparing deployment manifests, these tasks are performed automatically.
+
+The generated project is immediately committed to the organization's version control system and is ready for development.
+
+This allows developers to focus on implementing business functionality instead of performing repetitive setup tasks.
+
+== Get Started in Seconds
+
+Traditional project onboarding often involves several manual activities, including:
+
+* Requesting repositories
+* Downloading starter projects
+* Copying and modifying configuration files
+* Creating CI/CD pipelines
+* Configuring deployment resources
+
+Software Templates eliminate these repetitive tasks by automating the entire project creation process.
+
+Developers receive a production-ready project within seconds, while Platform Engineers can ensure every project follows organizational standards from the very beginning.
+
+== Key Benefits of Software Templates
+
+Software Templates provide advantages for both developers and platform teams.
+
+For developers:
+
+* Quickly create new projects using proven architectural patterns.
+* Eliminate repetitive project setup activities.
+* Begin development immediately with a fully configured project.
+* Follow organizational standards without additional effort.
+
+For Platform Engineers:
+
+* Standardize application architectures across teams.
+* Embed security, compliance, and operational best practices into every project.
+* Reduce support requests and onboarding time.
+* Continuously improve templates as organizational standards evolve.
+
+[TIP]
+====
+Software Templates do not replace developer creativity. Instead, they automate the repetitive foundation of every project, allowing developers to spend more time building business functionality while Platform Engineers ensure consistency across the Software Factory.
+====
+

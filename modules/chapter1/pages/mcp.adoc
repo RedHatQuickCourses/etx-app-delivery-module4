@@ -1,0 +1,64 @@
+== AI Integration with Model Context Protocol (MCP)
+
+As organizations adopt AI-powered developer assistants, Large Language Models (LLMs) need secure access to enterprise knowledge and platform capabilities.
+
+The *Model Context Protocol (MCP)* provides a standardized way for AI applications, also known as *MCP clients*, to communicate with external systems through *MCP servers*.
+
+Instead of requiring every AI assistant to implement custom integrations for different tools, MCP defines a common protocol for discovering and invoking capabilities exposed by external systems.
+
+image::mcp-overview.png[align="center"]
+
+An MCP server exposes a collection of *tools*, where each tool performs a specific action against an external system. These tools can retrieve information, query APIs, access documentation, or interact with platform services.
+
+Examples include:
+
+* Querying software catalogs
+* Retrieving documentation
+* Searching source code repositories
+* Accessing monitoring systems
+* Performing web searches
+
+NOTE: MCP standardizes how AI assistants access external systems. It does not replace those systems.
+
+=== MCP in Red Hat Developer Hub
+
+Red Hat Developer Hub includes support for MCP through the Backstage MCP plug-in.
+
+Unlike traditional MCP implementations that require building a separate MCP server, Developer Hub allows Platform Engineers to expose MCP tools by implementing simple Backstage backend plug-ins.
+
+This approach enables organizations to make platform knowledge available to AI assistants without introducing additional infrastructure.
+
+image::rhdh-mcp-architecture.png[align="center"]
+
+=== MCP Tools in Developer Hub
+
+As an initial implementation, Red Hat provides two read-only MCP tool plug-ins.
+
+.Software Catalog MCP Tool
+****
+Allows AI assistants to query the complete Software Catalog, including component metadata such as ownership, lifecycle, relationships, repositories, and dependencies.
+****
+
+.TechDocs MCP Tool
+****
+Allows AI assistants to retrieve documentation published through TechDocs, enabling developers to ask natural language questions about architecture, APIs, runbooks, and operational procedures.
+****
+
+These tools are intentionally read-only, allowing AI assistants to retrieve information without modifying platform resources.
+
+IMPORTANT: Write operations require additional security controls and are typically introduced only after appropriate authentication, authorization, and governance mechanisms are in place.
+
+=== Why MCP Matters
+
+MCP helps extend the Developer Experience by allowing AI assistants to retrieve platform knowledge from trusted sources.
+
+Instead of manually searching documentation or navigating multiple tools, developers can ask questions such as:
+
+* "Who owns this service?"
+* "Show me the documentation for this API."
+* "Which Git repository contains this application?"
+* "What is the lifecycle status of this component?"
+
+The AI assistant retrieves this information directly from Developer Hub using MCP, providing accurate and up-to-date responses.
+
+TIP: Think of MCP as a standardized bridge between AI assistants and the Software Factory. It enables AI to retrieve trusted platform information while allowing organizations to maintain control over what information is exposed.

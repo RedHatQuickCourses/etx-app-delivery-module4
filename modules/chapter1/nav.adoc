@@ -1,4 +1,14 @@
-
-
-* xref:day2-appmod-overview.adoc[Application Modernization]
-** xref:day2-lab2-mta.adoc[Application Modernization (MTA)]
+* Developer Hub and the IDP
+** xref:devX.adoc[Developer Experience Matters]
+** xref:devhub.adoc[Introducing Red Hat Developer Hub]
+** xref:self-serve.adoc[Self-Service with Software Templates]
+** xref:template.adoc[Software Template Workflow]
+** xref:catalog.adoc[Software Catalog]
+** xref:docs.adoc[Documentation as Code with TechDocs]
+** xref:plugins.adoc[Extending Developer Hub with Plugins]
+** xref:mcp.adoc[MCP in Developer Hub]
+** xref:lightspeed.adoc[Developer Lightspeed]
+* Hands-on Lab
+** xref:lab1-dh1-install-configure.adoc[Install and configure Red Hat Developer Hub]
+** xref:lab2-dh2-golden-paths.adoc[Developer Hub: templates and integrations]
+//** xref:summary.adoc[Summary and What's next?]

@@ -1,0 +1,90 @@
+= Introducing Red Hat Developer Hub
+:navtitle: Introducing Developer Hub
+
+You explored how improving the *Developer Experience (DevEx)* enables organizations to reduce developer cognitive load, increase productivity, and accelerate software delivery.
+
+This naturally raises an important question:
+
+[quote]
+____
+If a Software Factory consists of many different tools and platform capabilities, how do developers efficiently discover and use them without learning every underlying technology?
+____
+
+The answer is an *Internal Developer Portal*.
+
+An Internal Developer Portal provides developers with a single, self-service interface for interacting with the Software Factory. Instead of navigating multiple applications for source control, CI/CD, deployment, documentation, observability, and development environments, developers can access everything from one centralized portal.
+
+image::hub.png[Red Hat Developer Hub Overview,align="center", width=500]
+
+The illustration above demonstrates this concept. Platform Engineers build and maintain the Software Factory by integrating capabilities such as source control, CI/CD pipelines, GitOps, registries, service mesh, distributed tracing, and other platform services. Developers then consume these capabilities through a unified interface provided by the Internal Developer Portal. :contentReference[oaicite:0]{index=0}
+
+== What is Red Hat Developer Hub?
+
+Red Hat Developer Hub (RHDH) is an enterprise-grade Internal Developer Portal built on the CNCF Backstage open source project. Rather than replacing the tools already used within the Software Factory, Developer Hub integrates them into a single developer experience.
+
+Developer Hub provides a central location where developers can:
+
+* Discover software components, APIs, services, and infrastructure resources.
+* Create new applications using standardized Software Templates (Golden Paths).
+* Launch cloud-based development environments.
+* Monitor build pipelines and deployment status.
+* Access project documentation.
+* Navigate the complete application delivery lifecycle from a single interface.
+
+This enables developers to focus on building applications instead of spending time locating tools, configuring environments, or learning platform-specific implementation details.
+
+== Developer Hub within the Software Factory
+
+The Software Factory consists of multiple platform capabilities that work together to automate software delivery.
+
+Developer Hub acts as the entry point that brings these capabilities together into a unified workflow.
+
+[cols="1,3",options="header"]
+|===
+| Software Factory Capability
+| How Developer Hub Integrates
+
+| Source Control
+| Creates and links application repositories.
+
+| Development Environment
+| Launches cloud-based development workspaces using OpenShift Dev Spaces.
+
+| Continuous Integration
+| Displays pipeline execution and build status through Tekton integrations.
+
+| Continuous Delivery
+| Shows deployment status through GitOps integrations such as Argo CD.
+
+| Software Catalog
+| Provides a searchable inventory of software components, services, APIs, and ownership information.
+
+| Documentation
+| Makes project documentation available through TechDocs.
+
+| Observability
+| Integrates with monitoring and visualization platforms through plugins.
+|===
+
+Rather than interacting with each platform independently, developers access these capabilities through a consistent and self-service experience.
+
+== Why is Developer Hub Important?
+
+As organizations adopt microservices, Kubernetes, GitOps, and Platform Engineering practices, the number of tools involved in software delivery continues to grow.
+
+Without a centralized developer portal, developers often need to:
+
+* Navigate multiple web consoles.
+* Search for project documentation.
+* Locate repositories and deployment pipelines.
+* Understand platform-specific implementation details.
+* Request infrastructure from platform teams.
+
+Developer Hub addresses these challenges by providing:
+
+* **Discoverability** - Searchable software catalogs and documentation.
+* **Self-service** - Automated Software Templates that generate complete application projects.
+* **Standardization** - Every project follows organizational standards and best practices.
+* **Developer productivity** - Developers spend less time configuring tools and more time writing code.
+
+By reducing cognitive load and simplifying common development tasks, Developer Hub helps organizations improve both developer productivity and software delivery consistency.

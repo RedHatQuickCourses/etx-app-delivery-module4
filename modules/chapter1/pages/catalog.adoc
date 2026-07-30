@@ -1,0 +1,104 @@
+= Discovering Software with the Software Catalog
+:navtitle: Software Catalog
+
+As organizations adopt microservices and Platform Engineering, the number of software assets grows rapidly. Applications are no longer built as a single monolithic system. Instead, they consist of multiple services, APIs, databases, libraries, and supporting infrastructure owned by different development teams.
+
+Without a centralized inventory, developers often struggle to answer questions such as:
+
+* Which team owns this service?
+* Where is the source code located?
+* Which APIs does this application expose?
+* Is this service still actively maintained?
+* Where can I find the documentation?
+
+The **Software Catalog** addresses these challenges by providing a centralized inventory of software assets across the organization.
+
+image::catalog.png[Software Catalog,align="center"]
+
+The Software Catalog acts as a single source of truth for software components and their relationships. Rather than manually tracking applications in spreadsheets or documentation portals, Platform Engineers register software assets within the catalog, allowing developers to quickly discover the information they need.
+
+== What Does the Software Catalog Track?
+
+The Software Catalog organizes software into different types of entities.
+
+[cols="1,3",options="header"]
+|===
+| Entity Type | Description
+
+| Components
+| Individual software components such as microservices, websites, backend services, frontend applications, or shared libraries.
+
+| APIs
+| REST, GraphQL, gRPC, or other APIs exposed by applications for communication with other services.
+
+| Resources
+| Infrastructure resources required by applications, such as databases, object storage, message brokers, or Kubernetes resources.
+
+| Systems
+| Collections of related components that together deliver a business application or platform.
+
+| Domains
+| Higher-level business or organizational groupings that contain multiple systems.
+
+| Users
+| Individual developers or engineers associated with software components.
+
+| Groups
+| Development teams or organizational groups responsible for owning and maintaining software.
+|===
+
+== More Than an Inventory
+
+The Software Catalog is more than a list of applications.
+
+Each catalog entry contains valuable metadata that helps developers understand and manage software throughout its lifecycle, including:
+
+* Application owner
+* Source code repository
+* Lifecycle stage (Experimental, Development, Production, Deprecated)
+* System relationships
+* API dependencies
+* Technical documentation
+* CI/CD pipelines
+* Deployment status
+
+This information allows developers to quickly understand an application without searching across multiple tools.
+
+== Managed as Code
+
+One of the key principles of Red Hat Developer Hub is that the Software Catalog is **managed as code**.
+
+Each software component includes a `catalog-info.yaml` file in its source repository. This file defines the metadata that describes the component, including its name, owner, lifecycle, type, and relationships to other software assets.
+
+Because the catalog is stored alongside the application's source code, changes to metadata follow the same Git-based workflows used for application development.
+
+This approach ensures that catalog information remains version-controlled, reviewable, and automatically synchronized with the latest state of the application.
+
+== Benefits of the Software Catalog
+
+The Software Catalog provides value to both developers and platform teams.
+
+For developers:
+
+* Quickly discover applications, APIs, and services.
+* Identify application owners and responsible teams.
+* Access repositories, documentation, and deployment information from one location.
+* Understand relationships between software components.
+
+For Platform Engineers:
+
+* Maintain an accurate inventory of software assets.
+* Improve governance and software ownership.
+* Standardize metadata across development teams.
+* Enable self-service discovery throughout the organization.
+
+[TIP]
+====
+Think of the Software Catalog as the organization's **software inventory**.
+
+Just as a library catalog helps readers quickly find books, the Software Catalog helps developers discover applications, services, APIs, documentation, ownership information, and platform resources from a single location.
+====
+
+== Key Takeaway
+
+The Software Catalog serves as the central inventory of the Software Factory. It enables developers to discover software assets, understand ownership and relationships, and access the information they need without searching across multiple repositories and tools.

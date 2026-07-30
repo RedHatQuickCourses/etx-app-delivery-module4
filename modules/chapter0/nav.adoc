@@ -1,0 +1,4 @@
+* xref:index.adoc[Software Factory and CI/CD]
+* xref:day2-lab1-ci-pipeline.adoc[CI Pipeline]
+* xref:day2-lab1-app-deployment.adoc[Application Deployment]
+* xref:day2-lab1-promotion.adoc[Promotion Pipeline]
