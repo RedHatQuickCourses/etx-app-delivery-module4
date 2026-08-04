@@ -1,0 +1,178 @@
+= Lab 4: Configure OpenShift OAuth Authentication
+:navtitle: Lab 4: Configure OpenShift OAuth
+:experimental:
+
+In this lab, you'll replace the temporary Guest authentication used during installation with OpenShift OAuth authentication.
+
+This allows developers to sign in using their OpenShift identities, providing a production-like authentication experience for Red Hat Developer Hub.
+
+By the end of this lab, you will have:
+
+* Created an OpenShift OAuth client
+* Configured Developer Hub to authenticate using OpenShift OAuth
+* Mounted authentication secrets into the Backstage application
+* Verified user sign-in with OpenShift credentials
+* Tested the Golden Path template using an authenticated user
+
+== Create an OpenShift OAuth Client
+
+Developer Hub authenticates users through an OAuth client registered with OpenShift.
+
+Create the OAuth client.
+
+[source,bash,role=execute,subs="attributes+"]
+----
+oc create -f - <<EOF
+apiVersion: oauth.openshift.io/v1
+kind: OAuthClient
+metadata:
+  name: rhdh-oauth-client
+grantMethod: auto
+redirectURIs:
+  - https://backstage-rhdh-setup-rhdh.{openshift_cluster_ingress_domain}/api/auth/oidc/handler/frame
+secret: GENERATE_A_RANDOM_SECRET
+EOF
+----
+
+TIP: Generate a secure client secret before running the command.
+
+[source,bash,role=execute]
+----
+node -p 'require("crypto").randomBytes(24).toString("base64")'
+----
+
+Replace `GENERATE_A_RANDOM_SECRET` with the generated value.
+
+== Create the Authentication Secret
+
+Store the OAuth client information in a Kubernetes Secret.
+
+[source,bash,role=execute,subs="attributes+"]
+----
+oc create secret generic rhdh-auth-secret \
+  -n setup-rhdh \
+  --from-literal=AUTH_OIDC_CLIENT_ID=rhdh-oauth-client \
+  --from-literal=AUTH_OIDC_CLIENT_SECRET=GENERATE_A_RANDOM_SECRET \
+  --from-literal=AUTH_OIDC_METADATA_URL=https://oauth-openshift.{openshift_cluster_ingress_domain}/.well-known/openid-configuration
+----
+
+NOTE: Use the same client secret that was configured when creating the OAuth client.
+
+== Update the Developer Hub Configuration
+
+The initial installation used the Guest authentication provider.
+
+Update the existing `app-config.yaml` to use OpenShift OAuth instead.
+
+. Open the **setup-rhdh** project.
+. Navigate to **Workloads → ConfigMaps**.
+. Select **rhdh-config**.
+. Choose **Actions → Edit ConfigMap**.
+. Replace the Guest authentication configuration with the following OIDC configuration.
+
+[source,bash,role=execute,subs="attributes+"]
+----
+signInPage: oidc
+
+auth:
+  session:
+    secret: MY_SESSION_SECRET
+
+  environment: production
+
+  providers:
+    oidc:
+      production:
+        clientId: ${AUTH_OIDC_CLIENT_ID}
+        clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
+        metadataUrl: ${AUTH_OIDC_METADATA_URL}
+        prompt: auto
+----
+
+TIP: Generate a session secret using:
+
+[source,bash,role=execute]
+----
+node -p 'require("crypto").randomBytes(24).toString("base64")'
+----
+
+Replace `MY_SESSION_SECRET` with the generated value.
+
+Click **Save**.
+
+IMPORTANT: The `${AUTH_OIDC_*}` values are resolved from the Kubernetes Secret that will be mounted into the Backstage application in the next step.
+
+== Mount the Authentication Secret
+
+Mount the authentication Secret so Developer Hub can access the OAuth client credentials.
+
+. Switch to the **setup-rhdh** project.
+. Navigate to **Operators → Installed Operators**.
+. Open **Red Hat Developer Hub**.
+. Select the **Backstage** tab.
+. Open the **rhdh** instance.
+. Click **Actions → Edit Backstage**.
+. Under `spec.application`, add:
+
+[source,yaml]
+----
+extraEnvs:
+  secrets:
+    - name: rhdh-auth-secret
+----
+
+. Save the resource.
+
+NOTE: The Red Hat Developer Hub Operator automatically reconciles the change and restarts the Backstage pod.
+
+== Verify OpenShift Sign-In
+
+Wait until the Backstage pod returns to the **Running** state.
+
+. Open the Developer Hub route.
+. Click **OIDC** on the login page.
+. Sign in using your OpenShift credentials.
+
+After successful authentication, you should be redirected to the Developer Hub home page as your authenticated OpenShift user.
+
+IMPORTANT: Guest authentication is no longer available after enabling OpenShift OAuth.
+
+== Test the Golden Path Template
+
+Verify that authenticated users can create new applications.
+
+. Open menu:Create[Templates].
+. Select **Quarkus Application (Golden Path)**.
+. Enter the required project information.
+. Click btn:[Create].
+
+Verify that:
+
+* A new GitLab repository is created.
+* The application is registered in the Software Catalog.
+* The generated repository contains:
+** Devfile
+** Tekton pipeline
+** GitOps manifests
+* The catalog component provides a link to launch a Dev Spaces workspace.
+
+== Verify the Deployment
+
+Confirm the authentication flow is working correctly by checking:
+
+* You are signed in using your OpenShift identity.
+* Guest authentication is no longer available.
+* The Golden Path template successfully provisions a new project.
+* The generated project appears in the Software Catalog.
+
+++++
+<div class="key-card">
+++++
+
+.Key Takeaway
+
+Red Hat Developer Hub now uses OpenShift OAuth for authentication, allowing developers to securely access Software Templates and the Software Catalog using their enterprise identity while maintaining a production-ready authentication model.
+
+++++
+</div>
+++++

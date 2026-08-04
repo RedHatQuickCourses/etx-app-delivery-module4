@@ -1,0 +1,140 @@
+= Introducing Red Hat Developer Hub
+:navtitle: Introducing Developer Hub
+
+== The Challenge
+
+Modern Software Factories bring together many capabilities, including source control, CI/CD, GitOps, development environments, documentation, observability, and security.
+
+While these capabilities improve software delivery, they also introduce a new challenge for developers.
+
+[quote]
+____
+If a Software Factory consists of many different tools and platform capabilities, how do developers efficiently discover and use them without learning every underlying technology?
+____
+
+Without a unified experience, developers often need to:
+
+* Navigate multiple web consoles
+* Search for project documentation
+* Locate source code repositories and build pipelines
+* Understand platform-specific implementation details
+* Request infrastructure or platform services from different teams
+
+Instead of building software, developers spend valuable time learning tools and navigating platform complexity.
+
+[IMPORTANT]
+====
+As Software Factories grow, developer productivity depends not only on automation, but also on providing a consistent and discoverable developer experience.
+====
+
+== The Internal Developer Portal
+
+The solution is an *Internal Developer Portal*.
+
+An Internal Developer Portal provides developers with a single, self-service interface for interacting with the Software Factory.
+
+Rather than accessing separate applications for source control, CI/CD, deployment, documentation, observability, and development environments, developers can access everything from one centralized portal.
+
+.Internal Developer Portal within the Software Factory(_Click the image to view it in full size in a new browser tab_)
+image::hub.png[link={imagesdir}/hub.png,width=500]
+
+Platform Engineers build and maintain the Software Factory by integrating capabilities such as source control, CI/CD pipelines, GitOps, software catalogs, development environments, observability, and security services.
+
+Developers simply consume these capabilities through the Internal Developer Portal using a consistent self-service experience.
+
+== What is Red Hat Developer Hub?
+
+*Red Hat Developer Hub (RHDH)* is an enterprise-grade Internal Developer Portal built on the CNCF Backstage open source project.
+
+Rather than replacing the tools already used within the Software Factory, Developer Hub integrates them into a single developer experience.
+
+Developers can use Developer Hub to:
+
+* Discover software components, APIs, services, and infrastructure resources
+* Create new applications using standardized Software Templates (Golden Paths)
+* Launch cloud-based development environments
+* Monitor build pipelines and deployment status
+* Access project documentation through TechDocs
+* Navigate the complete application delivery lifecycle from a single interface
+
+Instead of learning every underlying platform technology, developers interact with a consistent, self-service portal.
+
+== Developer Hub within the Software Factory
+
+Developer Hub serves as the entry point into the Software Factory, bringing together platform capabilities into a unified workflow.
+
+[cols="1,3",options="header"]
+|===
+|Software Factory Capability
+|How Developer Hub Integrates
+
+|Source Control
+|Creates and links application repositories.
+
+|Development Environment
+|Launches cloud-based workspaces using OpenShift Dev Spaces.
+
+|Continuous Integration
+|Displays build pipelines and execution status through Tekton integrations.
+
+|Continuous Delivery
+|Shows deployment status through GitOps integrations such as Argo CD.
+
+|Software Catalog
+|Provides a searchable inventory of software components, APIs, services, and ownership information.
+
+|Documentation
+|Makes project documentation available through TechDocs.
+
+|Observability
+|Integrates monitoring, tracing, and visualization platforms through plugins.
+|===
+
+Rather than interacting with each platform independently, developers access these capabilities through one consistent interface.
+
+== Business Value
+
+By introducing an Internal Developer Portal, organizations gain:
+
+* A single entry point into the Software Factory
+* Improved discoverability of software components and documentation
+* Self-service application creation through Software Templates
+* Standardized development workflows
+* Reduced developer cognitive load
+* Faster onboarding and improved developer productivity
+
+[NOTE]
+====
+Red Hat Developer Hub is not another development tool.
+
+It provides the unified developer experience that enables teams to discover, consume, and interact with the capabilities of a Software Factory through a single self-service portal.
+====
+
+== Reflection
+
+{empty}
+
+[.reflection-box%collapsible]
+.Think about your own organization (Click to expand)
+====
+
+image::ROOT:mini-illustration-lightbulb-red-RH.Small_square_transparent.png[width=50,align=left]
+
+* How many different tools do developers use during a typical workday?
+* Where do developers go to find documentation or application ownership information?
+* Which platform capabilities could benefit from self-service access?
+* How would a single developer portal improve onboarding and daily development activities?
+
+====
+
+++++
+<div class="key-card">
+++++
+
+.Key Takeaway
+
+Red Hat Developer Hub provides a unified, self-service entry point into the Software Factory, allowing developers to discover platform capabilities, create applications, and manage the software delivery lifecycle without needing to learn every underlying tool.
+
+++++
+</div>
+++++

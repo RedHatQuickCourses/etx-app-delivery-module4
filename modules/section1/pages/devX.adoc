@@ -1,0 +1,88 @@
+= Developer Experience (DevEx)
+:navtitle: Developer Experience
+
+== Why Developer Experience Matters
+
+* Modern software development requires developers to work with numerous tools throughout the Software Development Lifecycle (SDLC).
+* A typical developer interacts with:
+** Source code repositories
+** Development environments
+** CI/CD pipelines
+** GitOps deployment tools
+** Container registries
+** Documentation portals
+** Security scanners
+** Monitoring and observability platforms
++
+image::developer.png[align="center",width=300]
++
+* Each tool solves a specific problem. However, switching between multiple tools increases the amount of information developers must understand before they can deliver software.
+* This additional mental effort is commonly referred to as *developer cognitive load*.
+
+* Platform Engineering aims to reduce this cognitive load by providing standardized workflows and self-service capabilities, allowing developers to spend more time writing applications and less time managing platform complexity.
+
+TIP: Great platforms are not measured by the number of tools they provide, but by how simple they make software delivery for developers.
+
+== What is Developer Experience?
+
+image::platform.png[align="center",width=300]
+
+* _Developer Experience (DevEx)_ describes the overall experience developers have while building, testing, deploying, and operating software.
+* It encompasses the tools, workflows, platforms, environments, and organizational practices that influence how efficiently developers can deliver applications.
+
+[quote]
+____
+Developer Experience is the user experience developers have while interacting with a platform, its tools, workflows, and supporting services.
+____
+
+* The primary goals of DevEx are to:
+** Reduce friction during software development.
+** Improve developer productivity.
+** Standardize development workflows.
+** Enable developers to focus on delivering business value.
+
+== Benefits of Improving Developer Experience
+
+Improving Developer Experience benefits both developers and organizations.
+
+.Technical Benefits
+* Reduced cognitive load
+* Standardized development workflows
+* Faster onboarding of new developers
+* Faster software delivery
+* Improved software quality
+* Consistent engineering practices
+
+.Business Benefits
+* Higher developer productivity
+* Faster time to market
+* Lower software development costs
+* Reduced developer burnout
+* Higher employee retention
+* Increased innovation
+
+NOTE: Organizations that invest in Developer Experience often observe improvements in software delivery performance, developer satisfaction, and overall business outcomes.
+
+== Developer Experience and Platform Engineering
+
+Developer Experience is closely related to several Platform Engineering concepts.
+
+.Platform Engineering
+****
+Builds, operates, and maintains the internal platform that enables developers to build and deliver software efficiently.
+****
+
+.Internal Developer Platform (IDP)
+****
+A collection of standardized tools, automation, services, and workflows that developers use throughout the Software Development Lifecycle.
+****
+
+.Developer Experience (DevEx)
+****
+Measures how effectively developers can use the Internal Developer Platform to deliver software.
+****
+
+.Internal Developer Portal
+****
+A centralized, self-service interface where developers discover services, documentation, templates, and workflows required to build and operate applications.
+****

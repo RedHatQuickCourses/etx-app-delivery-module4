@@ -1,0 +1,180 @@
+= Lab 1: Install and Configure Red Hat Developer Hub
+:navtitle: Lab 1: Install and Configure Red Hat Developer Hub
+:experimental:
+
+In this lab, you'll install Red Hat Developer Hub on OpenShift and deploy a minimal portal configuration that will serve as the foundation for the remaining exercises in this module.
+
+By the end of this lab, you will have:
+
+* Installed the Red Hat Developer Hub Operator
+* Created a minimal Developer Hub application configuration
+* Deployed a Red Hat Developer Hub instance
+* Verified that you can access and sign in to the portal
+
+== Install the Red Hat Developer Hub Operator
+
+Red Hat Developer Hub is installed and managed using the OpenShift Operator Lifecycle Manager (OLM).
+
+Install the operator from OperatorHub.
+
+. Open the OpenShift web console.
+. From the navigation menu, select menu:Ecosystem[Software Catalog].
+. Search for *Red Hat Developer Hub*.
++
+WARNING: Select the **Operator Backed** entry. Do **not** select the Helm chart.
++
+. Click btn:[Install].
+. Accept the following installation settings:
++
+* *Installation namespace:* `rhdh-operator`
+* *Installation mode:* `All namespaces`
+* *Approval strategy:* `Automatic`
++
+. Click btn:[Install].
+. Wait until the operator status changes to *Succeeded*.
++
+.Red Hat Developer Hub Operator (_Click the image to view it in full size in a new browser tab_)
+image::rhdh-operator.png[link={imagesdir}/rhdh-operator.png,width=600]
+
+== Create the Developer Hub Project
+
+Deploy Red Hat Developer Hub into a dedicated OpenShift project.
+
+[source,bash,role=execute]
+----
+oc create namespace setup-rhdh
+----
+
+Verify the project was created successfully.
+
+[source,bash,role=execute]
+----
+oc get namespace setup-rhdh
+----
+
+The output should include the `setup-rhdh` namespace.
+
+== Create the Application Configuration
+
+Red Hat Developer Hub loads its application settings from an `app-config.yaml` file.
+
+For this training, you'll provide the configuration using a Kubernetes ConfigMap.
+
+Apply the following manifest.
+
+[source,yaml,role=execute,subs="attributes+"]
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rhdh-config
+  namespace: setup-rhdh
+data:
+  app-config.yaml: |
+    app:
+      title: Red Hat Developer Hub
+    backend:
+      reading:
+        allow:
+          - host: 'gitlab.{openshift_cluster_ingress_domain}'
+    auth:
+      providers:
+        guest:
+          dangerouslyAllowOutsideDevelopment: true
+----
+
+NOTE: The `backend.reading.allow` setting allows Red Hat Developer Hub to retrieve Software Catalog information and Software Templates from the GitLab instance used throughout this training.
+
+WARNING: Guest authentication (`dangerouslyAllowOutsideDevelopment`) is intended only for development and training environments. Production deployments should integrate with an enterprise identity provider such as Red Hat Build of Keycloak.
+
+=== Verify the ConfigMap
+
+Verify that the ConfigMap was created successfully.
+
+[source,bash,role=execute]
+----
+oc get configmap rhdh-config -n setup-rhdh
+----
+
+The output should include the `rhdh-config` ConfigMap.
+
+== Deploy Red Hat Developer Hub
+
+The Red Hat Developer Hub Operator watches for `Backstage` custom resources and automatically provisions the application, database, routes, and supporting Kubernetes resources.
+
+Apply the following manifest.
+
+[source,yaml,role=execute]
+----
+apiVersion: rhdh.redhat.com/v1alpha5
+kind: Backstage
+metadata:
+  name: rhdh
+  namespace: setup-rhdh
+spec:
+  application:
+    appConfig:
+      mountPath: /opt/app-root/src
+      configMaps:
+        - name: rhdh-config
+    route:
+      enabled: true
+  database:
+    enableLocalDb: true
+----
+
+== Verify the Deployment
+
+Wait for the Developer Hub pods to become available.
+
+[source,bash,role=execute]
+----
+oc get pods -n setup-rhdh
+----
+
+Verify that both pods are in the `Running` state.
+
+The output should include pods similar to:
+
+* `backstage-rhdh-xxxxxxxx`
+* `postgresql-xxxxxxxx`
+
+Next, verify that the Backstage custom resource was created.
+
+[source,bash,role=execute]
+----
+oc get backstage -n setup-rhdh
+----
+
+Finally, retrieve the Developer Hub route.
+
+[source,bash,role=execute]
+----
+oc get route backstage-rhdh \
+  -n setup-rhdh \
+  -o jsonpath='https://{.spec.host}{"\n"}'
+----
+
+The command returns the URL used to access Red Hat Developer Hub.
+
+== Access Red Hat Developer Hub
+
+Open the route URL in your browser.
+
+If you receive an *Application is not available* message, wait a minute for the pods to finish starting and refresh the page.
+
+On the sign-in screen:
+
+. Select *Guest* and click btn:[Enter].
+
+.Sample Sign-in Screen (_Click the image to view it in full size in a new browser tab_)
+image::guest.png[link={imagesdir}/guest.png,width=700]
+
+After signing in, you should see the Red Hat Developer Hub home page.
+
+.Home Page (_Click the image to view it in full size in a new browser tab_)
+image::home.png[link={imagesdir}/home.png,width=700]
+
+IMPORTANT: Guest authentication is used only for this self-paced training to simplify setup. In production environments, organizations typically authenticate users through enterprise identity providers such as Red Hat Build of Keycloak.
+
+In the next lab, you'll begin customizing Red Hat Developer Hub by importing Software Templates and integrating it with the Software Factory services deployed earlier.

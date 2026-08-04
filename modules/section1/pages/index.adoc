@@ -1,0 +1,26 @@
+= Developer Hub and the IDP
+:navtitle: Developer Hub and the IDP
+
+++++
+<div class="module-card">
+<div class="module-header">
+++++
+
+image::ROOT:mini-illustration-book-red-RH.Large_square_transparent.png[width=40,align=left]
+
+**What's in this section?**
+
+++++
+</div>
+++++
+
+In this section, you'll learn how to deploy and configure **Red Hat Developer Hub** as the front door to your Software Factory.
+
+You'll install Developer Hub on OpenShift, create and register your first **Software Template (Golden Path)**, enable the **Software Catalog** for software discovery, and integrate enterprise authentication using **OpenShift OAuth**.
+
+By the end of this section, you'll have a working Internal Developer Portal that allows developers to securely discover software, create new applications through self-service templates, and access the Software Factory through a single, unified experience.
+
+++++
+</div>
+++++
+

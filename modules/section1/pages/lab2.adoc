@@ -1,0 +1,241 @@
+= Lab 2: Create Your First Software Template
+:navtitle: Lab 2: Software Templates
+:experimental:
+
+In this lab, you'll create and register a **Software Template (Golden Path)** in Red Hat Developer Hub.
+
+Instead of manually creating repositories, pipelines, deployment manifests, and catalog entries, you'll define a reusable template that automates project creation for developers.
+
+By the end of this lab, you will have:
+
+* Created a Git repository for a Software Template
+* Defined a Backstage `template.yaml`
+* Added a reusable application skeleton
+* Registered the template in Red Hat Developer Hub
+* Verified the template appears in the **Create** page
+
+== Create the Template Repository
+
+Software Templates are stored in Git repositories, just like application source code.
+
+Create a new repository that will contain the Golden Path template.
+
+. Open your GitLab instance.
+. Navigate to the **Software Factory** group.
+. Create a new **Public** project named `golden-path-quarkus`.
+. Leave **Initialize repository with a README** unchecked.
+
+Clone the repository locally.
+
+[source,bash,role=execute,subs="attributes+"]
+----
+cd ~/workshop
+
+git clone {gitlab_url}/software-factory/golden-path-quarkus.git
+
+cd golden-path-quarkus
+----
+
+== Understand the Template Structure
+
+A Software Template contains two major parts:
+
+* **template.yaml** — describes the workflow executed by Developer Hub
+* **skeleton/** — contains the files copied into newly generated applications
+
+The repository structure will look similar to:
+
+[source,text]
+----
+golden-path-quarkus/
+├── template.yaml
+└── skeleton/
+    ├── devfile.yaml
+    ├── pom.xml
+    ├── src/
+    ├── catalog-info.yaml
+    ├── tekton/
+    └── gitops/
+----
+
+NOTE: Everything inside the `skeleton` directory becomes the starting point for every project created from this template.
+
+== Create the Template Definition
+
+Create a file named `template.yaml` in the repository root.
+
+Paste the following template definition.
+
+[source,bash,role=execute,subs="attributes+"]
+----
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: quarkus-golden-path
+  title: Quarkus Application (Golden Path)
+  description: |
+    Create a Quarkus application with CI/CD pipeline, GitOps deployment,
+    Dev Spaces workspace, and OpenTelemetry instrumentation pre-configured.
+  tags:
+    - quarkus
+    - java
+    - recommended
+spec:
+  owner: platform-team
+  type: service
+  parameters:
+    - title: Application Details
+      required:
+        - name
+        - owner
+      properties:
+        name:
+          title: Application Name
+          type: string
+          pattern: "^[a-z0-9-]+$"
+        description:
+          title: Description
+          type: string
+        owner:
+          title: Owner
+          type: string
+          ui:field: OwnerPicker
+
+    - title: Repository
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - {gitlab_url}
+  steps:
+    - id: fetch-skeleton
+      name: Fetch Skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
+
+    - id: publish
+      name: Publish to GitLab
+      action: publish:gitlab
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        description: ${{ parameters.description }}
+        defaultBranch: main
+
+    - id: register
+      name: Register in Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in Catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
+----
+
+This template performs three automated tasks:
+
+* Generates a project from the skeleton
+* Publishes the generated project to GitLab
+* Registers the new application in the Software Catalog
+
+== Create the Catalog Entity
+
+Inside the `skeleton` directory, create a file named `catalog-info.yaml`.
+
+[source,bash,role=execute,subs="attributes+"]
+----
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.name }}
+  description: ${{ values.description }}
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    argocd/app-name: ${{ values.name }}-dev
+    janus-idp.io/tekton: ${{ values.name }}
+spec:
+  type: service
+  lifecycle: production
+  owner: ${{ values.owner }}
+----
+
+Every application generated from this template will automatically include this catalog metadata.
+
+This allows Red Hat Developer Hub to understand:
+
+* Application ownership
+* Lifecycle
+* Documentation
+* CI/CD integrations
+* Deployment relationships
+
+== Commit and Push the Template
+
+Commit the new template repository.
+
+[source,bash,role=execute]
+----
+git add .
+
+git commit -m "feat: initial Golden Path template"
+
+git push origin main
+----
+
+== Register the Template in Developer Hub
+
+Developer Hub discovers Software Templates through **catalog locations** configured in `app-config.yaml`.
+
+Update the existing `rhdh-config` ConfigMap created in the previous lab.
+
+. Switch to the **setup-rhdh** project.
+. Open **Workloads → ConfigMaps**.
+. Select **rhdh-config**.
+. Choose **Actions → Edit ConfigMap**.
+. Add the following `catalog` section under `data.app-config.yaml`.
+
+[source,yaml,subs="attributes+"]
+----
+catalog:
+  locations:
+    - type: url
+      target: '{gitlab_url}/software-factory/golden-path-quarkus/-/raw/main/template.yaml'
+      rules:
+        - allow: [Template]
+----
+
+Save the ConfigMap.
+
+NOTE: The Red Hat Developer Hub Operator automatically rolls out the updated configuration and restarts the application.
+
+== Verify the Template
+
+Wait until the Developer Hub pod returns to the **Running** state.
+
+Open Red Hat Developer Hub.
+
+Navigate to:
+
+menu:Create[]
+
+You should now see the **Quarkus Golden Path** template.
+
+.Quarkus Golden Path Template
+image::rhdh-quarkus-golden-path-template.png[link=self,window=blank,width=700]
+
+Select the template to verify its metadata and input form are displayed correctly.

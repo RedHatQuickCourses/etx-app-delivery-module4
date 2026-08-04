@@ -1,0 +1,99 @@
+= Self-Service with Software Templates
+:navtitle: Self-Service with Software Templates
+
+== The Challenge
+
+Creating a new application often involves much more than writing code.
+
+Developers frequently need to create repositories, configure CI/CD pipelines, prepare deployment manifests, register applications in software catalogs, and configure development environments before they can begin implementing business functionality.
+
+These repetitive setup activities consume valuable development time and often lead to inconsistent project structures across teams.
+
+[IMPORTANT]
+====
+When every team creates new projects manually, onboarding becomes slower, engineering practices become inconsistent, and maintaining organizational standards becomes increasingly difficult.
+====
+
+== What are Software Templates?
+
+*Software Templates*, also known as *Golden Paths*, provide standardized project blueprints that automate the creation of new applications.
+
+Rather than starting from an empty repository, developers begin with an organization-approved template that already includes the required project structure, configurations, and platform integrations.
+
+.Self-Service Application Creation(_Click the image to view it in full size in a new browser tab_)
+image::self-serve.png[link={imagesdir}/self-serve.png,width=650]
+
+Platform Engineers capture organizational best practices and package them into reusable Software Templates.
+
+Developers simply provide a few project-specific details, while the platform automatically provisions the remaining resources.
+
+== How Software Templates Work
+
+Software Templates automate the activities required to bootstrap a new application.
+
+A template can provision:
+
+* Project structure and source code scaffold
+* Git repository creation
+* CI/CD pipeline configuration
+* Deployment manifests, such as Helm charts or Kustomize overlays
+* OpenShift Dev Spaces workspace configuration
+* Software Catalog registration
+* Organizational standards and recommended configurations
+
+Instead of performing these tasks manually, developers complete a simple self-service form, and the platform generates a production-ready project automatically.
+
+== Self-Service Project Creation
+
+When a developer selects a Software Template in Red Hat Developer Hub, the platform executes the template and provisions the required resources.
+
+This includes creating repositories, generating source code, configuring pipelines, preparing deployment resources, and registering the application within the Software Factory.
+
+The generated project is immediately available for development, allowing developers to focus on implementing business functionality rather than configuring platform services.
+
+== Business Value
+
+By adopting Software Templates, organizations gain:
+
+* Faster application onboarding
+* Standardized project structures across development teams
+* Self-service application creation
+* Consistent security and organizational best practices
+* Reduced manual project setup
+* Improved developer productivity
+
+[NOTE]
+====
+Software Templates do not replace developer creativity.
+
+They automate the repetitive foundation of every project, allowing developers to focus on building business functionality while Platform Engineers continuously improve the underlying templates and organizational standards.
+====
+
+== Reflection
+
+{empty}
+
+[.reflection-box%collapsible]
+.Think about your own organization (Click to expand)
+====
+
+image::ROOT:mini-illustration-lightbulb-red-RH.Small_square_transparent.png[width=50,align=left]
+
+* How is a new application created in your organization today?
+* Which project setup activities are still performed manually?
+* Which organizational standards could be automated through reusable templates?
+* How would self-service project creation improve developer productivity?
+
+====
+
+++++
+<div class="key-card">
+++++
+
+.Key Takeaway
+
+Software Templates enable self-service application creation by automating project setup, embedding organizational best practices, and providing developers with a production-ready foundation so they can focus on building business functionality.
+
+++++
+</div>
+++++

@@ -1,0 +1,40 @@
+= Integrate with Dev Spaces
+
+Add a Dev Spaces link to catalog components so developers can open a workspace directly from the component page.
+
+== Add the Dev Spaces URL Annotation
+
+In the `catalog-info.yaml` skeleton, add the Dev Spaces annotation:
+
+[source,yaml,subs="attributes+"]
+----
+metadata:
+  annotations:
+    che.eclipse.org/che-server: {devspaces_url}
+----
+
+WARNING: Do not forget to commit and push the changes to the Git repository.
+
+[source,bash,role=execute]
+----
+git add catalog-info.yaml
+git commit -m "feat: add dev spaces annotation"
+git push origin main
+----
+
+When a component has this annotation, the Developer Hub UI shows a "Dev Spaces" link that opens a workspace for the component's repository.
+
+== Configure the Dev Spaces Plugin
+
+Add the Dev Spaces plugin configuration to *rhdh-config* ConfigMap. Under `data.app-config.yaml`, keep your
+existing `app`, `auth` and other settings and add the `devSpaces` block below.
+Do not replace the whole file—merge the new section with what is already there.
+
+[source,yaml,subs="attributes+"]
+----
+    devSpaces:
+      defaultUrl: {devspaces_url}
+----
+
+Update the ConfigMap and wait for the pod to restart.
+

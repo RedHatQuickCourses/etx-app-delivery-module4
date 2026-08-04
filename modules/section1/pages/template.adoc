@@ -1,0 +1,106 @@
+= Software Template Workflow
+:navtitle: Software Template Workflow
+
+== Behind the Scenes of a Software Template
+
+Creating a new application from Red Hat Developer Hub appears simple.
+
+A developer selects a *Software Template*, provides a few project details, and clicks *Create*.
+
+Behind that simple interface, however, Developer Hub orchestrates a series of automated tasks that prepare the application for development, testing, deployment, and operations.
+
+.Software Template Workflow (_Click the image to view it in full size in a new browser tab_)
+image::template.png[link={imagesdir}/template.png, width=700]
+
+Rather than generating only application source code, the Software Template establishes the complete foundation required for the application to participate in the organization's Software Factory.
+
+== Repository Provisioning
+
+The first stage prepares the application's source repository.
+
+Developer Hub automatically performs tasks such as:
+
+* Creating a new Git repository
+* Configuring repository permissions
+* Applying branch protection policies
+* Generating the initial project structure from the selected template
+
+Instead of manually creating repositories and copying starter projects, developers receive a project that already follows organizational standards.
+
+== Build and Continuous Integration
+
+Next, the template prepares everything required for Continuous Integration (CI).
+
+Typical automation includes:
+
+* Creating build pipelines
+* Configuring automated builds
+* Preparing testing workflows
+* Integrating with the organization's CI platform
+
+Once developers commit their code, the application is immediately ready to be built, tested, and validated through automated pipelines.
+
+== Deployment and Operations
+
+The final stage prepares the application for deployment into Kubernetes.
+
+The template automatically generates resources such as:
+
+* Kubernetes deployment manifests
+* Helm charts or Kustomize overlays
+* GitOps deployment configuration
+* Observability integrations
+* Security and governance policies
+
+By the time the template finishes, the application is ready to progress through the Software Factory using standardized deployment workflows.
+
+== End-to-End Automation
+
+Software Templates automate much more than project creation.
+
+Every generated application already includes the capabilities needed throughout the software delivery lifecycle, including:
+
+* Source control
+* Continuous Integration
+* Continuous Delivery
+* Kubernetes deployment resources
+* Observability configuration
+* Security and governance
+
+Developers can immediately begin implementing business functionality instead of spending time assembling platform infrastructure.
+
+[NOTE]
+====
+Software Templates are maintained by Platform Engineers.
+
+When organizational standards evolve, Platform Engineers update the template once. Every new application generated from that template automatically inherits the latest best practices without requiring developers to manually reconfigure their projects.
+====
+
+== Reflection
+
+{empty}
+
+[.reflection-box%collapsible]
+.Think about your own organization (Click to expand)
+====
+
+image::ROOT:mini-illustration-lightbulb-red-RH.Small_square_transparent.png[width=50,align=left]
+
+* How much time do developers spend creating repositories and configuring new projects?
+* Which setup activities are still performed manually?
+* Which of these tasks could be automated using Software Templates?
+* How would standardized project generation improve consistency across development teams?
+
+====
+
+++++
+<div class="key-card">
+++++
+
+.Key Takeaway
+
+A *Software Template* automates far more than project scaffolding. It provisions repositories, CI/CD pipelines, deployment resources, and platform integrations, allowing developers to focus on building applications while the Software Factory handles the surrounding infrastructure.
+
+++++
+</div>
+++++

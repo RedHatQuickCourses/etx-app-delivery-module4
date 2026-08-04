@@ -1,6 +1,6 @@
 {
-  "totalSeconds": 1833,
-  "pageCount": 13,
+  "totalSeconds": 915,
+  "pageCount": 12,
   "pages": [
     {
       "module": "ROOT",
@@ -10,62 +10,57 @@
     {
       "module": "LABENV",
       "page": "index.adoc",
-      "seconds": 68
+      "seconds": 82
     },
     {
-      "module": "chapter1",
+      "module": "section1",
+      "page": "index.adoc",
+      "seconds": 30
+    },
+    {
+      "module": "section1",
       "page": "devX.adoc",
       "seconds": 105
     },
     {
-      "module": "chapter1",
+      "module": "section1",
       "page": "devhub.adoc",
-      "seconds": 153
+      "seconds": 69
     },
     {
-      "module": "chapter1",
+      "module": "section1",
       "page": "self-serve.adoc",
-      "seconds": 123
+      "seconds": 50
     },
     {
-      "module": "chapter1",
+      "module": "section1",
       "page": "template.adoc",
-      "seconds": 118
+      "seconds": 38
     },
     {
-      "module": "chapter1",
+      "module": "section1",
       "page": "catalog.adoc",
-      "seconds": 160
+      "seconds": 65
     },
     {
-      "module": "chapter1",
-      "page": "docs.adoc",
-      "seconds": 151
+      "module": "section1",
+      "page": "lab1.adoc",
+      "seconds": 119
     },
     {
-      "module": "chapter1",
-      "page": "plugins.adoc",
-      "seconds": 159
+      "module": "section1",
+      "page": "lab2.adoc",
+      "seconds": 131
     },
     {
-      "module": "chapter1",
-      "page": "mcp.adoc",
-      "seconds": 118
+      "module": "section1",
+      "page": "lab3.adoc",
+      "seconds": 33
     },
     {
-      "module": "chapter1",
-      "page": "lightspeed.adoc",
-      "seconds": 157
-    },
-    {
-      "module": "chapter1",
-      "page": "lab1-dh1-install-configure.adoc",
-      "seconds": 178
-    },
-    {
-      "module": "chapter1",
-      "page": "lab2-dh2-golden-paths.adoc",
-      "seconds": 254
+      "module": "section1",
+      "page": "lab4.adoc",
+      "seconds": 104
     }
   ]
 }
