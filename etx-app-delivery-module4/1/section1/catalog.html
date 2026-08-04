@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Discovering Software with the Software Catalog :: DevEx with Developer Hub</title>
+    <link rel="prev" href="template.html">
+    <link rel="next" href="lab1.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/custom.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Developer Hub and the IDP</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab2.html">Lab 2: RHDH Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="index.html">Developer Hub and the IDP</a></li>
+    <li><a href="catalog.html">Software Catalog</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Discovering Software with the Software Catalog</h1>
+<div class="sect1">
+<h2 id="_the_challenge"><a class="anchor" href="#_the_challenge"></a>The Challenge</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As organizations adopt microservices and Platform Engineering, the number of software assets grows rapidly.</p>
+</div>
+<div class="paragraph">
+<p>Instead of a single application, modern systems often consist of dozens or even hundreds of services, APIs, databases, libraries, and infrastructure resources owned by different teams.</p>
+</div>
+<div class="paragraph">
+<p>Without a centralized inventory, developers often struggle to answer questions such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Which team owns this service?</p>
+</li>
+<li>
+<p>Where is the source code located?</p>
+</li>
+<li>
+<p>Which APIs does this application expose?</p>
+</li>
+<li>
+<p>Is this application still actively maintained?</p>
+</li>
+<li>
+<p>Where can I find its documentation?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Searching across multiple tools wastes valuable development time and increases cognitive load.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When software ownership and documentation are scattered across different systems, developers spend more time searching for information than building new features.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_the_software_catalog"><a class="anchor" href="#_what_is_the_software_catalog"></a>What is the Software Catalog?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>Software Catalog</strong> provides a centralized inventory of software assets across the organization.</p>
+</div>
+<div class="paragraph">
+<p>Rather than maintaining spreadsheets or separate documentation portals, Platform Engineers register software assets in the catalog, allowing developers to discover applications, services, APIs, documentation, and ownership information from a single location.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/catalog.png"><img src="_images/catalog.png" alt="catalog" width="700"></a>
+</div>
+<div class="title">Figure 1. Software Catalog (<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>The Software Catalog becomes the single source of truth for software components and the relationships between them, making it easier for developers to understand how applications fit within the broader Software Factory.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_does_the_software_catalog_track"><a class="anchor" href="#_what_does_the_software_catalog_track"></a>What Does the Software Catalog Track?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Software Catalog organizes software into several types of entities.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Entity Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Components</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Individual software components such as microservices, web applications, backend services, frontend applications, or shared libraries.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">APIs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REST, GraphQL, gRPC, and other APIs exposed by applications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resources</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Infrastructure resources such as databases, object storage, message brokers, or Kubernetes resources.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Systems</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collections of related components that together deliver a business application or platform.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domains</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Higher-level business or organizational groupings that contain multiple systems.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Individual developers or engineers associated with software components.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Groups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development teams responsible for owning and maintaining software.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_more_than_an_inventory"><a class="anchor" href="#_more_than_an_inventory"></a>More Than an Inventory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Software Catalog provides much more than a list of applications.</p>
+</div>
+<div class="paragraph">
+<p>Each catalog entry includes valuable metadata that helps developers understand and manage software throughout its lifecycle, including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Application owner</p>
+</li>
+<li>
+<p>Source code repository</p>
+</li>
+<li>
+<p>Lifecycle stage</p>
+</li>
+<li>
+<p>System relationships</p>
+</li>
+<li>
+<p>API dependencies</p>
+</li>
+<li>
+<p>Technical documentation</p>
+</li>
+<li>
+<p>CI/CD pipelines</p>
+</li>
+<li>
+<p>Deployment status</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Instead of searching multiple tools, developers can quickly understand an application&#8217;s purpose, ownership, and operational status from a single page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_managed_as_code"><a class="anchor" href="#_managed_as_code"></a>Managed as Code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One of the key principles of Red Hat Developer Hub is that the Software Catalog is <strong>managed as code</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Each application contains a <code>catalog-info.yaml</code> file in its source repository. This file defines metadata such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Component name</p>
+</li>
+<li>
+<p>Owner</p>
+</li>
+<li>
+<p>Lifecycle</p>
+</li>
+<li>
+<p>Type</p>
+</li>
+<li>
+<p>Relationships to other software assets</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Because this metadata lives alongside the application&#8217;s source code, updates follow the same Git-based review and approval process used for application development.</p>
+</div>
+<div class="paragraph">
+<p>This ensures that the catalog remains accurate, version-controlled, and automatically synchronized with the latest state of the application.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_business_value"><a class="anchor" href="#_business_value"></a>Business Value</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Software Catalog benefits both developers and Platform Engineers.</p>
+</div>
+<div class="paragraph">
+<p>For developers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Quickly discover applications, services, and APIs.</p>
+</li>
+<li>
+<p>Identify application owners and responsible teams.</p>
+</li>
+<li>
+<p>Access repositories, documentation, and deployment information from one location.</p>
+</li>
+<li>
+<p>Understand relationships between software components.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For Platform Engineers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Maintain an accurate inventory of software assets.</p>
+</li>
+<li>
+<p>Improve governance and software ownership.</p>
+</li>
+<li>
+<p>Standardize metadata across development teams.</p>
+</li>
+<li>
+<p>Enable self-service discovery throughout the organization.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Think of the <strong>Software Catalog</strong> as the organization&#8217;s software inventory.</p>
+</div>
+<div class="paragraph">
+<p>Just as a library catalog helps readers quickly find books, the Software Catalog helps developers discover applications, services, APIs, documentation, ownership information, and platform resources from a single interface.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reflection"><a class="anchor" href="#_reflection"></a>Reflection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<details class="reflection-box">
+<summary class="title">Think about your own organization (Click to expand)</summary>
+<div class="content">
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/mini-illustration-lightbulb-red-RH.Small_square_transparent.png" alt="mini illustration lightbulb red RH.Small square transparent" width="50">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How do developers discover existing applications and services today?</p>
+</li>
+<li>
+<p>Can you easily identify who owns a particular application or API?</p>
+</li>
+<li>
+<p>Where is technical documentation stored?</p>
+</li>
+<li>
+<p>How much time is spent searching across different tools for this information?</p>
+</li>
+</ul>
+</div>
+</div>
+</details>
+<div class="key-card">
+<div class="paragraph">
+<div class="title">Key Takeaway</div>
+<p>A <strong>Software Catalog</strong> serves as the central inventory of the Software Factory. It enables developers to discover software assets, understand ownership and relationships, and access documentation, repositories, and operational information through a single self-service portal.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="template.html">Software Template Workflow</a></span>
+  <span class="next"><a href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

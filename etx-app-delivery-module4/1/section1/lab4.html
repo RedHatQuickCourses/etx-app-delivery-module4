@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lab 4: Configure OpenShift OAuth Authentication :: DevEx with Developer Hub</title>
+    <link rel="prev" href="lab3.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/custom.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Developer Hub and the IDP</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab2.html">Lab 2: RHDH Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="index.html">Developer Hub and the IDP</a></li>
+    <li><a href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Lab 4: Configure OpenShift OAuth Authentication</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, you&#8217;ll replace the temporary Guest authentication used during installation with OpenShift OAuth authentication.</p>
+</div>
+<div class="paragraph">
+<p>This allows developers to sign in using their OpenShift identities, providing a production-like authentication experience for Red Hat Developer Hub.</p>
+</div>
+<div class="paragraph">
+<p>By the end of this lab, you will have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Created an OpenShift OAuth client</p>
+</li>
+<li>
+<p>Configured Developer Hub to authenticate using OpenShift OAuth</p>
+</li>
+<li>
+<p>Mounted authentication secrets into the Backstage application</p>
+</li>
+<li>
+<p>Verified user sign-in with OpenShift credentials</p>
+</li>
+<li>
+<p>Tested the Golden Path template using an authenticated user</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_an_openshift_oauth_client"><a class="anchor" href="#_create_an_openshift_oauth_client"></a>Create an OpenShift OAuth Client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developer Hub authenticates users through an OAuth client registered with OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>Create the OAuth client.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f - &lt;&lt;EOF
+apiVersion: oauth.openshift.io/v1
+kind: OAuthClient
+metadata:
+  name: rhdh-oauth-client
+grantMethod: auto
+redirectURIs:
+  - https://backstage-rhdh-setup-rhdh.{openshift_cluster_ingress_domain}/api/auth/oidc/handler/frame
+secret: GENERATE_A_RANDOM_SECRET
+EOF</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Generate a secure client secret before running the command.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">node -p 'require("crypto").randomBytes(24).toString("base64")'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replace <code>GENERATE_A_RANDOM_SECRET</code> with the generated value.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_the_authentication_secret"><a class="anchor" href="#_create_the_authentication_secret"></a>Create the Authentication Secret</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Store the OAuth client information in a Kubernetes Secret.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create secret generic rhdh-auth-secret \
+  -n setup-rhdh \
+  --from-literal=AUTH_OIDC_CLIENT_ID=rhdh-oauth-client \
+  --from-literal=AUTH_OIDC_CLIENT_SECRET=GENERATE_A_RANDOM_SECRET \
+  --from-literal=AUTH_OIDC_METADATA_URL=https://oauth-openshift.{openshift_cluster_ingress_domain}/.well-known/openid-configuration</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Use the same client secret that was configured when creating the OAuth client.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_update_the_developer_hub_configuration"><a class="anchor" href="#_update_the_developer_hub_configuration"></a>Update the Developer Hub Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The initial installation used the Guest authentication provider.</p>
+</div>
+<div class="paragraph">
+<p>Update the existing <code>app-config.yaml</code> to use OpenShift OAuth instead.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the <strong>setup-rhdh</strong> project.</p>
+</li>
+<li>
+<p>Navigate to <strong>Workloads → ConfigMaps</strong>.</p>
+</li>
+<li>
+<p>Select <strong>rhdh-config</strong>.</p>
+</li>
+<li>
+<p>Choose <strong>Actions → Edit ConfigMap</strong>.</p>
+</li>
+<li>
+<p>Replace the Guest authentication configuration with the following OIDC configuration.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">signInPage: oidc
+
+auth:
+  session:
+    secret: MY_SESSION_SECRET
+
+  environment: production
+
+  providers:
+    oidc:
+      production:
+        clientId: ${AUTH_OIDC_CLIENT_ID}
+        clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
+        metadataUrl: ${AUTH_OIDC_METADATA_URL}
+        prompt: auto</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Generate a session secret using:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">node -p 'require("crypto").randomBytes(24).toString("base64")'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replace <code>MY_SESSION_SECRET</code> with the generated value.</p>
+</div>
+<div class="paragraph">
+<p>Click <strong>Save</strong>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <code>${AUTH_OIDC_*}</code> values are resolved from the Kubernetes Secret that will be mounted into the Backstage application in the next step.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mount_the_authentication_secret"><a class="anchor" href="#_mount_the_authentication_secret"></a>Mount the Authentication Secret</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mount the authentication Secret so Developer Hub can access the OAuth client credentials.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Switch to the <strong>setup-rhdh</strong> project.</p>
+</li>
+<li>
+<p>Navigate to <strong>Operators → Installed Operators</strong>.</p>
+</li>
+<li>
+<p>Open <strong>Red Hat Developer Hub</strong>.</p>
+</li>
+<li>
+<p>Select the <strong>Backstage</strong> tab.</p>
+</li>
+<li>
+<p>Open the <strong>rhdh</strong> instance.</p>
+</li>
+<li>
+<p>Click <strong>Actions → Edit Backstage</strong>.</p>
+</li>
+<li>
+<p>Under <code>spec.application</code>, add:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">extraEnvs:
+  secrets:
+    - name: rhdh-auth-secret</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Save the resource.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Red Hat Developer Hub Operator automatically reconciles the change and restarts the Backstage pod.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verify_openshift_sign_in"><a class="anchor" href="#_verify_openshift_sign_in"></a>Verify OpenShift Sign-In</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wait until the Backstage pod returns to the <strong>Running</strong> state.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the Developer Hub route.</p>
+</li>
+<li>
+<p>Click <strong>OIDC</strong> on the login page.</p>
+</li>
+<li>
+<p>Sign in using your OpenShift credentials.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After successful authentication, you should be redirected to the Developer Hub home page as your authenticated OpenShift user.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Guest authentication is no longer available after enabling OpenShift OAuth.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_the_golden_path_template"><a class="anchor" href="#_test_the_golden_path_template"></a>Test the Golden Path Template</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Verify that authenticated users can create new applications.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Templates</b></span>.</p>
+</li>
+<li>
+<p>Select <strong>Quarkus Application (Golden Path)</strong>.</p>
+</li>
+<li>
+<p>Enter the required project information.</p>
+</li>
+<li>
+<p>Click <b class="button">Create</b>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Verify that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A new GitLab repository is created.</p>
+</li>
+<li>
+<p>The application is registered in the Software Catalog.</p>
+</li>
+<li>
+<p>The generated repository contains:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Devfile</p>
+</li>
+<li>
+<p>Tekton pipeline</p>
+</li>
+<li>
+<p>GitOps manifests</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The catalog component provides a link to launch a Dev Spaces workspace.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verify_the_deployment"><a class="anchor" href="#_verify_the_deployment"></a>Verify the Deployment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Confirm the authentication flow is working correctly by checking:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You are signed in using your OpenShift identity.</p>
+</li>
+<li>
+<p>Guest authentication is no longer available.</p>
+</li>
+<li>
+<p>The Golden Path template successfully provisions a new project.</p>
+</li>
+<li>
+<p>The generated project appears in the Software Catalog.</p>
+</li>
+</ul>
+</div>
+<div class="key-card">
+<div class="paragraph">
+<div class="title">Key Takeaway</div>
+<p>Red Hat Developer Hub now uses OpenShift OAuth for authentication, allowing developers to securely access Software Templates and the Software Catalog using their enterprise identity while maintaining a production-ready authentication model.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

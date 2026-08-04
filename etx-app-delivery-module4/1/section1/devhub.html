@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Introducing Red Hat Developer Hub :: DevEx with Developer Hub</title>
+    <link rel="prev" href="devX.html">
+    <link rel="next" href="self-serve.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/custom.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Developer Hub and the IDP</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab2.html">Lab 2: RHDH Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="index.html">Developer Hub and the IDP</a></li>
+    <li><a href="devhub.html">Introducing Red Hat Developer Hub</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Introducing Red Hat Developer Hub</h1>
+<div class="sect1">
+<h2 id="_the_challenge"><a class="anchor" href="#_the_challenge"></a>The Challenge</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Modern Software Factories bring together many capabilities, including source control, CI/CD, GitOps, development environments, documentation, observability, and security.</p>
+</div>
+<div class="paragraph">
+<p>While these capabilities improve software delivery, they also introduce a new challenge for developers.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>If a Software Factory consists of many different tools and platform capabilities, how do developers efficiently discover and use them without learning every underlying technology?</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Without a unified experience, developers often need to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate multiple web consoles</p>
+</li>
+<li>
+<p>Search for project documentation</p>
+</li>
+<li>
+<p>Locate source code repositories and build pipelines</p>
+</li>
+<li>
+<p>Understand platform-specific implementation details</p>
+</li>
+<li>
+<p>Request infrastructure or platform services from different teams</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Instead of building software, developers spend valuable time learning tools and navigating platform complexity.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>As Software Factories grow, developer productivity depends not only on automation, but also on providing a consistent and discoverable developer experience.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_internal_developer_portal"><a class="anchor" href="#_the_internal_developer_portal"></a>The Internal Developer Portal</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The solution is an <strong>Internal Developer Portal</strong>.</p>
+</div>
+<div class="paragraph">
+<p>An Internal Developer Portal provides developers with a single, self-service interface for interacting with the Software Factory.</p>
+</div>
+<div class="paragraph">
+<p>Rather than accessing separate applications for source control, CI/CD, deployment, documentation, observability, and development environments, developers can access everything from one centralized portal.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/hub.png"><img src="_images/hub.png" alt="hub" width="500"></a>
+</div>
+<div class="title">Figure 1. Internal Developer Portal within the Software Factory(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Platform Engineers build and maintain the Software Factory by integrating capabilities such as source control, CI/CD pipelines, GitOps, software catalogs, development environments, observability, and security services.</p>
+</div>
+<div class="paragraph">
+<p>Developers simply consume these capabilities through the Internal Developer Portal using a consistent self-service experience.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_red_hat_developer_hub"><a class="anchor" href="#_what_is_red_hat_developer_hub"></a>What is Red Hat Developer Hub?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Red Hat Developer Hub (RHDH)</strong> is an enterprise-grade Internal Developer Portal built on the CNCF Backstage open source project.</p>
+</div>
+<div class="paragraph">
+<p>Rather than replacing the tools already used within the Software Factory, Developer Hub integrates them into a single developer experience.</p>
+</div>
+<div class="paragraph">
+<p>Developers can use Developer Hub to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Discover software components, APIs, services, and infrastructure resources</p>
+</li>
+<li>
+<p>Create new applications using standardized Software Templates (Golden Paths)</p>
+</li>
+<li>
+<p>Launch cloud-based development environments</p>
+</li>
+<li>
+<p>Monitor build pipelines and deployment status</p>
+</li>
+<li>
+<p>Access project documentation through TechDocs</p>
+</li>
+<li>
+<p>Navigate the complete application delivery lifecycle from a single interface</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Instead of learning every underlying platform technology, developers interact with a consistent, self-service portal.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_developer_hub_within_the_software_factory"><a class="anchor" href="#_developer_hub_within_the_software_factory"></a>Developer Hub within the Software Factory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developer Hub serves as the entry point into the Software Factory, bringing together platform capabilities into a unified workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Software Factory Capability</th>
+<th class="tableblock halign-left valign-top">How Developer Hub Integrates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source Control</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creates and links application repositories.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development Environment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Launches cloud-based workspaces using OpenShift Dev Spaces.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Continuous Integration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays build pipelines and execution status through Tekton integrations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Continuous Delivery</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shows deployment status through GitOps integrations such as Argo CD.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Software Catalog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provides a searchable inventory of software components, APIs, services, and ownership information.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Documentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Makes project documentation available through TechDocs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Observability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integrates monitoring, tracing, and visualization platforms through plugins.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Rather than interacting with each platform independently, developers access these capabilities through one consistent interface.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_business_value"><a class="anchor" href="#_business_value"></a>Business Value</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By introducing an Internal Developer Portal, organizations gain:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A single entry point into the Software Factory</p>
+</li>
+<li>
+<p>Improved discoverability of software components and documentation</p>
+</li>
+<li>
+<p>Self-service application creation through Software Templates</p>
+</li>
+<li>
+<p>Standardized development workflows</p>
+</li>
+<li>
+<p>Reduced developer cognitive load</p>
+</li>
+<li>
+<p>Faster onboarding and improved developer productivity</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Red Hat Developer Hub is not another development tool.</p>
+</div>
+<div class="paragraph">
+<p>It provides the unified developer experience that enables teams to discover, consume, and interact with the capabilities of a Software Factory through a single self-service portal.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reflection"><a class="anchor" href="#_reflection"></a>Reflection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<details class="reflection-box">
+<summary class="title">Think about your own organization (Click to expand)</summary>
+<div class="content">
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/mini-illustration-lightbulb-red-RH.Small_square_transparent.png" alt="mini illustration lightbulb red RH.Small square transparent" width="50">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How many different tools do developers use during a typical workday?</p>
+</li>
+<li>
+<p>Where do developers go to find documentation or application ownership information?</p>
+</li>
+<li>
+<p>Which platform capabilities could benefit from self-service access?</p>
+</li>
+<li>
+<p>How would a single developer portal improve onboarding and daily development activities?</p>
+</li>
+</ul>
+</div>
+</div>
+</details>
+<div class="key-card">
+<div class="paragraph">
+<div class="title">Key Takeaway</div>
+<p>Red Hat Developer Hub provides a unified, self-service entry point into the Software Factory, allowing developers to discover platform capabilities, create applications, and manage the software delivery lifecycle without needing to learn every underlying tool.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="devX.html">Developer Experience Matters</a></span>
+  <span class="next"><a href="self-serve.html">Self-Service with Software Templates</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

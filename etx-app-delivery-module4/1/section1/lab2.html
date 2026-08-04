@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lab 2: Create Your First Software Template :: DevEx with Developer Hub</title>
+    <link rel="prev" href="lab1.html">
+    <link rel="next" href="lab3.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/custom.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Developer Hub and the IDP</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="lab2.html">Lab 2: RHDH Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="index.html">Developer Hub and the IDP</a></li>
+    <li><a href="lab2.html">Lab 2: RHDH Templates</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Lab 2: Create Your First Software Template</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, you&#8217;ll create and register a <strong>Software Template (Golden Path)</strong> in Red Hat Developer Hub.</p>
+</div>
+<div class="paragraph">
+<p>Instead of manually creating repositories, pipelines, deployment manifests, and catalog entries, you&#8217;ll define a reusable template that automates project creation for developers.</p>
+</div>
+<div class="paragraph">
+<p>By the end of this lab, you will have:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Created a Git repository for a Software Template</p>
+</li>
+<li>
+<p>Defined a Backstage <code>template.yaml</code></p>
+</li>
+<li>
+<p>Added a reusable application skeleton</p>
+</li>
+<li>
+<p>Registered the template in Red Hat Developer Hub</p>
+</li>
+<li>
+<p>Verified the template appears in the <strong>Create</strong> page</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_the_template_repository"><a class="anchor" href="#_create_the_template_repository"></a>Create the Template Repository</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Software Templates are stored in Git repositories, just like application source code.</p>
+</div>
+<div class="paragraph">
+<p>Create a new repository that will contain the Golden Path template.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open your GitLab instance.</p>
+</li>
+<li>
+<p>Navigate to the <strong>Software Factory</strong> group.</p>
+</li>
+<li>
+<p>Create a new <strong>Public</strong> project named <code>golden-path-quarkus</code>.</p>
+</li>
+<li>
+<p>Leave <strong>Initialize repository with a README</strong> unchecked.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Clone the repository locally.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/workshop
+
+git clone {gitlab_url}/software-factory/golden-path-quarkus.git
+
+cd golden-path-quarkus</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_understand_the_template_structure"><a class="anchor" href="#_understand_the_template_structure"></a>Understand the Template Structure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Software Template contains two major parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>template.yaml</strong> — describes the workflow executed by Developer Hub</p>
+</li>
+<li>
+<p><strong>skeleton/</strong> — contains the files copied into newly generated applications</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The repository structure will look similar to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">golden-path-quarkus/
+├── template.yaml
+└── skeleton/
+    ├── devfile.yaml
+    ├── pom.xml
+    ├── src/
+    ├── catalog-info.yaml
+    ├── tekton/
+    └── gitops/</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Everything inside the <code>skeleton</code> directory becomes the starting point for every project created from this template.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_the_template_definition"><a class="anchor" href="#_create_the_template_definition"></a>Create the Template Definition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create a file named <code>template.yaml</code> in the repository root.</p>
+</div>
+<div class="paragraph">
+<p>Paste the following template definition.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: quarkus-golden-path
+  title: Quarkus Application (Golden Path)
+  description: |
+    Create a Quarkus application with CI/CD pipeline, GitOps deployment,
+    Dev Spaces workspace, and OpenTelemetry instrumentation pre-configured.
+  tags:
+    - quarkus
+    - java
+    - recommended
+spec:
+  owner: platform-team
+  type: service
+  parameters:
+    - title: Application Details
+      required:
+        - name
+        - owner
+      properties:
+        name:
+          title: Application Name
+          type: string
+          pattern: "^[a-z0-9-]+$"
+        description:
+          title: Description
+          type: string
+        owner:
+          title: Owner
+          type: string
+          ui:field: OwnerPicker
+
+    - title: Repository
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - {gitlab_url}
+  steps:
+    - id: fetch-skeleton
+      name: Fetch Skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          owner: ${{ parameters.owner }}
+
+    - id: publish
+      name: Publish to GitLab
+      action: publish:gitlab
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        description: ${{ parameters.description }}
+        defaultBranch: main
+
+    - id: register
+      name: Register in Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in Catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This template performs three automated tasks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Generates a project from the skeleton</p>
+</li>
+<li>
+<p>Publishes the generated project to GitLab</p>
+</li>
+<li>
+<p>Registers the new application in the Software Catalog</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_the_catalog_entity"><a class="anchor" href="#_create_the_catalog_entity"></a>Create the Catalog Entity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Inside the <code>skeleton</code> directory, create a file named <code>catalog-info.yaml</code>.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.name }}
+  description: ${{ values.description }}
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    argocd/app-name: ${{ values.name }}-dev
+    janus-idp.io/tekton: ${{ values.name }}
+spec:
+  type: service
+  lifecycle: production
+  owner: ${{ values.owner }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Every application generated from this template will automatically include this catalog metadata.</p>
+</div>
+<div class="paragraph">
+<p>This allows Red Hat Developer Hub to understand:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Application ownership</p>
+</li>
+<li>
+<p>Lifecycle</p>
+</li>
+<li>
+<p>Documentation</p>
+</li>
+<li>
+<p>CI/CD integrations</p>
+</li>
+<li>
+<p>Deployment relationships</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_commit_and_push_the_template"><a class="anchor" href="#_commit_and_push_the_template"></a>Commit and Push the Template</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit the new template repository.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git add .
+
+git commit -m "feat: initial Golden Path template"
+
+git push origin main</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_register_the_template_in_developer_hub"><a class="anchor" href="#_register_the_template_in_developer_hub"></a>Register the Template in Developer Hub</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developer Hub discovers Software Templates through <strong>catalog locations</strong> configured in <code>app-config.yaml</code>.</p>
+</div>
+<div class="paragraph">
+<p>Update the existing <code>rhdh-config</code> ConfigMap created in the previous lab.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Switch to the <strong>setup-rhdh</strong> project.</p>
+</li>
+<li>
+<p>Open <strong>Workloads → ConfigMaps</strong>.</p>
+</li>
+<li>
+<p>Select <strong>rhdh-config</strong>.</p>
+</li>
+<li>
+<p>Choose <strong>Actions → Edit ConfigMap</strong>.</p>
+</li>
+<li>
+<p>Add the following <code>catalog</code> section under <code>data.app-config.yaml</code>.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">catalog:
+  locations:
+    - type: url
+      target: '{gitlab_url}/software-factory/golden-path-quarkus/-/raw/main/template.yaml'
+      rules:
+        - allow: [Template]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Save the ConfigMap.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Red Hat Developer Hub Operator automatically rolls out the updated configuration and restarts the application.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verify_the_template"><a class="anchor" href="#_verify_the_template"></a>Verify the Template</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wait until the Developer Hub pod returns to the <strong>Running</strong> state.</p>
+</div>
+<div class="paragraph">
+<p>Open Red Hat Developer Hub.</p>
+</div>
+<div class="paragraph">
+<p>Navigate to:</p>
+</div>
+<div class="paragraph">
+<p><b class="menuref">Create</b></p>
+</div>
+<div class="paragraph">
+<p>You should now see the <strong>Quarkus Golden Path</strong> template.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<a class="image" href="rhdh-quarkus-golden-path-template.png" target="blank"><img src="rhdh-quarkus-golden-path-template.png" alt="rhdh quarkus golden path template" width="700"></a>
+</div>
+<div class="title">Figure 1. Quarkus Golden Path Template</div>
+</div>
+<div class="paragraph">
+<p>Select the template to verify its metadata and input form are displayed correctly.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a></span>
+  <span class="next"><a href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

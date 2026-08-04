@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Self-Service with Software Templates :: DevEx with Developer Hub</title>
+    <link rel="prev" href="devhub.html">
+    <link rel="next" href="template.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/custom.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Developer Hub and the IDP</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab2.html">Lab 2: RHDH Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="index.html">Developer Hub and the IDP</a></li>
+    <li><a href="self-serve.html">Self-Service with Software Templates</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Self-Service with Software Templates</h1>
+<div class="sect1">
+<h2 id="_the_challenge"><a class="anchor" href="#_the_challenge"></a>The Challenge</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Creating a new application often involves much more than writing code.</p>
+</div>
+<div class="paragraph">
+<p>Developers frequently need to create repositories, configure CI/CD pipelines, prepare deployment manifests, register applications in software catalogs, and configure development environments before they can begin implementing business functionality.</p>
+</div>
+<div class="paragraph">
+<p>These repetitive setup activities consume valuable development time and often lead to inconsistent project structures across teams.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When every team creates new projects manually, onboarding becomes slower, engineering practices become inconsistent, and maintaining organizational standards becomes increasingly difficult.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_are_software_templates"><a class="anchor" href="#_what_are_software_templates"></a>What are Software Templates?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Software Templates</strong>, also known as <strong>Golden Paths</strong>, provide standardized project blueprints that automate the creation of new applications.</p>
+</div>
+<div class="paragraph">
+<p>Rather than starting from an empty repository, developers begin with an organization-approved template that already includes the required project structure, configurations, and platform integrations.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/self-serve.png"><img src="_images/self-serve.png" alt="self serve" width="650"></a>
+</div>
+<div class="title">Figure 1. Self-Service Application Creation(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Platform Engineers capture organizational best practices and package them into reusable Software Templates.</p>
+</div>
+<div class="paragraph">
+<p>Developers simply provide a few project-specific details, while the platform automatically provisions the remaining resources.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_software_templates_work"><a class="anchor" href="#_how_software_templates_work"></a>How Software Templates Work</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Software Templates automate the activities required to bootstrap a new application.</p>
+</div>
+<div class="paragraph">
+<p>A template can provision:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Project structure and source code scaffold</p>
+</li>
+<li>
+<p>Git repository creation</p>
+</li>
+<li>
+<p>CI/CD pipeline configuration</p>
+</li>
+<li>
+<p>Deployment manifests, such as Helm charts or Kustomize overlays</p>
+</li>
+<li>
+<p>OpenShift Dev Spaces workspace configuration</p>
+</li>
+<li>
+<p>Software Catalog registration</p>
+</li>
+<li>
+<p>Organizational standards and recommended configurations</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Instead of performing these tasks manually, developers complete a simple self-service form, and the platform generates a production-ready project automatically.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_self_service_project_creation"><a class="anchor" href="#_self_service_project_creation"></a>Self-Service Project Creation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a developer selects a Software Template in Red Hat Developer Hub, the platform executes the template and provisions the required resources.</p>
+</div>
+<div class="paragraph">
+<p>This includes creating repositories, generating source code, configuring pipelines, preparing deployment resources, and registering the application within the Software Factory.</p>
+</div>
+<div class="paragraph">
+<p>The generated project is immediately available for development, allowing developers to focus on implementing business functionality rather than configuring platform services.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_business_value"><a class="anchor" href="#_business_value"></a>Business Value</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By adopting Software Templates, organizations gain:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Faster application onboarding</p>
+</li>
+<li>
+<p>Standardized project structures across development teams</p>
+</li>
+<li>
+<p>Self-service application creation</p>
+</li>
+<li>
+<p>Consistent security and organizational best practices</p>
+</li>
+<li>
+<p>Reduced manual project setup</p>
+</li>
+<li>
+<p>Improved developer productivity</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Software Templates do not replace developer creativity.</p>
+</div>
+<div class="paragraph">
+<p>They automate the repetitive foundation of every project, allowing developers to focus on building business functionality while Platform Engineers continuously improve the underlying templates and organizational standards.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reflection"><a class="anchor" href="#_reflection"></a>Reflection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<details class="reflection-box">
+<summary class="title">Think about your own organization (Click to expand)</summary>
+<div class="content">
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/mini-illustration-lightbulb-red-RH.Small_square_transparent.png" alt="mini illustration lightbulb red RH.Small square transparent" width="50">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How is a new application created in your organization today?</p>
+</li>
+<li>
+<p>Which project setup activities are still performed manually?</p>
+</li>
+<li>
+<p>Which organizational standards could be automated through reusable templates?</p>
+</li>
+<li>
+<p>How would self-service project creation improve developer productivity?</p>
+</li>
+</ul>
+</div>
+</div>
+</details>
+<div class="key-card">
+<div class="paragraph">
+<div class="title">Key Takeaway</div>
+<p>Software Templates enable self-service application creation by automating project setup, embedding organizational best practices, and providing developers with a production-ready foundation so they can focus on building business functionality.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="devhub.html">Introducing Red Hat Developer Hub</a></span>
+  <span class="next"><a href="template.html">Software Template Workflow</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>
