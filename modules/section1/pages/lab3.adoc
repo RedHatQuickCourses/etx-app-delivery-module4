@@ -1,4 +1,4 @@
-= Integrate with Dev Spaces
+= Lab 3: Integrate with Dev Spaces
 
 Add a Dev Spaces link to catalog components so developers can open a workspace directly from the component page.
 
