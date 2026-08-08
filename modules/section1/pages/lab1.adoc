@@ -165,7 +165,7 @@ Next, verify that the Backstage custom resource was created.
 ----
 oc get backstage -n setup-rhdh
 ----
-
+s
 == Access Red Hat Developer Hub
 
 Retrieve the Developer Hub route and open the route URL in your browser:
