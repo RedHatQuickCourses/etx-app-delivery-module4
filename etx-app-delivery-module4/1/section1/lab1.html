@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Lab 1: Install and Configure Red Hat Developer Hub :: DevEx with Developer Hub</title>
+    <title>Lab 1: Install and Configure RHDH :: DevEx with Developer Hub</title>
     <link rel="prev" href="catalog.html">
-    <link rel="next" href="lab2.html">
+    <link rel="next" href="template2.html">
     <meta name="generator" content="Antora 3.2.0-alpha.12">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="stylesheet" href="../../../_/css/custom.css">
@@ -52,7 +52,7 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+    <a class="nav-link" href="../LABENV/lab-env-overview.html">Lab Environment</a>
   </li>
 </ul>
   </li>
@@ -77,16 +77,19 @@
     <a class="nav-link" href="catalog.html">Software Catalog</a>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a>
+    <a class="nav-link" href="lab1.html">Lab 1: Install and configure RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="template2.html">Developer Hub: Templates and Integrations</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="lab2.html">Lab 2: RHDH Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a>
+    <a class="nav-link" href="lab2-2.html">Lab 3: Register the Template in Developer Hub</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a>
+    <a class="nav-link" href="lab4.html">Lab 5: Configure OpenShift OAuth Authentication</a>
   </li>
 </ul>
   </li>
@@ -119,7 +122,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">DevEx with Developer Hub</a></li>
-    <li><a href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a></li>
+    <li><a href="lab1.html">Lab 1: Install and configure RHDH</a></li>
   </ul>
 </nav>
 </div>
@@ -128,7 +131,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Lab 1: Install and Configure Red Hat Developer Hub</h1>
+<h1 class="page">Lab 1: Install and Configure RHDH</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -158,37 +161,52 @@
 <div class="sect1">
 <h2 id="_install_the_red_hat_developer_hub_operator"><a class="anchor" href="#_install_the_red_hat_developer_hub_operator"></a>Install the Red Hat Developer Hub Operator</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Red Hat Developer Hub is installed and managed using the OpenShift Operator Lifecycle Manager (OLM).</p>
-</div>
-<div class="paragraph">
-<p>Install the operator from OperatorHub.</p>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open the OpenShift web console.</p>
+<p>Get the OpenShift web console URL from your RHDP lab environment page and open in the browser.</p>
 </li>
 <li>
-<p>From the navigation menu, select <span class="menuseq"><b class="menu">Ecosystem</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Software Catalog</b></span>.</p>
+<p>Sign in using the <code>admin</code> credentials provided on the RHDP Lab Environment page.</p>
+</li>
+<li>
+<p>From the navigation menu, select <b class="button">Ecosystem</b> &#8594; <b class="button">Software Catalog</b>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/menu.png" target="_blank" rel="noopener"><img src="_images/menu.png" alt="menu" width="350"></a>
+</div>
+<div class="title">Figure 1. Ecosystem &#8594; Software Catalog(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
 <p>Search for <strong>Red Hat Developer Hub</strong>.</p>
-<div class="admonitionblock warning">
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/hub1.png" target="_blank" rel="noopener"><img src="_images/hub1.png" alt="hub1" width="350"></a>
+</div>
+<div class="title">Figure 2. Red Hat Developer Hub Operator(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Select the <strong>Operator Backed</strong> entry. Do <strong>not</strong> select the Helm chart.
+It may take a few moments for OperatorHub to finish loading all available operators.
 </td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Click <b class="button">Install</b>.</p>
+<p>Select the operator and click <b class="button">Install</b>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/info.png" target="_blank" rel="noopener"><img src="_images/info.png" alt="info" width="350"></a>
+</div>
+<div class="title">Figure 3. Install Red Hat OpenShift Hub Operator(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
 <p>Accept the following installation settings:</p>
@@ -211,11 +229,11 @@ Select the <strong>Operator Backed</strong> entry. Do <strong>not</strong> selec
 </li>
 <li>
 <p>Wait until the operator status changes to <strong>Succeeded</strong>.</p>
-<div class="imageblock unresolved">
+<div class="imageblock">
 <div class="content">
-<a class="image" href="_images/rhdh-operator.png"><img src="rhdh-operator.png" alt="rhdh operator" width="600"></a>
+<a class="image" href="_images/installed.png" target="_blank" rel="noopener"><img src="_images/installed.png" alt="installed" width="500"></a>
 </div>
-<div class="title">Figure 1. Red Hat Developer Hub Operator (<em>Click the image to view it in full size in a new browser tab</em>)</div>
+<div class="title">Figure 4. Red Hat OpenShift Developer Hub Installed(<em>Click the image to view it in full size in a new browser tab</em>)</div>
 </div>
 </li>
 </ol>
@@ -250,17 +268,24 @@ Select the <strong>Operator Backed</strong> entry. Do <strong>not</strong> selec
 <h2 id="_create_the_application_configuration"><a class="anchor" href="#_create_the_application_configuration"></a>Create the Application Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Red Hat Developer Hub loads its application settings from an <code>app-config.yaml</code> file.</p>
+<p>Red Hat Developer Hub loads its application settings from an <code>app-config.yaml</code> file. For this training, you&#8217;ll provide the configuration using a Kubernetes ConfigMap.</p>
 </div>
-<div class="paragraph">
-<p>For this training, you&#8217;ll provide the configuration using a Kubernetes ConfigMap.</p>
-</div>
-<div class="paragraph">
-<p>Apply the following manifest.</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Copy the output of the following command. This value is the <strong>openshift_cluster_ingress_domain</strong> and is required in the next step.</p>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}{"\n"}'</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Apply the following manifest, replacing <strong>{openshift_cluster_ingress_domain}</strong> with the value obtained from the previous command.</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">oc apply -f - &lt;&lt;'EOF'
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: rhdh-config
@@ -276,7 +301,8 @@ data:
     auth:
       providers:
         guest:
-          dangerouslyAllowOutsideDevelopment: true</code></pre>
+          dangerouslyAllowOutsideDevelopment: true
+EOF</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -302,6 +328,9 @@ Guest authentication (<code>dangerouslyAllowOutsideDevelopment</code>) is intend
 </td>
 </tr>
 </table>
+</div>
+</li>
+</ol>
 </div>
 <div class="sect2">
 <h3 id="_verify_the_configmap"><a class="anchor" href="#_verify_the_configmap"></a>Verify the ConfigMap</h3>
@@ -330,7 +359,8 @@ Guest authentication (<code>dangerouslyAllowOutsideDevelopment</code>) is intend
 </div>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: rhdh.redhat.com/v1alpha5
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">oc apply -f - &lt;&lt;'EOF'
+apiVersion: rhdh.redhat.com/v1alpha5
 kind: Backstage
 metadata:
   name: rhdh
@@ -344,7 +374,8 @@ spec:
     route:
       enabled: true
   database:
-    enableLocalDb: true</code></pre>
+    enableLocalDb: true
+EOF</code></pre>
 </div>
 </div>
 </div>
@@ -357,11 +388,11 @@ spec:
 </div>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n setup-rhdh</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n setup-rhdh -w</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Verify that both pods are in the <code>Running</code> state.</p>
+<p>Verify that both pods are in the <code>Running</code> state, it might take couple of minutes.</p>
 </div>
 <div class="paragraph">
 <p>The output should include pods similar to:</p>
@@ -384,8 +415,13 @@ spec:
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get backstage -n setup-rhdh</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_red_hat_developer_hub"><a class="anchor" href="#_access_red_hat_developer_hub"></a>Access Red Hat Developer Hub</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Finally, retrieve the Developer Hub route.</p>
+<p>Retrieve the Developer Hub route and open the route URL in your browser:</p>
 </div>
 <div class="listingblock execute">
 <div class="content">
@@ -395,43 +431,25 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>The command returns the URL used to access Red Hat Developer Hub.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_access_red_hat_developer_hub"><a class="anchor" href="#_access_red_hat_developer_hub"></a>Access Red Hat Developer Hub</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Open the route URL in your browser.</p>
-</div>
-<div class="paragraph">
 <p>If you receive an <strong>Application is not available</strong> message, wait a minute for the pods to finish starting and refresh the page.</p>
 </div>
 <div class="paragraph">
-<p>On the sign-in screen:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Select <strong>Guest</strong> and click <b class="button">Enter</b>.</p>
-</li>
-</ol>
+<p>On the sign-in screen, select <strong>Guest</strong> and click <b class="button">Enter</b>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/guest.png"><img src="_images/guest.png" alt="guest" width="700"></a>
 </div>
-<div class="title">Figure 2. Sample Sign-in Screen (<em>Click the image to view it in full size in a new browser tab</em>)</div>
+<div class="title">Figure 5. Sample Sign-in Screen (<em>Click the image to view it in full size in a new browser tab</em>)</div>
 </div>
 <div class="paragraph">
-<p>After signing in, you should see the Red Hat Developer Hub home page.</p>
+<p>After signing in, you should see the <strong>Red Hat Developer Hub</strong> home page.</p>
 </div>
-<div class="imageblock unresolved">
+<div class="imageblock">
 <div class="content">
-<a class="image" href="_images/home.png"><img src="home.png" alt="home" width="700"></a>
+<a class="image" href="_images/home.png"><img src="_images/home.png" alt="home" width="700"></a>
 </div>
-<div class="title">Figure 3. Home Page (<em>Click the image to view it in full size in a new browser tab</em>)</div>
+<div class="title">Figure 6. RHDH Home Page (<em>Click the image to view it in full size in a new browser tab</em>)</div>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -452,7 +470,7 @@ Guest authentication is used only for this self-paced training to simplify setup
 </div>
 <nav class="pagination">
   <span class="prev"><a href="catalog.html">Software Catalog</a></span>
-  <span class="next"><a href="lab2.html">Lab 2: RHDH Templates</a></span>
+  <span class="next"><a href="template2.html">Developer Hub: Templates and Integrations</a></span>
 </nav>
 </article>
   </div>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lab 3: Register the Template in Developer Hub :: DevEx with Developer Hub</title>
+    <link rel="prev" href="lab2.html">
+    <link rel="next" href="lab4.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/custom.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">DevEx with Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="etx-app-delivery-module4" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">DevEx with Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">DevEx with Developer Hub </a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/lab-env-overview.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Developer Hub and the IDP</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="devX.html">Developer Experience Matters</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="devhub.html">Introducing Red Hat Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="self-serve.html">Self-Service with Software Templates</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="template.html">Software Template Workflow</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="catalog.html">Software Catalog</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lab1.html">Lab 1: Install and configure RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="template2.html">Developer Hub: Templates and Integrations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lab2.html">Lab 2: RHDH Templates</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="lab2-2.html">Lab 3: Register the Template in Developer Hub</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lab4.html">Lab 5: Configure OpenShift OAuth Authentication</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">DevEx with Developer Hub</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">DevEx with Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">DevEx with Developer Hub</a></li>
+    <li><a href="lab2-2.html">Lab 3: Register the Template in Developer Hub</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Lab 3: Register the Template in Developer Hub</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developer Hub discovers Software Templates through <strong>catalog locations</strong> configured in <code>app-config.yaml</code>.</p>
+</div>
+<div class="paragraph">
+<p>Update the existing <code>rhdh-config</code> ConfigMap created in the previous lab.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to your Openshift console, and switch to the <strong>setup-rhdh</strong> project.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/ns.png" target="_blank" rel="noopener"><img src="_images/ns.png" alt="ns" width="500"></a>
+</div>
+<div class="title">Figure 1. Openshift Console(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+</li>
+<li>
+<p>Open <strong>Workloads → ConfigMaps</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/cm.png" target="_blank" rel="noopener"><img src="_images/cm.png" alt="cm" width="300"></a>
+</div>
+<div class="title">Figure 2. Openshift Console Workloads(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+</li>
+<li>
+<p>Select <strong>rhdh-config</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/rc.png" target="_blank" rel="noopener"><img src="_images/rc.png" alt="rc" width="500"></a>
+</div>
+<div class="title">Figure 3. rhdh-config ConfigMap(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+</li>
+<li>
+<p>Choose <strong>Actions → Edit ConfigMap</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/edit.png" target="_blank" rel="noopener"><img src="_images/edit.png" alt="edit" width="400"></a>
+</div>
+<div class="title">Figure 4. Actions(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+</li>
+<li>
+<p>Retrive GitLab URL and navigate to the GitLab account.</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+echo $GITLAB_URL</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add the following <code>catalog</code> section under <code>data.app-config.yaml</code> and make sure to substitute &lt;GITLAB_URL&gt; value with above command output.</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">catalog:
+  locations:
+    - type: url
+      target: '&lt;GITLAB_URL&gt;/software-factory/golden-path-quarkus/-/blob/main/template.yaml'
+      rules:
+        - allow: [Template]</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/setting.png" target="_blank" rel="noopener"><img src="_images/setting.png" alt="setting" width="700"></a>
+</div>
+<div class="title">Figure 5. Sample setting(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Save the ConfigMap.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Red Hat Developer Hub Operator automatically rolls out the updated configuration and restarts the application.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verify_the_template"><a class="anchor" href="#_verify_the_template"></a>Verify the Template</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wait until the Developer Hub pod returns to the <strong>Running</strong> state.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">oc get pods -n setup-rhdh -w</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Retrieve the Developer Hub route and open the route URL in your browser:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route backstage-rhdh \
+  -n setup-rhdh \
+  -o jsonpath='https://{.spec.host}{"\n"}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Click <b class="button">Catalog</b></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/catalog1.png" target="blank"><img src="_images/catalog1.png" alt="catalog1" width="300"></a>
+</div>
+<div class="title">Figure 6. Select Catalog(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Select click <b class="button">Kind</b> &#8594; click <b class="button">Template</b>, you should now see the <strong>Quarkus Golden Path</strong> template.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/path.png" target="blank"><img src="_images/path.png" alt="path" width="600"></a>
+</div>
+<div class="title">Figure 7. Quarkus Golden Path Template(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Select the template to verify its metadata and input form are displayed correctly.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/template1.png" target="blank"><img src="_images/template1.png" alt="template1" width="450"></a>
+</div>
+<div class="title">Figure 8. Template details(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="lab2.html">Lab 2: RHDH Templates</a></span>
+  <span class="next"><a href="lab4.html">Lab 5: Configure OpenShift OAuth Authentication</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

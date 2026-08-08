@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Lab 4: Configure OpenShift OAuth Authentication :: DevEx with Developer Hub</title>
-    <link rel="prev" href="lab3.html">
+    <link rel="prev" href="lab2-2.html">
     <meta name="generator" content="Antora 3.2.0-alpha.12">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <link rel="stylesheet" href="../../../_/css/custom.css">
@@ -51,7 +51,7 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+    <a class="nav-link" href="../LABENV/lab-env-overview.html">Lab Environment</a>
   </li>
 </ul>
   </li>
@@ -76,16 +76,19 @@
     <a class="nav-link" href="catalog.html">Software Catalog</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="lab1.html">Lab 1: Install and configure Red Hat Developer Hub</a>
+    <a class="nav-link" href="lab1.html">Lab 1: Install and configure RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="template2.html">Developer Hub: Templates and Integrations</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="lab2.html">Lab 2: RHDH Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a>
+    <a class="nav-link" href="lab2-2.html">Lab 3: Register the Template in Developer Hub</a>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a>
+    <a class="nav-link" href="lab4.html">Lab 5: Configure OpenShift OAuth Authentication</a>
   </li>
 </ul>
   </li>
@@ -118,7 +121,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">DevEx with Developer Hub</a></li>
-    <li><a href="lab4.html">Lab 4: Configure OpenShift OAuth Authentication</a></li>
+    <li><a href="lab4.html">Lab 5: Configure OpenShift OAuth Authentication</a></li>
   </ul>
 </nav>
 </div>
@@ -161,76 +164,95 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_an_openshift_oauth_client"><a class="anchor" href="#_create_an_openshift_oauth_client"></a>Create an OpenShift OAuth Client</h2>
+<h2 id="_setup_gitlab_integration"><a class="anchor" href="#_setup_gitlab_integration"></a>Setup GitLab Integration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Developer Hub authenticates users through an OAuth client registered with OpenShift.</p>
+<p>Create a Person Access Token from GitLab to be used in RHDH. In production you would use a service account but for the purposes of this lab we can use a PAT.</p>
 </div>
 <div class="paragraph">
-<p>Create the OAuth client.</p>
+<p>Retrive GitLab URL and navigate to your <strong>User settings</strong> by opening below command&#8217;s URL in browser.</p>
 </div>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f - &lt;&lt;EOF
-apiVersion: oauth.openshift.io/v1
-kind: OAuthClient
-metadata:
-  name: rhdh-oauth-client
-grantMethod: auto
-redirectURIs:
-  - https://backstage-rhdh-setup-rhdh.{openshift_cluster_ingress_domain}/api/auth/oidc/handler/frame
-secret: GENERATE_A_RANDOM_SECRET
-EOF</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Generate a secure client secret before running the command.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock execute">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">node -p 'require("crypto").randomBytes(24).toString("base64")'</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+echo $GITLAB_URL/-/profile/preferences</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Replace <code>GENERATE_A_RANDOM_SECRET</code> with the generated value.</p>
+<p>Click <b class="button">Access</b> &#8594; <b class="button">Personal access tokens</b></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/pat.png" target="_blank" rel="noopener"><img src="_images/pat.png" alt="pat" width="400"></a>
+</div>
+<div class="title">Figure 1. Actions(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Click <b class="button">Add new token</b></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/token.png" target="_blank" rel="noopener"><img src="_images/token.png" alt="token" width="600"></a>
+</div>
+<div class="title">Figure 2. Add new token(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Give it a name and select the api scope and click <strong>Generate Token</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/api.png" target="_blank" rel="noopener"><img src="_images/api.png" alt="api" width="600"></a>
+</div>
+<div class="title">Figure 3. Token Settings(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>You will see a Green box that says Your token, copy that token</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/token2.png" target="_blank" rel="noopener"><img src="_images/token2.png" alt="token2" width="700"></a>
+</div>
+<div class="title">Figure 4. Token(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Run the following replacing {YOUR_PAT_HERE} with the <strong>PAT</strong> you copied:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export GITLAB_PAT={YOUR_PAT_HERE}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will use the <strong>GITLAB_PATH</strong> environment variable in a later step when we setup the RHDH auth secret</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_the_authentication_secret"><a class="anchor" href="#_create_the_authentication_secret"></a>Create the Authentication Secret</h2>
+<h2 id="_configure_keycloak_oauth_authentication"><a class="anchor" href="#_configure_keycloak_oauth_authentication"></a>Configure Keycloak OAuth Authentication</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Store the OAuth client information in a Kubernetes Secret.</p>
+<p>Replace guest authentication with Keycloak OAuth for production-like access.</p>
+</div>
+<div class="sect2">
+<h3 id="_create_the_auth_secret"><a class="anchor" href="#_create_the_auth_secret"></a>Create the Auth Secret</h3>
+<div class="paragraph">
+<p>RHDH will need to sign/encrypt the session cookie used during the OIDC flow. We need to generate and define a session secret. It can be any string but for real use it should be high entropy, e.g. ~32 random bytes</p>
 </div>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create secret generic rhdh-auth-secret \
-  -n setup-rhdh \
-  --from-literal=AUTH_OIDC_CLIENT_ID=rhdh-oauth-client \
-  --from-literal=AUTH_OIDC_CLIENT_SECRET=GENERATE_A_RANDOM_SECRET \
-  --from-literal=AUTH_OIDC_METADATA_URL=https://oauth-openshift.{openshift_cluster_ingress_domain}/.well-known/openid-configuration</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export SESSION_SECRET=$(python3 -c 'import secrets; print(secrets.token_hex(32))')
+export GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+export CLUSTER_DOMAIN=$(oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}{"\n"}')
+
+oc create secret generic rhdh-auth-secret -n setup-rhdh \
+  --from-literal=KEYCLOAK_RHDH_REALM=etx-lab \
+  --from-literal=KEYCLOAK_CLIENT_ID=rhdh \
+  --from-literal=KEYCLOAK_CLIENT_SECRET=etx-lab-workshop-gitlab-secret \
+  --from-literal=KEYCLOAK_BASE_URL=https://etx-sso.${CLUSTER_DOMAIN} \
+  --from-literal=SESSION_SECRET=${SESSION_SECRET} \
+  --from-literal=GITLAB_TOKEN=${GITLAB_PAT}</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Use the same client secret that was configured when creating the OAuth client.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -238,128 +260,110 @@ Use the same client secret that was configured when creating the OAuth client.
 <h2 id="_update_the_developer_hub_configuration"><a class="anchor" href="#_update_the_developer_hub_configuration"></a>Update the Developer Hub Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The initial installation used the Guest authentication provider.</p>
-</div>
-<div class="paragraph">
-<p>Update the existing <code>app-config.yaml</code> to use OpenShift OAuth instead.</p>
+<p>The initial installation used the Guest authentication provider. Update the existing <code>app-config.yaml</code> to use OpenShift OAuth instead.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open the <strong>setup-rhdh</strong> project.</p>
+<p>Navigate to your Openshift console, and switch to the <strong>setup-rhdh</strong> project.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/ns.png" target="_blank" rel="noopener"><img src="_images/ns.png" alt="ns" width="500"></a>
+</div>
+<div class="title">Figure 5. Openshift Console(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
-<p>Navigate to <strong>Workloads → ConfigMaps</strong>.</p>
+<p>Open <strong>Workloads → ConfigMaps</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/cm.png" target="_blank" rel="noopener"><img src="_images/cm.png" alt="cm" width="300"></a>
+</div>
+<div class="title">Figure 6. Openshift Console Workloads(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
 <p>Select <strong>rhdh-config</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/rc.png" target="_blank" rel="noopener"><img src="_images/rc.png" alt="rc" width="500"></a>
+</div>
+<div class="title">Figure 7. rhdh-config ConfigMap(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
 <p>Choose <strong>Actions → Edit ConfigMap</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/edit.png" target="_blank" rel="noopener"><img src="_images/edit.png" alt="edit" width="400"></a>
+</div>
+<div class="title">Figure 8. Actions(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
-<p>Replace the Guest authentication configuration with the following OIDC configuration.</p>
+<p>Copy the output of the following command. This value is the <strong>openshift_cluster_ingress_domain</strong> and is required in the next step.</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">openshift_cluster_ingress_domain=$(oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}{"\n"}')
+echo ${openshift_cluster_ingress_domain}</code></pre>
+</div>
+</div>
 </li>
-</ol>
-</div>
+<li>
+<p>Replace the <strong>Guest</strong> authentication configuration with the following OIDC configuration, make sure to substitute <strong>openshift_cluster_ingress_domain</strong> with output receive from above command.</p>
 <div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">signInPage: oidc
-
-auth:
-  session:
-    secret: MY_SESSION_SECRET
-
-  environment: production
-
-  providers:
-    oidc:
-      production:
-        clientId: ${AUTH_OIDC_CLIENT_ID}
-        clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
-        metadataUrl: ${AUTH_OIDC_METADATA_URL}
-        prompt: auto</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Generate a session secret using:
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock execute">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">node -p 'require("crypto").randomBytes(24).toString("base64")'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">    signInPage: oidc
+    auth:
+      environment: production
+      session:
+        secret: ${SESSION_SECRET}
+      providers:
+        oidc:
+          production:
+            clientId: ${KEYCLOAK_CLIENT_ID}
+            clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+            metadataUrl: ${KEYCLOAK_BASE_URL}/realms/${KEYCLOAK_RHDH_REALM}
+            prompt: auto
+    catalog:
+      providers:
+        keycloakOrg:
+          default:
+            baseUrl: ${KEYCLOAK_BASE_URL}
+            clientId: ${KEYCLOAK_CLIENT_ID}
+            clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+            realm: ${KEYCLOAK_RHDH_REALM}
+            loginRealm: ${KEYCLOAK_RHDH_REALM}
+            schedule:
+              frequency: { minutes: 5 }
+    integrations:
+      gitlab:
+        - host: gitlab.{openshift_cluster_ingress_domain}
+          token: ${GITLAB_TOKEN}
+          apiBaseUrl: https://gitlab.{openshift_cluster_ingress_domain}/api/v4
+          baseUrl: https://gitlab.{openshift_cluster_ingress_domain}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Replace <code>MY_SESSION_SECRET</code> with the generated value.</p>
+<p><em>Sample output</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/set2.png" target="_blank" rel="noopener"><img src="_images/set2.png" alt="set2" width="750"></a>
+</div>
+<div class="title">Figure 9. Sample rhdh-config changes(<em>Click the image to view it in full size in a new browser tab</em>)</div>
 </div>
 <div class="paragraph">
 <p>Click <strong>Save</strong>.</p>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-The <code>${AUTH_OIDC_*}</code> values are resolved from the Kubernetes Secret that will be mounted into the Backstage application in the next step.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_mount_the_authentication_secret"><a class="anchor" href="#_mount_the_authentication_secret"></a>Mount the Authentication Secret</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Mount the authentication Secret so Developer Hub can access the OAuth client credentials.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Switch to the <strong>setup-rhdh</strong> project.</p>
 </li>
 <li>
-<p>Navigate to <strong>Operators → Installed Operators</strong>.</p>
-</li>
-<li>
-<p>Open <strong>Red Hat Developer Hub</strong>.</p>
-</li>
-<li>
-<p>Select the <strong>Backstage</strong> tab.</p>
-</li>
-<li>
-<p>Open the <strong>rhdh</strong> instance.</p>
-</li>
-<li>
-<p>Click <strong>Actions → Edit Backstage</strong>.</p>
-</li>
-<li>
-<p>Under <code>spec.application</code>, add:</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
+<p>Wait until the Developer Hub pod returns to the <strong>Running</strong> state.</p>
+<div class="listingblock execute">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">extraEnvs:
-  secrets:
-    - name: rhdh-auth-secret</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">oc get pods -n setup-rhdh -w</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Save the resource.</p>
 </li>
 </ol>
 </div>
@@ -370,34 +374,168 @@ The <code>${AUTH_OIDC_*}</code> values are resolved from the Kubernetes Secret t
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The Red Hat Developer Hub Operator automatically reconciles the change and restarts the Backstage pod.
+The schedule frequency would be set to something higher in production (12 hours) and is set low for demo purposes. Other options like userQuerySize or groupQuerySize are also good to set.
 </td>
 </tr>
 </table>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click <b class="button">Save</b>. Wait until the Developer Hub pod returns to the <strong>Running</strong> state.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">oc get pods -n setup-rhdh -w</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_verify_openshift_sign_in"><a class="anchor" href="#_verify_openshift_sign_in"></a>Verify OpenShift Sign-In</h2>
+<h2 id="_create_dynamic_plugins_configmap"><a class="anchor" href="#_create_dynamic_plugins_configmap"></a>Create Dynamic Plugins ConfigMap</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Wait until the Backstage pod returns to the <strong>Running</strong> state.</p>
+<p>Create a dynamic plugins ConfigMap to enable the Keycloak Org sync plugin and the gitlab scaffolder plugin for our template</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">oc create -f - &lt;&lt;EOF
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dynamic-plugins-rhdh
+  namespace: setup-rhdh
+data:
+  dynamic-plugins.yaml: |
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - package: './dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-keycloak-dynamic'
+        disabled: false
+      - package: './dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic'
+        disabled: false
+EOF</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_update_the_backstage_cr"><a class="anchor" href="#_update_the_backstage_cr"></a>Update the Backstage CR</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Add the <strong>dynamic-plugins-rhdh</strong> config map so we can enable the keycloak Org sync</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open the Developer Hub route.</p>
+<p>Open Openshift console and switch to the <strong>setup-rhdh</strong> project.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/ns.png" target="_blank" rel="noopener"><img src="_images/ns.png" alt="ns" width="500"></a>
+</div>
+<div class="title">Figure 10. Openshift Console(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
-<p>Click <strong>OIDC</strong> on the login page.</p>
+<p>Go to <b class="button">Ecosystem</b> → <b class="button">Installed Operators</b>. Select <strong>Red Hat Developer Hub</strong> Operator.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/hub3.png" target="_blank" rel="noopener"><img src="_images/hub3.png" alt="hub3" width="700"></a>
+</div>
+<div class="title">Figure 11. Red Hat Developer Hub Operator(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
-<p>Sign in using your OpenShift credentials.</p>
+<p>Click tab <b class="button">Red Hat Developer Hub</b> &#8594;  click <b class="button">rhdh</b> instance created.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/ns.png" target="_blank" rel="noopener"><img src="_images/rhdh.png" alt="rhdh" width="700"></a>
+</div>
+<div class="title">Figure 12. rhdh instance(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+</li>
+<li>
+<p>Click <b class="button">Actions</b> → <b class="button">Edit Backstage</b></p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/backstage.png" target="_blank" rel="noopener"><img src="_images/backstage.png" alt="backstage" width="400"></a>
+</div>
+<div class="title">Figure 13. rhdh instance(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+</li>
+<li>
+<p>Switch to <strong>YAML</strong> view, under <strong>spec.application</strong>, add the <strong>extraEnvs &amp; dynamicPluginsConfigMapName</strong> blocks below. Keep the existing appConfig and route sections from the initial deployment.</p>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    extraEnvs:
+      secrets:
+        - name: rhdh-auth-secret
+    dynamicPluginsConfigMapName: dynamic-plugins-rhdh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><em>Sample Output</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/env.png" target="_blank" rel="noopener"><img src="_images/env.png" alt="env" width="400"></a>
+</div>
+<div class="title">Figure 14. Environment Vairable Settings(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 </ol>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verify_keycloak_sign_in"><a class="anchor" href="#_verify_keycloak_sign_in"></a>Verify Keycloak sign-in</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>After successful authentication, you should be redirected to the Developer Hub home page as your authenticated OpenShift user.</p>
+<p>Wait until the Developer Hub pod returns to the <strong>Running</strong> state.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">oc get pods -n setup-rhdh -w</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Retrieve the Developer Hub route and open the route URL in your browser:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route backstage-rhdh \
+  -n setup-rhdh \
+  -o jsonpath='https://{.spec.host}{"\n"}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On the login page, choose OIDC.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/login.png" target="_blank" rel="noopener"><img src="_images/login.png" alt="login" width="400"></a>
+</div>
+<div class="title">Figure 15. OIDC login page(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>Sign in with your Keycloak credentials (for example platform-developer / openshift).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/etx.png" target="_blank" rel="noopener"><img src="_images/etx.png" alt="etx" width="400"></a>
+</div>
+<div class="title">Figure 16. ETX Lab Login Page(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="paragraph">
+<p>You should land on the Developer Hub home page authenticated as your Keycloak user, not as Guest.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/home2.png" target="_blank" rel="noopener"><img src="_images/home2.png" alt="home2" width="400"></a>
+</div>
+<div class="title">Figure 17. Developer Hub Home Page(<em>Click the image to view it in full size in a new browser tab</em>)</div>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -406,7 +544,7 @@ The Red Hat Developer Hub Operator automatically reconciles the change and resta
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Guest authentication is no longer available after enabling OpenShift OAuth.
+The signed-in user must exist in the Software Catalog (or be mapped via your org setup, which is what we configured with the keycloakOrg provider) to use some catalog features. For template creation in this lab, guest access is no longer available after this change.
 </td>
 </tr>
 </table>
@@ -422,16 +560,55 @@ Guest authentication is no longer available after enabling OpenShift OAuth.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Templates</b></span>.</p>
+<p>Open <b class="button">Catalog</b> &#8594; <b class="button">Kind</b> &#8594; <b class="button">Templates</b> and select <b class="button"><strong>Quarkus Application (Golden Path)</strong></b></p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/home2.png" target="_blank" rel="noopener"><img src="_images/home2.png" alt="home2" width="700"></a>
+</div>
+<div class="title">Figure 18. Developer Hub Home Page(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
-<p>Select <strong>Quarkus Application (Golden Path)</strong>.</p>
+<p>Click <b class="button">Launch Template</b></p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/launch.png" target="_blank" rel="noopener"><img src="_images/launch.png" alt="launch" width="500"></a>
+</div>
+<div class="title">Figure 19. Launch Template(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
 <p>Enter the required project information.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/im1.png" target="_blank" rel="noopener"><img src="_images/im1.png" alt="im1" width="400"></a>
+</div>
+<div class="title">Figure 20. Sample Project Information Page 1(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/im2.png" target="_blank" rel="noopener"><img src="_images/im2.png" alt="im2" width="700"></a>
+</div>
+<div class="title">Figure 21. Sample Project Information Page 2(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
-<p>Click <b class="button">Create</b>.</p>
+<p>Review all the information and click <b class="button">Create</b></p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/im3.png" target="_blank" rel="noopener"><img src="_images/im3.png" alt="im3" width="700"></a>
+</div>
+<div class="title">Figure 22. Sample Project Information Page 3(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
+</li>
+<li>
+<p>Once the template run finishes, the output should be something like below:</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/im4.png" target="_blank" rel="noopener"><img src="_images/im4.png" alt="im4" width="700"></a>
+</div>
+<div class="title">Figure 23. Sample Template Run Output(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 </ol>
 </div>
@@ -441,10 +618,13 @@ Guest authentication is no longer available after enabling OpenShift OAuth.
 <div class="ulist">
 <ul>
 <li>
-<p>A new GitLab repository is created.</p>
-</li>
-<li>
-<p>The application is registered in the Software Catalog.</p>
+<p>A new GitLab repository is created and the application is registered in the Software Catalog.</p>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/project2.png" target="_blank" rel="noopener"><img src="_images/project2.png" alt="project2" width="700"></a>
+</div>
+<div class="title">Figure 24. Newly created git repository(<em>Click the image to view it in full size in a new browser tab</em>)</div>
+</div>
 </li>
 <li>
 <p>The generated repository contains:</p>
@@ -464,30 +644,12 @@ Guest authentication is no longer available after enabling OpenShift OAuth.
 </li>
 <li>
 <p>The catalog component provides a link to launch a Dev Spaces workspace.</p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/repo.png" target="_blank" rel="noopener"><img src="_images/repo.png" alt="repo" width="700"></a>
 </div>
+<div class="title">Figure 25. Git repository content(<em>Click the image to view it in full size in a new browser tab</em>)</div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_verify_the_deployment"><a class="anchor" href="#_verify_the_deployment"></a>Verify the Deployment</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Confirm the authentication flow is working correctly by checking:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>You are signed in using your OpenShift identity.</p>
-</li>
-<li>
-<p>Guest authentication is no longer available.</p>
-</li>
-<li>
-<p>The Golden Path template successfully provisions a new project.</p>
-</li>
-<li>
-<p>The generated project appears in the Software Catalog.</p>
 </li>
 </ul>
 </div>
@@ -500,7 +662,7 @@ Guest authentication is no longer available after enabling OpenShift OAuth.
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="lab3.html">Lab 3: RHDH Integration with Dev Spaces</a></span>
+  <span class="prev"><a href="lab2-2.html">Lab 3: Register the Template in Developer Hub</a></span>
 </nav>
 </article>
   </div>
