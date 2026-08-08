@@ -1,0 +1,87 @@
+= Lab 3: Register the Template in Developer Hub
+:navtitle: Lab 3: Register the Template in Developer Hub
+:experimental:
+
+Developer Hub discovers Software Templates through **catalog locations** configured in `app-config.yaml`.
+
+Update the existing `rhdh-config` ConfigMap created in the previous lab.
+
+. Navigate to your Openshift console, and switch to the **setup-rhdh** project.
++
+.Openshift Console(_Click the image to view it in full size in a new browser tab_)
+image::ns.png[link={imagesdir}/ns.png, width=500,window=_blank]
+
+. Open **Workloads → ConfigMaps**.
++
+.Openshift Console Workloads(_Click the image to view it in full size in a new browser tab_)
+image::cm.png[link={imagesdir}/cm.png, width=300,window=_blank]
+
+. Select **rhdh-config**.
++
+.rhdh-config ConfigMap(_Click the image to view it in full size in a new browser tab_)
+image::rc.png[link={imagesdir}/rc.png, width=500,window=_blank]
+
+. Choose **Actions → Edit ConfigMap**.
++
+.Actions(_Click the image to view it in full size in a new browser tab_)
+image::edit.png[link={imagesdir}/edit.png, width=400,window=_blank]
+
+. Retrive GitLab URL and navigate to the GitLab account.
++
+[source,bash,role=execute,subs="attributes+",role=execute]
+----
+GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+echo $GITLAB_URL
+----
+
+. Add the following `catalog` section under `data.app-config.yaml` and make sure to substitute <GITLAB_URL> value with above command output.
++
+[source,yaml,subs="attributes+",role=execute]
+----
+catalog:
+  locations:
+    - type: url
+      target: '<GITLAB_URL>/software-factory/golden-path-quarkus/-/blob/main/template.yaml'
+      rules:
+        - allow: [Template]
+----
++
+.Sample setting(_Click the image to view it in full size in a new browser tab_)
+image::setting.png[link={imagesdir}/setting.png, width=700,window=_blank]
++
+Save the ConfigMap.
+
+NOTE: The Red Hat Developer Hub Operator automatically rolls out the updated configuration and restarts the application.
+
+== Verify the Template
+
+Wait until the Developer Hub pod returns to the **Running** state.
+
+[source,yaml,subs="attributes+",role=execute]
+----
+oc get pods -n setup-rhdh -w
+----
+
+Retrieve the Developer Hub route and open the route URL in your browser:
+
+[source,bash,role=execute]
+----
+oc get route backstage-rhdh \
+  -n setup-rhdh \
+  -o jsonpath='https://{.spec.host}{"\n"}'
+----
+
+Click btn:[Catalog]
+
+.Select Catalog(_Click the image to view it in full size in a new browser tab_)
+image::catalog1.png[link=self,window=blank,width=300]
+
+Select click btn:[Kind] -> click btn:[Template], you should now see the **Quarkus Golden Path** template.
+
+.Quarkus Golden Path Template(_Click the image to view it in full size in a new browser tab_)
+image::path.png[link=self,window=blank,width=600]
+
+Select the template to verify its metadata and input form are displayed correctly.
+
+.Template details(_Click the image to view it in full size in a new browser tab_)
+image::template1.png[link=self,window=blank,width=450]

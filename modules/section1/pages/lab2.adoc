@@ -20,45 +20,41 @@ Software Templates are stored in Git repositories, just like application source 
 
 Create a new repository that will contain the Golden Path template.
 
-. Open your GitLab instance.
-. Navigate to the **Software Factory** group.
-. Create a new **Public** project named `golden-path-quarkus`.
-. Leave **Initialize repository with a README** unchecked.
-
-Clone the repository locally.
-
+. Retrive GitLab URL and navigate to the GitLab account.
++
 [source,bash,role=execute,subs="attributes+"]
 ----
-cd ~/workshop
+GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+echo $GITLAB_URL
+----
 
-git clone {gitlab_url}/software-factory/golden-path-quarkus.git
+. Navigate to the **Software Factory** group.
++
+.Software Factory Group(_Click the image to view it in full size in a new browser tab_)
+image::group.png[link={imagesdir}/group.png, width=500,window=_blank]
 
+. Click btn:[Create Project]. 
++
+.Create Project(_Click the image to view it in full size in a new browser tab_)
+image::create.png[link={imagesdir}/create.png, width=500,window=_blank]
+
+. Click btn:[Create Blank Project]
++
+.Create Blank Project(_Click the image to view it in full size in a new browser tab_)
+image::blank.png[link={imagesdir}/blank.png, width=500,window=_blank]
+
+. Create a new **Public** project named `golden-path-quarkus`. Leave **Initialize repository with a README** unchecked.
++
+.GitLab Project(_Click the image to view it in full size in a new browser tab_)
+image::project.png[link={imagesdir}/project.png, width=700,window=_blank]
+
+. Clone the repository locally.
++
+[source,bash,role=execute,subs="attributes+"]
+----
+git clone ${GITLAB_URL}/software-factory/golden-path-quarkus.git
 cd golden-path-quarkus
 ----
-
-== Understand the Template Structure
-
-A Software Template contains two major parts:
-
-* **template.yaml** — describes the workflow executed by Developer Hub
-* **skeleton/** — contains the files copied into newly generated applications
-
-The repository structure will look similar to:
-
-[source,text]
-----
-golden-path-quarkus/
-├── template.yaml
-└── skeleton/
-    ├── devfile.yaml
-    ├── pom.xml
-    ├── src/
-    ├── catalog-info.yaml
-    ├── tekton/
-    └── gitops/
-----
-
-NOTE: Everything inside the `skeleton` directory becomes the starting point for every project created from this template.
 
 == Create the Template Definition
 
@@ -68,6 +64,7 @@ Paste the following template definition.
 
 [source,bash,role=execute,subs="attributes+"]
 ----
+cat << 'EOF' > template.yaml
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
@@ -100,6 +97,26 @@ spec:
           title: Owner
           type: string
           ui:field: OwnerPicker
+        port:
+          title: Port
+          type: number
+          default: 8080
+          description: Override the port exposed for the application
+        groupId:
+          title: Group ID
+          type: string
+          default: io.janus
+          description: Maven Group ID eg (io.janus)
+        artifactId:
+          title: Artifact ID
+          type: string
+          default: quarkusapp
+          description: Maven Artifact ID
+        javaPackageName:
+          title: Java Package Namespace
+          type: string
+          default: io/janus/quarkusapp
+          description: Name for the Java Package (ensure to use the / character as this is used for folder structure) should match Group ID and Artifact ID
 
     - title: Repository
       required:
@@ -111,7 +128,9 @@ spec:
           ui:field: RepoUrlPicker
           ui:options:
             allowedHosts:
-              - {gitlab_url}
+              - gitlab.apps.cluster-f86c6.dyn.redhatworkshops.io
+            allowedOwners:
+              - software-factory
   steps:
     - id: fetch-skeleton
       name: Fetch Skeleton
@@ -122,14 +141,22 @@ spec:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
           owner: ${{ parameters.owner }}
+          applicationType: api
+          port: ${{ parameters.port }}
+          groupId: ${{ parameters.groupId }}
+          artifactId: ${{ parameters.artifactId }}
+          javaPackageName: ${{ parameters.javaPackageName }}
+          repoCloneUrl: https://${{ (parameters.repoUrl | parseRepoUrl).host }}/${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}.git
 
     - id: publish
       name: Publish to GitLab
       action: publish:gitlab
       input:
         repoUrl: ${{ parameters.repoUrl }}
-        description: ${{ parameters.description }}
+        settings:
+          description: ${{ parameters.description }}
         defaultBranch: main
+        repoVisibility: public
 
     - id: register
       name: Register in Catalog
@@ -145,6 +172,7 @@ spec:
       - title: Open in Catalog
         icon: catalog
         entityRef: ${{ steps['register'].output.entityRef }}
+EOF
 ----
 
 This template performs three automated tasks:
@@ -153,12 +181,32 @@ This template performs three automated tasks:
 * Publishes the generated project to GitLab
 * Registers the new application in the Software Catalog
 
-== Create the Catalog Entity
+== Copy the Skeleton
 
-Inside the `skeleton` directory, create a file named `catalog-info.yaml`.
+Use the below command to use preconfigured skeleton folder:
 
 [source,bash,role=execute,subs="attributes+"]
 ----
+curl -L \
+  "https://codeload.github.com/redhat-gpte-devopsautomation/software-templates/tar.gz/main" \
+  | tar -xz --strip-components=3 \
+    software-templates-main/scaffolder-templates/quarkus-backend-template/skeleton
+----
+
+== Create the Catalog Entity
+
+Copy the output of the following command. This value is the **openshift_cluster_ingress_domain** and is required in the next step.
+
+[source,yaml,role=execute,subs="attributes+"]
+----
+oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}{"\n"}'
+----
+
+Inside the `skeleton` directory, create a file named `catalog-info.yaml`. Execute the following manifest, replacing **{openshift_cluster_ingress_domain}** with the value obtained from the previous command.
+
+[source,bash,role=execute,subs="attributes+"]
+----
+cat << 'EOF' > skeleton/catalog-info.yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -168,10 +216,16 @@ metadata:
     backstage.io/techdocs-ref: dir:.
     argocd/app-name: ${{ values.name }}-dev
     janus-idp.io/tekton: ${{ values.name }}
+    che.eclipse.org/che-server: https://devspaces.{openshift_cluster_ingress_domain}
+    app.openshift.io/vcs-uri: ${{values.repoCloneUrl}}
+  links:
+    - url: https://devspaces.{openshift_cluster_ingress_domain}/#${{values.repoCloneUrl}}
+      title: OpenShift Dev Spaces
 spec:
   type: service
   lifecycle: production
   owner: ${{ values.owner }}
+EOF
 ----
 
 Every application generated from this template will automatically include this catalog metadata.
@@ -184,6 +238,105 @@ This allows Red Hat Developer Hub to understand:
 * CI/CD integrations
 * Deployment relationships
 
+== Create the Dev File
+
+Add devfile.yaml to the skeleton directory:
+
+[source,bash,role=execute]
+----
+cat << 'EOF' > skeleton/devfile.yaml
+schemaVersion: 2.2.0
+metadata:
+  name: ${{ values.name }}
+  version: 1.0.0
+  displayName: Quarkus Java Application
+  description: Development environment for standard and native Quarkus Java apps.
+  tags:
+    - Java
+    - Quarkus
+  projectType: Quarkus
+  language: Java
+
+components:
+  # Main development container toolset
+  - name: tools
+    container:
+      image: registry.redhat.io/devspaces/udi-rhel9:latest
+      memoryLimit: 2Gi
+      memoryRequest: 512Mi
+      cpuLimit: '2'
+      cpuRequest: '500m'
+      mountSources: true
+      env:
+        - name: QUARKUS_HTTP_HOST
+          value: 0.0.0.0
+      endpoints:
+        - name: http
+          targetPort: ${{ values.port }}
+          exposure: public
+          protocol: http
+        - name: dev-ui
+          targetPort: ${{ values.port }}
+          path: /q/dev-ui
+          exposure: public
+          protocol: http
+        - name: debug
+          targetPort: 5005
+          exposure: none
+          protocol: tcp
+      volumeMounts:
+        - name: m2-cache
+          path: /home/user/.m2
+
+  # Persistent local cache volume for Maven dependencies
+  - name: m2-cache
+    volume:
+      size: 3Gi
+
+commands:
+  # 1. Start Quarkus Live-Coding Dev Mode
+  - id: dev
+    exec:
+      label: "Start Quarkus Dev Mode"
+      component: tools
+      workingDir: ${PROJECTS_ROOT}
+      commandLine: "./mvnw quarkus:dev"
+      group:
+        kind: run
+        isDefault: true
+
+  # 2. Package standard JVM JAR file
+  - id: package-jvm
+    exec:
+      label: "Package JVM JAR"
+      component: tools
+      workingDir: ${PROJECTS_ROOT}
+      commandLine: "./mvnw clean package -DskipTests=true"
+      group:
+        kind: build
+
+  # 3. Package Native Executable (Requires GraalVM or explicit container build flags)
+  - id: package-native
+    exec:
+      label: "Package Native Binary"
+      component: tools
+      workingDir: ${PROJECTS_ROOT}
+      commandLine: "./mvnw clean package -Pnative -DskipTests=true"
+      group:
+        kind: build
+
+  # 4. Run Unit and Integration Tests
+  - id: test
+    exec:
+      label: "Run Tests"
+      component: tools
+      workingDir: ${PROJECTS_ROOT}
+      commandLine: "./mvnw test"
+      group:
+        kind: test
+EOF
+----
+
 == Commit and Push the Template
 
 Commit the new template repository.
@@ -191,51 +344,7 @@ Commit the new template repository.
 [source,bash,role=execute]
 ----
 git add .
-
 git commit -m "feat: initial Golden Path template"
-
 git push origin main
 ----
 
-== Register the Template in Developer Hub
-
-Developer Hub discovers Software Templates through **catalog locations** configured in `app-config.yaml`.
-
-Update the existing `rhdh-config` ConfigMap created in the previous lab.
-
-. Switch to the **setup-rhdh** project.
-. Open **Workloads → ConfigMaps**.
-. Select **rhdh-config**.
-. Choose **Actions → Edit ConfigMap**.
-. Add the following `catalog` section under `data.app-config.yaml`.
-
-[source,yaml,subs="attributes+"]
-----
-catalog:
-  locations:
-    - type: url
-      target: '{gitlab_url}/software-factory/golden-path-quarkus/-/raw/main/template.yaml'
-      rules:
-        - allow: [Template]
-----
-
-Save the ConfigMap.
-
-NOTE: The Red Hat Developer Hub Operator automatically rolls out the updated configuration and restarts the application.
-
-== Verify the Template
-
-Wait until the Developer Hub pod returns to the **Running** state.
-
-Open Red Hat Developer Hub.
-
-Navigate to:
-
-menu:Create[]
-
-You should now see the **Quarkus Golden Path** template.
-
-.Quarkus Golden Path Template
-image::rhdh-quarkus-golden-path-template.png[link=self,window=blank,width=700]
-
-Select the template to verify its metadata and input form are displayed correctly.

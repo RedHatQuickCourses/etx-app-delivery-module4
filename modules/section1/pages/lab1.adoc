@@ -1,5 +1,5 @@
-= Lab 1: Install and Configure Red Hat Developer Hub
-:navtitle: Lab 1: Install and Configure Red Hat Developer Hub
+= Lab 1: Install and Configure RHDH
+:navtitle: Lab 1: Install and Configure RHDH
 :experimental:
 
 In this lab, you'll install Red Hat Developer Hub on OpenShift and deploy a minimal portal configuration that will serve as the foundation for the remaining exercises in this module.
@@ -13,17 +13,27 @@ By the end of this lab, you will have:
 
 == Install the Red Hat Developer Hub Operator
 
-Red Hat Developer Hub is installed and managed using the OpenShift Operator Lifecycle Manager (OLM).
+. Get the OpenShift web console URL from your RHDP lab environment page and open in the browser.
 
-Install the operator from OperatorHub.
+. Sign in using the `admin` credentials provided on the RHDP Lab Environment page.
 
-. Open the OpenShift web console.
-. From the navigation menu, select menu:Ecosystem[Software Catalog].
+. From the navigation menu, select btn:[Ecosystem] -> btn:[Software Catalog].
++
+.Ecosystem -> Software Catalog(_Click the image to view it in full size in a new browser tab_)
+image::menu.png[link={imagesdir}/menu.png, width=350,window=_blank]
++
 . Search for *Red Hat Developer Hub*.
 +
-WARNING: Select the **Operator Backed** entry. Do **not** select the Helm chart.
+.Red Hat Developer Hub Operator(_Click the image to view it in full size in a new browser tab_)
+image::hub1.png[link={imagesdir}/hub1.png, width=350,window=_blank]
 +
-. Click btn:[Install].
+NOTE: It may take a few moments for OperatorHub to finish loading all available operators.
++
+. Select the operator and click btn:[Install].
++
+.Install Red Hat OpenShift Hub Operator(_Click the image to view it in full size in a new browser tab_)
+image::info.png[link={imagesdir}/info.png, width=350,window=_blank]
++
 . Accept the following installation settings:
 +
 * *Installation namespace:* `rhdh-operator`
@@ -31,10 +41,11 @@ WARNING: Select the **Operator Backed** entry. Do **not** select the Helm chart.
 * *Approval strategy:* `Automatic`
 +
 . Click btn:[Install].
+
 . Wait until the operator status changes to *Succeeded*.
 +
-.Red Hat Developer Hub Operator (_Click the image to view it in full size in a new browser tab_)
-image::rhdh-operator.png[link={imagesdir}/rhdh-operator.png,width=600]
+.Red Hat OpenShift Developer Hub Installed(_Click the image to view it in full size in a new browser tab_)
+image::installed.png[link={imagesdir}/installed.png, width=500,window=_blank]
 
 == Create the Developer Hub Project
 
@@ -56,14 +67,20 @@ The output should include the `setup-rhdh` namespace.
 
 == Create the Application Configuration
 
-Red Hat Developer Hub loads its application settings from an `app-config.yaml` file.
+Red Hat Developer Hub loads its application settings from an `app-config.yaml` file. For this training, you'll provide the configuration using a Kubernetes ConfigMap.
 
-For this training, you'll provide the configuration using a Kubernetes ConfigMap.
-
-Apply the following manifest.
-
+. Copy the output of the following command. This value is the **openshift_cluster_ingress_domain** and is required in the next step.
++
 [source,yaml,role=execute,subs="attributes+"]
 ----
+oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}{"\n"}'
+----
+
+. Apply the following manifest, replacing **{openshift_cluster_ingress_domain}** with the value obtained from the previous command.
++
+[source,yaml,role=execute,subs="attributes+"]
+----
+oc apply -f - <<'EOF'
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -81,10 +98,11 @@ data:
       providers:
         guest:
           dangerouslyAllowOutsideDevelopment: true
+EOF
 ----
-
++
 NOTE: The `backend.reading.allow` setting allows Red Hat Developer Hub to retrieve Software Catalog information and Software Templates from the GitLab instance used throughout this training.
-
++
 WARNING: Guest authentication (`dangerouslyAllowOutsideDevelopment`) is intended only for development and training environments. Production deployments should integrate with an enterprise identity provider such as Red Hat Build of Keycloak.
 
 === Verify the ConfigMap
@@ -106,6 +124,7 @@ Apply the following manifest.
 
 [source,yaml,role=execute]
 ----
+oc apply -f - <<'EOF'
 apiVersion: rhdh.redhat.com/v1alpha5
 kind: Backstage
 metadata:
@@ -121,6 +140,7 @@ spec:
       enabled: true
   database:
     enableLocalDb: true
+EOF
 ----
 
 == Verify the Deployment
@@ -129,10 +149,10 @@ Wait for the Developer Hub pods to become available.
 
 [source,bash,role=execute]
 ----
-oc get pods -n setup-rhdh
+oc get pods -n setup-rhdh -w
 ----
 
-Verify that both pods are in the `Running` state.
+Verify that both pods are in the `Running` state, it might take couple of minutes.
 
 The output should include pods similar to:
 
@@ -146,7 +166,9 @@ Next, verify that the Backstage custom resource was created.
 oc get backstage -n setup-rhdh
 ----
 
-Finally, retrieve the Developer Hub route.
+== Access Red Hat Developer Hub
+
+Retrieve the Developer Hub route and open the route URL in your browser:
 
 [source,bash,role=execute]
 ----
@@ -155,24 +177,16 @@ oc get route backstage-rhdh \
   -o jsonpath='https://{.spec.host}{"\n"}'
 ----
 
-The command returns the URL used to access Red Hat Developer Hub.
-
-== Access Red Hat Developer Hub
-
-Open the route URL in your browser.
-
 If you receive an *Application is not available* message, wait a minute for the pods to finish starting and refresh the page.
 
-On the sign-in screen:
-
-. Select *Guest* and click btn:[Enter].
+On the sign-in screen, select *Guest* and click btn:[Enter].
 
 .Sample Sign-in Screen (_Click the image to view it in full size in a new browser tab_)
 image::guest.png[link={imagesdir}/guest.png,width=700]
 
-After signing in, you should see the Red Hat Developer Hub home page.
+After signing in, you should see the **Red Hat Developer Hub** home page.
 
-.Home Page (_Click the image to view it in full size in a new browser tab_)
+.RHDH Home Page (_Click the image to view it in full size in a new browser tab_)
 image::home.png[link={imagesdir}/home.png,width=700]
 
 IMPORTANT: Guest authentication is used only for this self-paced training to simplify setup. In production environments, organizations typically authenticate users through enterprise identity providers such as Red Hat Build of Keycloak.

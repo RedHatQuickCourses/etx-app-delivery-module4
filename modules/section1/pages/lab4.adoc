@@ -14,156 +14,306 @@ By the end of this lab, you will have:
 * Verified user sign-in with OpenShift credentials
 * Tested the Golden Path template using an authenticated user
 
-== Create an OpenShift OAuth Client
+== Setup GitLab Integration
 
-Developer Hub authenticates users through an OAuth client registered with OpenShift.
+Create a Person Access Token from GitLab to be used in RHDH. In production you would use a service account but for the purposes of this lab we can use a PAT.
 
-Create the OAuth client.
+Retrive GitLab URL and navigate to your **User settings** by opening below command's URL in browser.
+
+[source,yaml,subs="attributes+",role=execute]
+----
+GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+echo $GITLAB_URL/-/profile/preferences
+----
+
+Click btn:[Access] -> btn:[Personal access tokens]
+
+.Actions(_Click the image to view it in full size in a new browser tab_)
+image::pat.png[link={imagesdir}/pat.png, width=400,window=_blank]
+
+Click btn:[Add new token]
+
+.Add new token(_Click the image to view it in full size in a new browser tab_)
+image::token.png[link={imagesdir}/token.png, width=600,window=_blank]
+
+Give it a name and select the api scope and click **Generate Token**
+
+.Token Settings(_Click the image to view it in full size in a new browser tab_)
+image::api.png[link={imagesdir}/api.png, width=600,window=_blank]
+
+You will see a Green box that says Your token, copy that token 
+
+.Token(_Click the image to view it in full size in a new browser tab_)
+image::token2.png[link={imagesdir}/token2.png, width=700,window=_blank]
+
+Run the following replacing {YOUR_PAT_HERE} with the **PAT** you copied:
 
 [source,bash,role=execute,subs="attributes+"]
 ----
-oc create -f - <<EOF
-apiVersion: oauth.openshift.io/v1
-kind: OAuthClient
-metadata:
-  name: rhdh-oauth-client
-grantMethod: auto
-redirectURIs:
-  - https://backstage-rhdh-setup-rhdh.{openshift_cluster_ingress_domain}/api/auth/oidc/handler/frame
-secret: GENERATE_A_RANDOM_SECRET
-EOF
+export GITLAB_PAT={YOUR_PAT_HERE}
 ----
 
-TIP: Generate a secure client secret before running the command.
+We will use the **GITLAB_PATH** environment variable in a later step when we setup the RHDH auth secret
 
-[source,bash,role=execute]
-----
-node -p 'require("crypto").randomBytes(24).toString("base64")'
-----
+== Configure Keycloak OAuth Authentication
 
-Replace `GENERATE_A_RANDOM_SECRET` with the generated value.
+Replace guest authentication with Keycloak OAuth for production-like access.
 
-== Create the Authentication Secret
+=== Create the Auth Secret
 
-Store the OAuth client information in a Kubernetes Secret.
+RHDH will need to sign/encrypt the session cookie used during the OIDC flow. We need to generate and define a session secret. It can be any string but for real use it should be high entropy, e.g. ~32 random bytes
 
 [source,bash,role=execute,subs="attributes+"]
 ----
-oc create secret generic rhdh-auth-secret \
-  -n setup-rhdh \
-  --from-literal=AUTH_OIDC_CLIENT_ID=rhdh-oauth-client \
-  --from-literal=AUTH_OIDC_CLIENT_SECRET=GENERATE_A_RANDOM_SECRET \
-  --from-literal=AUTH_OIDC_METADATA_URL=https://oauth-openshift.{openshift_cluster_ingress_domain}/.well-known/openid-configuration
-----
+export SESSION_SECRET=$(python3 -c 'import secrets; print(secrets.token_hex(32))')
+export GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.items[0].spec.host}')"
+export CLUSTER_DOMAIN=$(oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}{"\n"}')
 
-NOTE: Use the same client secret that was configured when creating the OAuth client.
+oc create secret generic rhdh-auth-secret -n setup-rhdh \
+  --from-literal=KEYCLOAK_RHDH_REALM=etx-lab \
+  --from-literal=KEYCLOAK_CLIENT_ID=rhdh \
+  --from-literal=KEYCLOAK_CLIENT_SECRET=etx-lab-workshop-gitlab-secret \
+  --from-literal=KEYCLOAK_BASE_URL=https://etx-sso.${CLUSTER_DOMAIN} \
+  --from-literal=SESSION_SECRET=${SESSION_SECRET} \
+  --from-literal=GITLAB_TOKEN=${GITLAB_PAT}
+----
 
 == Update the Developer Hub Configuration
 
-The initial installation used the Guest authentication provider.
+The initial installation used the Guest authentication provider. Update the existing `app-config.yaml` to use OpenShift OAuth instead.
 
-Update the existing `app-config.yaml` to use OpenShift OAuth instead.
+. Navigate to your Openshift console, and switch to the **setup-rhdh** project.
++
+.Openshift Console(_Click the image to view it in full size in a new browser tab_)
+image::ns.png[link={imagesdir}/ns.png, width=500,window=_blank]
 
-. Open the **setup-rhdh** project.
-. Navigate to **Workloads → ConfigMaps**.
+. Open **Workloads → ConfigMaps**.
++
+.Openshift Console Workloads(_Click the image to view it in full size in a new browser tab_)
+image::cm.png[link={imagesdir}/cm.png, width=300,window=_blank]
+
 . Select **rhdh-config**.
-. Choose **Actions → Edit ConfigMap**.
-. Replace the Guest authentication configuration with the following OIDC configuration.
++
+.rhdh-config ConfigMap(_Click the image to view it in full size in a new browser tab_)
+image::rc.png[link={imagesdir}/rc.png, width=500,window=_blank]
 
+. Choose **Actions → Edit ConfigMap**.
++
+.Actions(_Click the image to view it in full size in a new browser tab_)
+image::edit.png[link={imagesdir}/edit.png, width=400,window=_blank]
+
+. Copy the output of the following command. This value is the **openshift_cluster_ingress_domain** and is required in the next step.
++
+[source,yaml,role=execute,subs="attributes+"]
+----
+openshift_cluster_ingress_domain=$(oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}{"\n"}')
+echo ${openshift_cluster_ingress_domain}
+----
+
+. Replace the **Guest** authentication configuration with the following OIDC configuration, make sure to substitute **openshift_cluster_ingress_domain** with output receive from above command.
++
 [source,bash,role=execute,subs="attributes+"]
 ----
-signInPage: oidc
+    signInPage: oidc
+    auth:
+      environment: production
+      session:
+        secret: ${SESSION_SECRET}
+      providers:
+        oidc:
+          production:
+            clientId: ${KEYCLOAK_CLIENT_ID}
+            clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+            metadataUrl: ${KEYCLOAK_BASE_URL}/realms/${KEYCLOAK_RHDH_REALM}
+            prompt: auto
+    catalog:
+      providers:
+        keycloakOrg:
+          default:
+            baseUrl: ${KEYCLOAK_BASE_URL}
+            clientId: ${KEYCLOAK_CLIENT_ID}
+            clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+            realm: ${KEYCLOAK_RHDH_REALM}
+            loginRealm: ${KEYCLOAK_RHDH_REALM}
+            schedule:
+              frequency: { minutes: 5 }
+    integrations:
+      gitlab:
+        - host: gitlab.{openshift_cluster_ingress_domain}
+          token: ${GITLAB_TOKEN}
+          apiBaseUrl: https://gitlab.{openshift_cluster_ingress_domain}/api/v4
+          baseUrl: https://gitlab.{openshift_cluster_ingress_domain}
+----
++
+_Sample output_
++
+.Sample rhdh-config changes(_Click the image to view it in full size in a new browser tab_)
+image::set2.png[link={imagesdir}/set2.png, width=750,window=_blank]
++
+Click **Save**.
 
-auth:
-  session:
-    secret: MY_SESSION_SECRET
-
-  environment: production
-
-  providers:
-    oidc:
-      production:
-        clientId: ${AUTH_OIDC_CLIENT_ID}
-        clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
-        metadataUrl: ${AUTH_OIDC_METADATA_URL}
-        prompt: auto
+. Wait until the Developer Hub pod returns to the **Running** state.
++
+[source,yaml,subs="attributes+",role=execute]
+----
+oc get pods -n setup-rhdh -w
 ----
 
-TIP: Generate a session secret using:
+NOTE: The schedule frequency would be set to something higher in production (12 hours) and is set low for demo purposes. Other options like userQuerySize or groupQuerySize are also good to set.
+
+. Click btn:[Save]. Wait until the Developer Hub pod returns to the **Running** state.
+
+[source,yaml,subs="attributes+",role=execute]
+----
+oc get pods -n setup-rhdh -w
+----
+
+== Create Dynamic Plugins ConfigMap
+
+Create a dynamic plugins ConfigMap to enable the Keycloak Org sync plugin and the gitlab scaffolder plugin for our template
+
+[source,yaml,subs="attributes+",role=execute]
+----
+oc create -f - <<EOF
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dynamic-plugins-rhdh
+  namespace: setup-rhdh
+data:
+  dynamic-plugins.yaml: |
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - package: './dynamic-plugins/dist/backstage-community-plugin-catalog-backend-module-keycloak-dynamic'
+        disabled: false
+      - package: './dynamic-plugins/dist/backstage-plugin-scaffolder-backend-module-gitlab-dynamic'
+        disabled: false
+EOF
+----
+
+== Update the Backstage CR
+
+Add the **dynamic-plugins-rhdh** config map so we can enable the keycloak Org sync
+
+. Open Openshift console and switch to the **setup-rhdh** project.
++
+.Openshift Console(_Click the image to view it in full size in a new browser tab_)
+image::ns.png[link={imagesdir}/ns.png, width=500,window=_blank]
+
+. Go to btn:[Ecosystem] → btn:[Installed Operators]. Select **Red Hat Developer Hub** Operator.
++
+.Red Hat Developer Hub Operator(_Click the image to view it in full size in a new browser tab_)
+image::hub3.png[link={imagesdir}/hub3.png, width=700,window=_blank]
+
+. Click tab btn:[Red Hat Developer Hub] ->  click btn:[rhdh] instance created.
++
+.rhdh instance(_Click the image to view it in full size in a new browser tab_)
+image::rhdh.png[link={imagesdir}/ns.png, width=700,window=_blank]
+
+. Click btn:[Actions] → btn:[Edit Backstage] 
++
+.rhdh instance(_Click the image to view it in full size in a new browser tab_)
+image::backstage.png[link={imagesdir}/backstage.png, width=400,window=_blank]
+
+. Switch to **YAML** view, under **spec.application**, add the **extraEnvs & dynamicPluginsConfigMapName** blocks below. Keep the existing appConfig and route sections from the initial deployment.
++
+[source,yaml,subs="attributes+",role=execute]
+----
+    extraEnvs:
+      secrets:
+        - name: rhdh-auth-secret
+    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
+----
++
+_Sample Output_
++
+.Environment Vairable Settings(_Click the image to view it in full size in a new browser tab_)
+image::env.png[link={imagesdir}/env.png, width=400,window=_blank]
+
+== Verify Keycloak sign-in
+
+Wait until the Developer Hub pod returns to the **Running** state.
+
+[source,yaml,subs="attributes+",role=execute]
+----
+oc get pods -n setup-rhdh -w
+----
+
+Retrieve the Developer Hub route and open the route URL in your browser:
 
 [source,bash,role=execute]
 ----
-node -p 'require("crypto").randomBytes(24).toString("base64")'
+oc get route backstage-rhdh \
+  -n setup-rhdh \
+  -o jsonpath='https://{.spec.host}{"\n"}'
 ----
 
-Replace `MY_SESSION_SECRET` with the generated value.
+On the login page, choose OIDC.
 
-Click **Save**.
+.OIDC login page(_Click the image to view it in full size in a new browser tab_)
+image::login.png[link={imagesdir}/login.png, width=400,window=_blank]
 
-IMPORTANT: The `${AUTH_OIDC_*}` values are resolved from the Kubernetes Secret that will be mounted into the Backstage application in the next step.
+Sign in with your Keycloak credentials (for example platform-developer / openshift).
 
-== Mount the Authentication Secret
+.ETX Lab Login Page(_Click the image to view it in full size in a new browser tab_)
+image::etx.png[link={imagesdir}/etx.png, width=400,window=_blank]
 
-Mount the authentication Secret so Developer Hub can access the OAuth client credentials.
+You should land on the Developer Hub home page authenticated as your Keycloak user, not as Guest.
 
-. Switch to the **setup-rhdh** project.
-. Navigate to **Operators → Installed Operators**.
-. Open **Red Hat Developer Hub**.
-. Select the **Backstage** tab.
-. Open the **rhdh** instance.
-. Click **Actions → Edit Backstage**.
-. Under `spec.application`, add:
+.Developer Hub Home Page(_Click the image to view it in full size in a new browser tab_)
+image::home2.png[link={imagesdir}/home2.png, width=400,window=_blank]
 
-[source,yaml]
-----
-extraEnvs:
-  secrets:
-    - name: rhdh-auth-secret
-----
-
-. Save the resource.
-
-NOTE: The Red Hat Developer Hub Operator automatically reconciles the change and restarts the Backstage pod.
-
-== Verify OpenShift Sign-In
-
-Wait until the Backstage pod returns to the **Running** state.
-
-. Open the Developer Hub route.
-. Click **OIDC** on the login page.
-. Sign in using your OpenShift credentials.
-
-After successful authentication, you should be redirected to the Developer Hub home page as your authenticated OpenShift user.
-
-IMPORTANT: Guest authentication is no longer available after enabling OpenShift OAuth.
+IMPORTANT: The signed-in user must exist in the Software Catalog (or be mapped via your org setup, which is what we configured with the keycloakOrg provider) to use some catalog features. For template creation in this lab, guest access is no longer available after this change.
 
 == Test the Golden Path Template
 
 Verify that authenticated users can create new applications.
 
-. Open menu:Create[Templates].
-. Select **Quarkus Application (Golden Path)**.
+. Open btn:[Catalog] -> btn:[Kind] -> btn:[Templates] and select btn:[**Quarkus Application (Golden Path)**]
++
+.Developer Hub Home Page(_Click the image to view it in full size in a new browser tab_)
+image::home2.png[link={imagesdir}/home2.png, width=700,window=_blank]
+
+. Click btn:[Launch Template]
++
+.Launch Template(_Click the image to view it in full size in a new browser tab_)
+image::launch.png[link={imagesdir}/launch.png, width=500,window=_blank]
+
 . Enter the required project information.
-. Click btn:[Create].
++
+.Sample Project Information Page 1(_Click the image to view it in full size in a new browser tab_)
+image::im1.png[link={imagesdir}/im1.png, width=400,window=_blank]
++
+.Sample Project Information Page 2(_Click the image to view it in full size in a new browser tab_)
+image::im2.png[link={imagesdir}/im2.png, width=700,window=_blank]
+
+. Review all the information and click btn:[Create]
++
+.Sample Project Information Page 3(_Click the image to view it in full size in a new browser tab_)
+image::im3.png[link={imagesdir}/im3.png, width=700,window=_blank]
+
+. Once the template run finishes, the output should be something like below:
++
+.Sample Template Run Output(_Click the image to view it in full size in a new browser tab_)
+image::im4.png[link={imagesdir}/im4.png, width=700,window=_blank]
 
 Verify that:
 
-* A new GitLab repository is created.
-* The application is registered in the Software Catalog.
+* A new GitLab repository is created and the application is registered in the Software Catalog.
++
+.Newly created git repository(_Click the image to view it in full size in a new browser tab_)
+image::project2.png[link={imagesdir}/project2.png, width=700,window=_blank]
+
 * The generated repository contains:
 ** Devfile
 ** Tekton pipeline
 ** GitOps manifests
 * The catalog component provides a link to launch a Dev Spaces workspace.
++
+.Git repository content(_Click the image to view it in full size in a new browser tab_)
+image::repo.png[link={imagesdir}/repo.png, width=700,window=_blank]
 
-== Verify the Deployment
-
-Confirm the authentication flow is working correctly by checking:
-
-* You are signed in using your OpenShift identity.
-* Guest authentication is no longer available.
-* The Golden Path template successfully provisions a new project.
-* The generated project appears in the Software Catalog.
 
 ++++
 <div class="key-card">
