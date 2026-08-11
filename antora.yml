@@ -1,8 +1,9 @@
 name: etx-app-delivery-module4
-title: DevEx with Developer Hub 
+title: DevEx with Red Hat Developer Hub 
 version: 1
 nav:
 - modules/ROOT/nav.adoc
 - modules/LABENV/nav.adoc
 - modules/section1/nav.adoc
+- modules/quiz/nav.adoc
 #- modules/chapter1/nav.adoc

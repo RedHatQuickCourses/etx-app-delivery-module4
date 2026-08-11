@@ -2,29 +2,40 @@
 :navtitle: Lab 3: Register the Template in Developer Hub
 :experimental:
 
-Developer Hub discovers Software Templates through **catalog locations** configured in `app-config.yaml`.
+In this lab, you'll register a **Software Template (Golden Path)** in Red Hat Developer Hub by configuring a catalog location. You will update the existing Developer Hub configuration and verify that the Quarkus Golden Path is available in the Software Catalog.
 
-Update the existing `rhdh-config` ConfigMap created in the previous lab.
+By the end of this lab, you will have:
 
-. Navigate to your Openshift console, and switch to the **setup-rhdh** project.
+* Configured a catalog location for the Software Template
+* Updated the Developer Hub configuration
+* Verified that the Quarkus Golden Path is registered
+* Reviewed the template metadata and input form
+
+== Configure the Software Template Catalog Location
+
+Red Hat Developer Hub discovers Software Templates through catalog locations configured in app-config.yaml.
+
+You'll update the existing rhdh-config ConfigMap created in the previous lab to register the Quarkus Golden Path template.
+
+. Navigate to the OpenShift web console and switch to the **setup-rhdh** project.
 +
-.Openshift Console(_Click the image to view it in full size in a new browser tab_)
-image::ns.png[link={imagesdir}/ns.png, width=500,window=_blank]
+.OpenShift Console (Click the image to view it in full size in a new browser tab)
+image::ns.png[link={imagesdir}/ns.png,width=500,window=_blank]
 
-. Open **Workloads → ConfigMaps**.
+. From the navigation menu, select Workloads → ConfigMaps.
 +
-.Openshift Console Workloads(_Click the image to view it in full size in a new browser tab_)
-image::cm.png[link={imagesdir}/cm.png, width=300,window=_blank]
+.OpenShift Console Workloads (Click the image to view it in full size in a new browser tab)
+image::cm.png[link={imagesdir}/cm.png,width=300,window=_blank]
 
-. Select **rhdh-config**.
+. Select rhdh-config.
 +
-.rhdh-config ConfigMap(_Click the image to view it in full size in a new browser tab_)
-image::rc.png[link={imagesdir}/rc.png, width=500,window=_blank]
+.rhdh-config ConfigMap (Click the image to view it in full size in a new browser tab)
+image::rc.png[link={imagesdir}/rc.png,width=500,window=_blank]
 
-. Choose **Actions → Edit ConfigMap**.
+. Select btn:[Actions] → btn:[Edit ConfigMap].
 +
-.Actions(_Click the image to view it in full size in a new browser tab_)
-image::edit.png[link={imagesdir}/edit.png, width=400,window=_blank]
+.Actions (Click the image to view it in full size in a new browser tab)
+image::edit.png[link={imagesdir}/edit.png,width=400,window=_blank]
 
 . Retrive GitLab URL and navigate to the GitLab account.
 +
@@ -34,14 +45,14 @@ GITLAB_URL="https://$(oc get route -n gitlab -l app=webservice -o jsonpath='{.it
 echo $GITLAB_URL
 ----
 
-. Add the following `catalog` section under `data.app-config.yaml` and make sure to substitute <GITLAB_URL> value with above command output.
+. Add the following `catalog` section under `data.app-config.yaml` and make sure to substitute ${GITLAB_URL} value with above command output.
 +
 [source,yaml,subs="attributes+",role=execute]
 ----
 catalog:
   locations:
     - type: url
-      target: '<GITLAB_URL>/software-factory/golden-path-quarkus/-/blob/main/template.yaml'
+      target: '${GITLAB_URL}/software-factory/golden-path-quarkus/-/blob/main/template.yaml'
       rules:
         - allow: [Template]
 ----
@@ -51,9 +62,11 @@ image::setting.png[link={imagesdir}/setting.png, width=700,window=_blank]
 +
 Save the ConfigMap.
 
-NOTE: The Red Hat Developer Hub Operator automatically rolls out the updated configuration and restarts the application.
+NOTE: Do not replace the existing configuration. Add the template catalog location to the existing app-config.yaml settings.
 
 == Verify the Template
+
+Verify that the Developer Hub application has restarted successfully after the configuration change.
 
 Wait until the Developer Hub pod returns to the **Running** state.
 
@@ -71,9 +84,9 @@ oc get route backstage-rhdh \
   -o jsonpath='https://{.spec.host}{"\n"}'
 ----
 
-Click btn:[Catalog]
+In Developer Hub, click btn:[Catalog].
 
-.Select Catalog(_Click the image to view it in full size in a new browser tab_)
+.Select Catalog (Click the image to view it in full size in a new browser tab)
 image::catalog1.png[link=self,window=blank,width=300]
 
 Select click btn:[Kind] -> click btn:[Template], you should now see the **Quarkus Golden Path** template.
@@ -85,3 +98,5 @@ Select the template to verify its metadata and input form are displayed correctl
 
 .Template details(_Click the image to view it in full size in a new browser tab_)
 image::template1.png[link=self,window=blank,width=450]
+
+IMPORTANT: Registering a Software Template makes the Golden Path discoverable to developers through the Developer Hub Software Catalog. Developers can then use the template to create applications through a standardized self-service workflow.

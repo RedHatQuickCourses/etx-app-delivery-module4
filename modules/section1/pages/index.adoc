@@ -1,5 +1,5 @@
-= Developer Hub and the IDP
-:navtitle: Developer Hub and the IDP
+= Red Hat Developer Hub and the IDP
+:navtitle: Red Hat Developer Hub and the IDP
 
 ++++
 <div class="module-card">

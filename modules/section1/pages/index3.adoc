@@ -1,0 +1,26 @@
+= Software Templates Integrations
+:navtitle: Software Templates Integrations
+
+++++
+<div class="module-card">
+<div class="module-header">
+++++
+
+image::ROOT:mini-illustration-book-red-RH.Large_square_transparent.png[width=40,align=left]
+
+**What's in this section?**
+
+++++
+</div>
+++++
+
+In this section, you'll learn how to register Software Templates in Red Hat Developer Hub and integrate them with the Software Factory.
+
+You'll explore how Developer Hub templates use integrations and plugins to automate application creation, register software components, and connect with platform services. You'll then register a Golden Path template and configure OpenShift OAuth to provide secure enterprise authentication.
+
+By the end of this section, you'll have a registered Software Template and a securely authenticated Developer Hub environment ready for self-service application creation.
+
+++++
+</div>
+++++
+

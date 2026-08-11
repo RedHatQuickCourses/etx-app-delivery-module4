@@ -16,7 +16,7 @@ By the end of this lab, you will have:
 
 == Setup GitLab Integration
 
-Create a Person Access Token from GitLab to be used in RHDH. In production you would use a service account but for the purposes of this lab we can use a PAT.
+Create a Person Access Token(PAT) from GitLab to be used in RHDH. In production you would use a service account but for the purposes of this lab we can use a PAT.
 
 Retrive GitLab URL and navigate to your **User settings** by opening below command's URL in browser.
 

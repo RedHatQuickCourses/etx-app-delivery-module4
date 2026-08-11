@@ -1,0 +1,26 @@
+= Software Templates in RHDH
+:navtitle: Software Templates in RHDH
+
+++++
+<div class="module-card">
+<div class="module-header">
+++++
+
+image::ROOT:mini-illustration-book-red-RH.Large_square_transparent.png[width=40,align=left]
+
+**What's in this section?**
+
+++++
+</div>
+++++
+
+In this section, you'll learn how Red Hat Developer Hub uses Software Templates (Golden Paths) to provide self-service application creation.
+
+You'll explore how templates automate project setup, provision repositories and CI/CD resources, understand the Software Template workflow, and use the Software Catalog to discover and manage software components.
+
+By the end of this section, you'll understand how Software Templates and the Software Catalog reduce developer cognitive load, standardize application delivery, and enable consistent self-service workflows across the Software Factory.
+
+++++
+</div>
+++++
+

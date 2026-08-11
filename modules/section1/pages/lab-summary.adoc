@@ -1,0 +1,6 @@
+= 📋 Lab Summary
+:navtitle: 📋 Lab Summary
+
+In this module, you installed and configured **Red Hat Developer Hub on OpenShift** and established it as the Internal Developer Portal for the Software Factory. You created a reusable **Software Template (Golden Path)** that automates application project setup, registered the template in the Developer Hub Software Catalog, and verified its metadata and input form.
+
+You then replaced temporary Guest authentication with **OpenShift OAuth**, enabling developers to securely access Developer Hub using their OpenShift identities. Finally, you validated the complete self-service experience by using an authenticated user to access and test the Golden Path template.

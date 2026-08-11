@@ -1,0 +1,11 @@
+= Summary and What's Next?
+
+_Congratulations! You have successfully established the foundation of your DevEx with Red Hat Developer Hub._
+
+In this module, you learned how Red Hat Developer Hub (RHDH) provides a unified Internal Developer Portal for the Software Factory. You explored Developer Experience, the role of Developer Hub, Software Templates (Golden Paths), and the Software Catalog in reducing developer cognitive load and enabling self-service application delivery.
+
+You also created and registered a reusable Software Template, integrated it with the Software Catalog, and configured OpenShift OAuth for secure authentication. By the end of the module, you established a foundation for standardized, self-service application creation through Developer Hub.
+
+// In the next modules, you'll use this environment to implement automated software delivery pipelines, GitOps workflows, developer self-service capabilities, and trusted software supply chain practices.
+
+

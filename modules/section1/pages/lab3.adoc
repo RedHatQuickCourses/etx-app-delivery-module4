@@ -1,6 +1,15 @@
 = Lab 3: Integrate with Dev Spaces
+:navtitle: Lab 3: Integrate with Dev Spaces
+:experimental:
 
-Add a Dev Spaces link to catalog components so developers can open a workspace directly from the component page.
+In this lab, you'll integrate Red Hat OpenShift Dev Spaces with Red Hat Developer Hub so developers can open a development workspace directly from a software component in the Software Catalog.
+
+By the end of this lab, you will have:
+
+Configured the Dev Spaces annotation for catalog components
+Configured the Dev Spaces plugin in Red Hat Developer Hub
+Updated the Developer Hub configuration with the Dev Spaces URL
+Verified that the Dev Spaces link is available from a catalog component
 
 == Add the Dev Spaces URL Annotation
 
