@@ -1,11 +1,11 @@
 {
-  "totalSeconds": 1148,
-  "pageCount": 13,
+  "totalSeconds": 1254,
+  "pageCount": 18,
   "pages": [
     {
       "module": "ROOT",
       "page": "index.adoc",
-      "seconds": 89
+      "seconds": 82
     },
     {
       "module": "LABENV",
@@ -29,6 +29,16 @@
     },
     {
       "module": "section1",
+      "page": "lab1.adoc",
+      "seconds": 107
+    },
+    {
+      "module": "section1",
+      "page": "index2.adoc",
+      "seconds": 27
+    },
+    {
+      "module": "section1",
       "page": "self-serve.adoc",
       "seconds": 50
     },
@@ -39,18 +49,13 @@
     },
     {
       "module": "section1",
+      "page": "template2.adoc",
+      "seconds": 27
+    },
+    {
+      "module": "section1",
       "page": "catalog.adoc",
       "seconds": 65
-    },
-    {
-      "module": "section1",
-      "page": "lab1.adoc",
-      "seconds": 107
-    },
-    {
-      "module": "section1",
-      "page": "template2.adoc",
-      "seconds": 76
     },
     {
       "module": "section1",
@@ -59,13 +64,33 @@
     },
     {
       "module": "section1",
+      "page": "index3.adoc",
+      "seconds": 28
+    },
+    {
+      "module": "section1",
       "page": "lab2-2.adoc",
-      "seconds": 32
+      "seconds": 73
     },
     {
       "module": "section1",
       "page": "lab4.adoc",
       "seconds": 176
+    },
+    {
+      "module": "section1",
+      "page": "lab-summary.adoc",
+      "seconds": 29
+    },
+    {
+      "module": "quiz",
+      "page": "index.adoc",
+      "seconds": 6
+    },
+    {
+      "module": "quiz",
+      "page": "next.adoc",
+      "seconds": 31
     }
   ]
 }
