@@ -1,16 +1,16 @@
 {
-  "totalSeconds": 1254,
+  "totalSeconds": 1273,
   "pageCount": 18,
   "pages": [
     {
       "module": "ROOT",
       "page": "index.adoc",
-      "seconds": 82
+      "seconds": 85
     },
     {
       "module": "LABENV",
       "page": "lab-env-overview.adoc",
-      "seconds": 93
+      "seconds": 100
     },
     {
       "module": "section1",
@@ -90,7 +90,7 @@
     {
       "module": "quiz",
       "page": "next.adoc",
-      "seconds": 31
+      "seconds": 40
     }
   ]
 }
