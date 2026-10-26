@@ -60,8 +60,20 @@ cd golden-path-quarkus
 
 Create a file named `template.yaml` in the repository root.
 
-Paste the following template definition.
+Before creating the template, retrieve your cluster's unique identifier (GUID) which is needed in the template configuration.
 
+. Get your cluster domain and store it in a variable:
++
+[source,bash,role=execute]
+----
+CLUSTER_DOMAIN=$(oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}' | sed 's/apps\.//')
+echo "Your cluster domain: ${CLUSTER_DOMAIN}"
+----
++
+The output will be in the format `cluster-XXXXX.dyn.redhatworkshops.io` where `XXXXX` is your cluster's unique GUID (for example: `cluster-lhpfm.dyn.redhatworkshops.io`).
+
+. Create the template definition:
++
 [source,bash,role=execute,subs="attributes+"]
 ----
 cat << 'EOF' > template.yaml
@@ -128,7 +140,7 @@ spec:
           ui:field: RepoUrlPicker
           ui:options:
             allowedHosts:
-              - gitlab.apps.cluster-f86c6.dyn.redhatworkshops.io
+              - gitlab.apps.cluster-f86c6.dyn.redhatworkshops.io # <1>
             allowedOwners:
               - software-factory
   steps:
@@ -173,6 +185,30 @@ spec:
         icon: catalog
         entityRef: ${{ steps['register'].output.entityRef }}
 EOF
+----
++
+<1> This line contains the GitLab hostname that must match your cluster. The example value `cluster-f86c6.dyn.redhatworkshops.io` is a placeholder.
+
+. Substitute the placeholder cluster domain with your actual cluster domain:
++
+[source,bash,role=execute]
+----
+sed -i "s/cluster-f86c6.dyn.redhatworkshops.io/gitlab.apps.${CLUSTER_DOMAIN}/g" template.yaml
+----
++
+Verify the substitution was successful:
++
+[source,bash,role=execute]
+----
+grep "allowedHosts:" -A 1 template.yaml
+----
++
+The output should show your actual cluster domain, for example:
++
+[source,yaml]
+----
+allowedHosts:
+  - gitlab.apps.cluster-lhpfm.dyn.redhatworkshops.io
 ----
 
 This template performs three automated tasks:
@@ -345,6 +381,22 @@ Commit the new template repository.
 ----
 git add .
 git commit -m "feat: initial Golden Path template"
+----
+
+Configure Git authentication using your Personal Access Token from Module 3:
+
+[source,bash,role=execute]
+----
+# Replace <YOUR-TOKEN> with the GitLab Personal Access Token created in Module 3, Lab 7
+git remote set-url origin https://root:<YOUR-TOKEN>@${GITLAB_URL#https://}/software-factory/golden-path-quarkus.git
+----
+
+Push the template to GitLab:
+
+[source,bash,role=execute]
+----
 git push origin main
 ----
+
+NOTE: The Personal Access Token (starting with `glpat-`) was created in **Module 3, Section 2, Lab 7: Create the GitOps Repository**. If you don't have this token, you'll need to create a new one in GitLab by navigating to your avatar -> Edit profile -> Access Tokens.
 

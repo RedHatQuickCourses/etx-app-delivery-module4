@@ -52,10 +52,12 @@ echo $GITLAB_URL
 catalog:
   locations:
     - type: url
-      target: '${GITLAB_URL}/software-factory/golden-path-quarkus/-/blob/main/template.yaml'
+      target: '${GITLAB_URL}/software-factory/golden-path-quarkus/-/raw/main/template.yaml'
       rules:
         - allow: [Template]
 ----
++
+IMPORTANT: Use `/-/raw/` in the URL path, not `/-/blob/`. RHDH needs to fetch the raw YAML content, not the GitLab web UI HTML page.
 +
 .Sample setting(_Click the image to view it in full size in a new browser tab_)
 image::setting.png[link={imagesdir}/setting.png, width=700,window=_blank]
