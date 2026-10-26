@@ -1,5 +1,5 @@
 {
-  "totalSeconds": 1269,
+  "totalSeconds": 1231,
   "pageCount": 18,
   "pages": [
     {
@@ -30,7 +30,7 @@
     {
       "module": "section1",
       "page": "lab1.adoc",
-      "seconds": 107
+      "seconds": 106
     },
     {
       "module": "section1",
@@ -60,7 +60,7 @@
     {
       "module": "section1",
       "page": "lab2.adoc",
-      "seconds": 218
+      "seconds": 173
     },
     {
       "module": "section1",
@@ -70,7 +70,7 @@
     {
       "module": "section1",
       "page": "lab2-2.adoc",
-      "seconds": 73
+      "seconds": 81
     },
     {
       "module": "section1",

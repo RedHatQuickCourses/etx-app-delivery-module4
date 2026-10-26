@@ -250,10 +250,22 @@ echo $GITLAB_URL</code></pre>
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">catalog:
   locations:
     - type: url
-      target: '${GITLAB_URL}/software-factory/golden-path-quarkus/-/blob/main/template.yaml'
+      target: '${GITLAB_URL}/software-factory/golden-path-quarkus/-/raw/main/template.yaml'
       rules:
         - allow: [Template]</code></pre>
 </div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Use <code>/-/raw/</code> in the URL path, not <code>/-/blob/</code>. RHDH needs to fetch the raw YAML content, not the GitLab web UI HTML page.
+</td>
+</tr>
+</table>
 </div>
 <div class="imageblock">
 <div class="content">
